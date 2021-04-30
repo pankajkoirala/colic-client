@@ -11,11 +11,6 @@ import { Text } from "react-native-elements";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { base_URL } from "../../utils/const";
 import BgImage from "./../../../assets/chartBGimage.jpg";
-console.log(
-  "🚀 ~ file: homepage.js ~ line 14 ~ BgImage",
-  new Date().getDay(),
-  "fgdgfdgfdgfgf"
-);
 
 export default ExampleTwo = (props) => {
   const { day, setDay, styleValue, labelByDay, profileDetail } = props;
@@ -223,7 +218,7 @@ export default ExampleTwo = (props) => {
                   {labelByDay(day)?.data[0].map((arg1, ind) => {
                     return (
                       <Text key={ind} style={styleValue(arg, i, ind, styles)}>
-                        {i === 0 ? arg[ind].time : arg[ind].value}
+                        {i === 0 ? arg[ind].startTime : arg[ind].intensity}
                       </Text>
                     );
                   })}

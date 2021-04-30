@@ -36,7 +36,6 @@ function Profile(props) {
     loader,
     setProfileImage,
   } = props;
-  console.log("🚀 ~ file: profile.js ~ line 39 ~ Profile ~ loader", loader);
   return (
     <ScrollView style={styles.profileContainer} bounces={false}>
       <View style={styles.fullPageView}>

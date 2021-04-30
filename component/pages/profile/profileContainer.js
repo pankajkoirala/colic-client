@@ -11,11 +11,14 @@ import {
 
 function ProfileContainer(props) {
   const dispatch = useDispatch();
-  const { token, profileDetail, reload } = useSelector((state) => ({
-    token: state.token.token,
-    profileDetail: state.profileDetail.profileDetail,
-    reload: state.reload.reload,
-  }));
+  const { token, profileDetail, reload, crying_data } = useSelector(
+    (state) => ({
+      token: state.token.token,
+      profileDetail: state.profileDetail.profileDetail,
+      crying_data: state.crying_data.crying_data,
+      reload: state.reload.reload,
+    })
+  );
 
   const [profileImage, setProfileImage] = useState({});
   const [editState, setEditState] = useState(false);
