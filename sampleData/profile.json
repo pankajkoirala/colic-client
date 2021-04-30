@@ -1,0 +1,20 @@
+ {
+  "_id": "607590e2d41fa20a6446a3bc",
+  "appointment":  [],
+  "email": "patient@patient.com",
+  "labReport":  [],
+  "personalDetail":  {
+    "DateOfBirth": "2021-02-11T18:15:00.000Z",
+    "address":  {
+      "city": "finland",
+      "country": "nepal",
+      "phoneNo": "5688"
+    },
+    "email": "dhiraj@gmail.com",
+    "gender": "Male",
+    "mobileNo": "4688848",
+    "name": "dhiraj"
+  },
+  "photos": "http://localhost:4000/upload\\photos_1618377094856.JPG",
+  "userType": "Patient"
+}

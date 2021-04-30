@@ -1,0 +1,53 @@
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AUTH_TOKEN, RELOAD } from "../../../redux/action/action";
+import Login from "./login";
+import { useForm } from "react-hook-form";
+import { AuthLogin } from "../../../service/authService";
+
+export default LoginContainer = (props) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const { reload, token } = useSelector((state) => ({
+    reload: state.reload.reload,
+    token: state.token.token,
+  }));
+
+  //data dispatcher function
+  const dispatch = useDispatch();
+
+  const dispatchData = (data) => {
+    dispatch({ type: AUTH_TOKEN, payload: data });
+  };
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+    const loginData = {
+      email: data?.email?.toLowerCase().split(" ")[0],
+      password: data?.password,
+    };
+
+    AuthLogin(loginData, dispatchData);
+  };
+
+  return (
+    <Login
+      email={email}
+      setEmail={setEmail}
+      password={password}
+      setPassword={setPassword}
+      dispatchData={dispatchData}
+      control={control}
+      handleSubmit={handleSubmit}
+      errors={errors}
+      onSubmit={onSubmit}
+      {...props}
+    />
+  );
+};
