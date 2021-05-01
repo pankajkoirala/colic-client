@@ -4,6 +4,7 @@ import { base_URL } from "../utils/const";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { PROFILE_DETAIL, RELOAD, CRYING_DATA } from "../redux/action/action";
+import moment from "moment";
 
 const FetchDataComponent = () => {
   const [reload, setReload] = useState(false);
@@ -16,27 +17,28 @@ const FetchDataComponent = () => {
 
   useEffect(() => {
     //crying data fetch
-    axios
-      .post(
-        `${base_URL}/baby/get_crying_data`,
-        {
-          user_id: profileDetail.id,
-          date: "2021-04-07T12:17:50.730Z",
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            authorization: token,
+    if (profileDetail.id) {
+      axios
+        .post(
+          `${base_URL}/baby/get_week_crying_data`,
+          {
+            user_id: profileDetail.id,
+            date: moment().format("YYYY-MM-DD"),
           },
-        }
-      )
-      .then((res) => {
-        dispatch({ type: CRYING_DATA, payload: res.data.message });
-      })
-      .catch((err) => {
-        console.log("server error", err.response);
-      });
-
+          {
+            headers: {
+              "Content-Type": "application/json",
+              authorization: token,
+            },
+          }
+        )
+        .then((res) => {
+          dispatch({ type: CRYING_DATA, payload: res.data.message });
+        })
+        .catch((err) => {
+          console.log("server error", err.response);
+        });
+    }
     //personal data fetch
     axios
       .get(`${base_URL}/auth/user_profile`, {
@@ -56,7 +58,7 @@ const FetchDataComponent = () => {
       type: RELOAD,
       payload: { reload: reload, setReload: setReload },
     });
-  }, [reload]);
+  }, [profileDetail.id]);
 
   return <View></View>;
 };

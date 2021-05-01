@@ -13,7 +13,15 @@ import { base_URL } from "../../utils/const";
 import BgImage from "./../../../assets/chartBGimage.jpg";
 
 export default ExampleTwo = (props) => {
-  const { day, setDay, styleValue, labelByDay, profileDetail } = props;
+  const {
+    day,
+    setDay,
+    styleValue,
+    labelByDay,
+    profileDetail,
+    getCrying_dataByDay,
+    getCrying_dataByweek,
+  } = props;
 
   return (
     <ScrollView bounces={false}>
@@ -137,7 +145,7 @@ export default ExampleTwo = (props) => {
             }}
           >
             <Text
-              onPress={() => setDay(2)}
+              onPress={() => getCrying_dataByDay()}
               style={{
                 fontFamily: "Montserrat",
                 color: "grey",
@@ -150,7 +158,7 @@ export default ExampleTwo = (props) => {
               today
             </Text>
             <Text
-              onPress={() => setDay(0)}
+              onPress={() => getCrying_dataByweek()}
               style={{
                 fontFamily: "Montserrat",
                 color: "grey",

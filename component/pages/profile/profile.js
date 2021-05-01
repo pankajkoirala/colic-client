@@ -110,7 +110,7 @@ function Profile(props) {
               )}
               name="name"
               rules={{ required: true }}
-              defaultValue=""
+              defaultValue=" no name"
             />
           </View>
           <View style={styles.inputView}>
@@ -207,7 +207,7 @@ function Profile(props) {
               rules={{
                 required: true,
               }}
-              defaultValue=""
+              defaultValue="no gender"
             />
           </View>
         </View>

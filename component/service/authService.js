@@ -72,7 +72,7 @@ export const signup = (data, props) => {
       props.navigation.navigate("VerifyUser");
     })
     .catch((err) => {
-      console.log(err?.response?.data);
+      console.log(err);
       errorAlert(err?.response?.data?.message);
     });
 };

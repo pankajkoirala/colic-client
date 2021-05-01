@@ -3,7 +3,7 @@ import { Pressable } from "react-native";
 import { StyleSheet, View, ScrollView, ActivityIndicator } from "react-native";
 import { Text } from "react-native-elements";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import DateInsert from "../../../common/dateInsert";
+import DatePicker from "../../../common/datePicker";
 
 export default Blog = () => {
   return (
@@ -22,6 +22,7 @@ export default Blog = () => {
       >
         <Text>This is blog Page</Text>
       </TouchableOpacity>
+      <DatePicker />
     </View>
   );
 };

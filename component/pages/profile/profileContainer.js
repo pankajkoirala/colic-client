@@ -58,7 +58,11 @@ function ProfileContainer(props) {
     setValue,
     formState: { errors },
   } = useForm();
+
+
+
   const onSubmit = (data) => {
+  
     if (editState === true) {
       setEditState(false);
       patientProfileUpdate(profileDetail?.id, data, token, reloadFetchData);
