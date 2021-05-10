@@ -35,6 +35,7 @@ function ProfileContainer(props) {
 
   //reload get date service
   const reloadFetchData = () => {
+    console.log("pankajsjajd");
     reload.setReload(!reload.reload);
     setLoader(false);
   };
@@ -59,10 +60,7 @@ function ProfileContainer(props) {
     formState: { errors },
   } = useForm();
 
-
-
   const onSubmit = (data) => {
-  
     if (editState === true) {
       setEditState(false);
       patientProfileUpdate(profileDetail?.id, data, token, reloadFetchData);

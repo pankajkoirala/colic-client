@@ -1,17 +1,18 @@
 import DateTimePicker from "@react-native-community/datetimepicker";
 import moment from "moment";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Button, Platform, Text, TouchableOpacity } from "react-native";
 
-const DatePicker = () => {
-  const [date, setDate] = useState(new Date(1598051730000));
+export default DatePicker = (props) => {
+  const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("date");
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(showDateMode);
+  const { setFinalSelectedDate, showDateMode } = props;
 
-  console.log(
-    "🚀 ~ file: datePicker.js ~ line 7 ~ DatePicker ~ date",
-    moment(date).format("YYYY-MM-DD")
-  );
+  useEffect(() => {
+    setFinalSelectedDate(moment(date).format("YYYY-MM-DD"));
+  }, [date]);
+
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate || date;
     setShow(Platform.OS === "ios");
@@ -33,13 +34,15 @@ const DatePicker = () => {
 
   return (
     <View>
-      <View>
-        <Button onPress={showDatepicker} title="Show date picker!" />
-      </View>
-      <View>
-        <Button onPress={showTimepicker} title="Show time picker!" />
-      </View>
-      <View style={{ width: 400 }}>
+      {Platform.OS === "ios" && show == true ? (
+        <TouchableOpacity
+          style={{ alignItems: "flex-end", marginRight: 4 }}
+          onPress={() => setShow(false)}
+        >
+          <Text> close</Text>
+        </TouchableOpacity>
+      ) : null}
+      <View style={{ width: 400, backgroundColor: "red" }}>
         {show && (
           <DateTimePicker
             testID="dateTimePicker"
@@ -50,12 +53,7 @@ const DatePicker = () => {
             onChange={onChange}
           />
         )}
-        <TouchableOpacity onPress={() => setShow(false)}>
-          <Text>close</Text>
-        </TouchableOpacity>
       </View>
     </View>
   );
 };
-
-export default DatePicker;

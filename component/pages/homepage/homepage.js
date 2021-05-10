@@ -7,12 +7,14 @@ import {
   Image,
   ImageBackground,
 } from "react-native";
-import { Text } from "react-native-elements";
+import { Text, FAB } from "react-native-elements";
+import DateModel from "./../../../common/ModelDateInsert/datePicker";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { base_URL } from "../../utils/const";
 import BgImage from "./../../../assets/chartBGimage.jpg";
 
 export default ExampleTwo = (props) => {
+  const [showDateMode, setShowDateMode] = useState(true);
   const {
     day,
     setDay,
@@ -20,7 +22,8 @@ export default ExampleTwo = (props) => {
     labelByDay,
     profileDetail,
     getCrying_dataByDay,
-    getCrying_dataByweek,
+    setGettingDataDate,
+    setDataShow,
   } = props;
 
   return (
@@ -63,6 +66,7 @@ export default ExampleTwo = (props) => {
               />
             </TouchableOpacity>
           </View>
+
           <View>
             <Text
               style={{
@@ -95,6 +99,7 @@ export default ExampleTwo = (props) => {
               >
                 Average Crying
               </Text>
+
               <Text
                 style={{
                   fontSize: 18,
@@ -145,7 +150,7 @@ export default ExampleTwo = (props) => {
             }}
           >
             <Text
-              onPress={() => getCrying_dataByDay()}
+              onPress={() => setDataShow(true)}
               style={{
                 fontFamily: "Montserrat",
                 color: "grey",
@@ -158,7 +163,7 @@ export default ExampleTwo = (props) => {
               today
             </Text>
             <Text
-              onPress={() => getCrying_dataByweek()}
+              onPress={() => setDataShow(false)}
               style={{
                 fontFamily: "Montserrat",
                 color: "grey",
@@ -171,6 +176,9 @@ export default ExampleTwo = (props) => {
               weekly
             </Text>
           </View>
+          <Text onPress={() => setShowDateMode(!showDateMode)}>
+            Date Select
+          </Text>
         </ImageBackground>
 
         <View
@@ -211,7 +219,7 @@ export default ExampleTwo = (props) => {
             width: "100%",
             height: 500,
           }}
-          bounces={false}
+          //bounces={true}
         >
           <View
             style={{
@@ -235,6 +243,43 @@ export default ExampleTwo = (props) => {
             })}
           </View>
         </ScrollView>
+
+        <View
+          style={{
+            position: "absolute",
+            bottom: 0,
+            zIndex: 999,
+          }}
+        >
+          <DateModel
+            showDateMode={showDateMode}
+            setFinalSelectedDate={setGettingDataDate}
+          />
+        </View>
+        <TouchableOpacity
+          onPress={() => console.log("add data")}
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            height: 50,
+            width: 50,
+            backgroundColor: "red",
+            borderRadius: 30,
+            position: "absolute",
+            alignSelf: "flex-end",
+            bottom: 20,
+            right: 20,
+          }}
+        >
+          <FontAwesome5
+            style={{
+              alignSelf: "center",
+            }}
+            name="plus"
+            size={30}
+            color="#ffff"
+          />
+        </TouchableOpacity>
       </View>
     </ScrollView>
   );

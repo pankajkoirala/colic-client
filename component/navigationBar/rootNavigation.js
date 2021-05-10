@@ -17,7 +17,6 @@ export default function AppStack(props) {
   }));
   if (!token) {
     console.log("token dekhayena");
-    console.log(token);
   }
 
   // let token = "pankaj";

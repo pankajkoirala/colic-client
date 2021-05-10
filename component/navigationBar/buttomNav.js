@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import BlogPage from "../pages/blog/blog";
+import BlogPage from "../pages/blog/blogContainer";
 import ContactUs from "../pages/contactus/contactus";
 import Profile from "./../pages/profile/profileContainer";
 import Stake from "./stack";
-import Chat from "../pages/chat/chatContainer";
 import { Text, View, Animated } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import Home from "../pages/homepage/homepageContainer";

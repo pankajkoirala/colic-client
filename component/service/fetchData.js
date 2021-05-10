@@ -3,7 +3,12 @@ import { View } from "react-native";
 import { base_URL } from "../utils/const";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { PROFILE_DETAIL, RELOAD, CRYING_DATA } from "../redux/action/action";
+import {
+  PROFILE_DETAIL,
+  RELOAD,
+  CRYING_DATA,
+  BLOGS_DATA,
+} from "../redux/action/action";
 import moment from "moment";
 
 const FetchDataComponent = () => {
@@ -16,7 +21,7 @@ const FetchDataComponent = () => {
   }));
 
   useEffect(() => {
-    //crying data fetch
+    //crying data fetch-----------------------------------------------------------------------------------------------
     if (profileDetail.id) {
       axios
         .post(
@@ -39,7 +44,7 @@ const FetchDataComponent = () => {
           console.log("server error", err.response);
         });
     }
-    //personal data fetch
+    //personal data fetch-------------------------------------------------------------------------------------------
     axios
       .get(`${base_URL}/auth/user_profile`, {
         headers: {
@@ -58,7 +63,26 @@ const FetchDataComponent = () => {
       type: RELOAD,
       payload: { reload: reload, setReload: setReload },
     });
-  }, [profileDetail.id]);
+    //blogs data---------------------------------------------------------------------------------------------------------
+    axios
+      .get(`${base_URL}/api/all_blog`, {
+        headers: {
+          "Content-Type": "application/json",
+          authorization: token,
+        },
+      })
+      .then((res) => {
+        dispatch({ type: BLOGS_DATA, payload: res.data.message });
+      })
+      .catch((err) => {
+        console.log("get profile pic", err.response);
+      });
+
+    dispatch({
+      type: RELOAD,
+      payload: { reload: reload, setReload: setReload },
+    });
+  }, [profileDetail.id, reload]);
 
   return <View></View>;
 };

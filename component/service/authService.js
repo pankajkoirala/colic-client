@@ -18,8 +18,8 @@ export const AuthLogin = (data, dispatch) => {
       fingerPrintSaveAlert(`Bearer ${res.data.token}`, data);
     })
     .catch((err) => {
-      console.log(err);
       errorAlert(LOGIN_FAILED);
+      console.log("pankajsjda", err.response.data.message);
     });
 };
 

@@ -11,6 +11,7 @@ import LoginFrontPage from "../pages/auth/loginFrontPage";
 import SignUp from "../pages/auth/signup/signupContainer";
 import Profile from "../pages/profile/profileContainer";
 import verifyUser from "../pages/auth/signup/verifyUser";
+import SingleBlogView from "./../pages/blog/detailView";
 
 const Stack = createStackNavigator();
 
@@ -46,6 +47,7 @@ const AppScreen = {
   Blog: BlogPage,
   Profile: Profile,
   ContactUs: ContactUsPage,
+  SingleBlogView: SingleBlogView,
 };
 
 export default function AppStack(props) {

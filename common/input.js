@@ -16,7 +16,6 @@ export default function CommonInput(props) {
     setError,
     errorMessage,
   } = props;
-  console.log("🚀 ~ file: input.js ~ line 18 ~ CommonInput ~ errors", errors);
   return (
     <View style={containerStyle}>
       <Text style={labelStyle}>{label}</Text>

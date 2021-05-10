@@ -1,76 +1,53 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HomePage from "./homepage";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
-import sampleBabyCryingData from "./babyCryingSampleData.json";
 import { CRYING_DATA } from "../../redux/action/action";
-import axios from "axios";
-import { base_URL } from "../../utils/const";
+import { dayCryingData, weeCryingData } from "../../service/cryingDataService";
 
 export default HomepageContainer = (props) => {
   const dispatch = useDispatch();
-  const { token, profileDetail, reload, crying_data } = useSelector(
+  const { token, profileDetail, reload, crying_data, blogs_data } = useSelector(
     (state) => ({
       token: state.token.token,
       profileDetail: state.profileDetail.profileDetail,
       reload: state.reload.reload,
       crying_data: state.crying_data.crying_data,
+      blogs_data: state.blogs_data.blogs_data,
     })
   );
+  console.log(
+    "🚀 ~ file: homepageContainer.js ~ line 11 ~ profileDetail",
+    profileDetail
+  );
+
   const [day, setDay] = useState("3");
-  const [gettingDataDate, setGettingDataDate] = useState(moment());
+  const [gettingDataDate, setGettingDataDate] = useState(new Date());
+  const [dataShow, setDataShow] = useState(false);
+
+  //-----------------------------------------------------------------------------------------------------------------------------------
+  const cryingDataDespatch = (data) => {
+    dispatch({ type: CRYING_DATA, payload: data });
+  };
+
+  useEffect(() => {
+    if (profileDetail.id) {
+      if (dataShow === false) {
+        let reqDate = moment(gettingDataDate).format("YYYY-MM-DD");
+        weeCryingData(profileDetail.id, token, reqDate, cryingDataDespatch);
+      } else {
+        let reqDate = moment(gettingDataDate).format("YYYY-MM-DD");
+
+        dayCryingData(profileDetail.id, token, reqDate, cryingDataDespatch);
+      }
+    }
+  }, [gettingDataDate, profileDetail.id]);
 
   //--------------------------------------------------------------------------------------------------------------------------------
   //data get by day
-  const getCrying_dataByDay = (date) => {
-    axios
-      .post(
-        `${base_URL}/baby/get_day_crying_data`,
-        {
-          user_id: profileDetail.id,
-          date: gettingDataDate.format("YYYY-MM-DD"),
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            authorization: token,
-          },
-        }
-      )
-      .then((res) => {
-        dispatch({ type: CRYING_DATA, payload: res.data.message });
-      })
-      .catch((err) => {
-        console.log("server error", err.response);
-      });
-  };
 
   //--------------------------------------------------------------------------------------------------------
-  //data get by day
-  const getCrying_dataByweek = (date) => {
-    axios
-      .post(
-        `${base_URL}/baby/get_week_crying_data`,
-        {
-          user_id: profileDetail.id,
-          date: gettingDataDate.format("YYYY-MM-DD"),
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-            authorization: token,
-          },
-        }
-      )
-      .then((res) => {
-        dispatch({ type: CRYING_DATA, payload: res.data.message });
-      })
-      .catch((err) => {
-        console.log("server error", err.response);
-      });
-  };
 
-  //-----------------------------------------------------------------------------------------------
   //lebel according to date
   const dayLabel = (day) => {
     switch (day) {
@@ -190,8 +167,8 @@ export default HomepageContainer = (props) => {
       labelByDay={labelByDay}
       styleValue={styleValue}
       profileDetail={profileDetail}
-      getCrying_dataByDay={getCrying_dataByDay}
-      getCrying_dataByweek={getCrying_dataByweek}
+      setGettingDataDate={setGettingDataDate}
+      setDataShow={setDataShow}
       {...props}
     />
   );

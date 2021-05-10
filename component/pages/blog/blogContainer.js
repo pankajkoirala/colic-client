@@ -1,8 +1,14 @@
 import React from "react";
 import Blog from "./blog";
+import { useSelector } from "react-redux";
 
 export default BlogContainer = (props) => {
-  console.log("hjasdhjaddhj");
+  const { blogs_data, profileDetail } = useSelector((state) => ({
+    blogs_data: state.blogs_data.blogs_data,
+    profileDetail: state.profileDetail.profileDetail,
+  }));
+
+  /*console.log("hjasdhjaddhj");
   const starttime = "14:00";
   const endtime = "20:00";
 
@@ -75,7 +81,8 @@ export default BlogContainer = (props) => {
   console.log(
     "🚀 ~ file: blogContainer.js ~ line 79 ~ allarray",
     allarray.sort((a, b) => a.startTime - b.startTime)
+  );*/
+  return (
+    <Blog {...props} profileDetail={profileDetail} blogs_data={blogs_data} />
   );
-  console.log(new Date());
-  return <Blog {...props} />;
 };
