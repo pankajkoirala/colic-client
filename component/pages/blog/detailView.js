@@ -52,34 +52,40 @@ export default SingleBlogView = (props) => {
         </TouchableOpacity>
       </View>
       <ScrollView bounces={false}>
-        <Text
+        <View
           style={{
-            paddingBottom: 10,
-            color: "#999966",
-            fontSize: 16,
-            textTransform: "capitalize",
+            paddingHorizontal: 6,
           }}
         >
-          {`${selectedBlog.author}, ${moment(selectedBlog.posteddate).format(
-            "DD MMM YYYY"
-          )}`}
-        </Text>
-        <Text style={{ textAlign: "justify" }}>{selectedBlog.content}</Text>
-        <View style={{ paddingTop: 10 }}>
           <Text
             style={{
+              paddingBottom: 10,
+              color: "#999966",
               fontSize: 16,
+              textTransform: "capitalize",
             }}
           >
-            {"Source : "}
+            {`${selectedBlog.author}, ${moment(selectedBlog.posteddate).format(
+              "DD MMM YYYY"
+            )}`}
+          </Text>
+          <Text style={{ textAlign: "justify" }}>{selectedBlog.content}</Text>
+          <View style={{ paddingTop: 10 }}>
             <Text
               style={{
-                textTransform: "capitalize",
+                fontSize: 16,
               }}
             >
-              {selectedBlog.source}
+              {"Source : "}
+              <Text
+                style={{
+                  textTransform: "capitalize",
+                }}
+              >
+                {selectedBlog.source}
+              </Text>
             </Text>
-          </Text>
+          </View>
         </View>
       </ScrollView>
     </View>

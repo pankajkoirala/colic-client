@@ -230,7 +230,6 @@ const styles = StyleSheet.create({
   colicIconText: {
     fontSize: 45,
     alignSelf: "center",
-    fontFamily: "Montserrat",
     color: "white",
   },
   OTPInnerContainer: {

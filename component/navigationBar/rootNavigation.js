@@ -19,7 +19,7 @@ export default function AppStack(props) {
     console.log("token dekhayena");
   }
 
-  // let token = "pankaj";
+  //let token = "pankaj";
   return (
     <NavigationContainer>
       {token ? (

@@ -54,7 +54,7 @@ export default function AppStack(props) {
   const { token } = useSelector((state) => ({
     token: state.token.token,
   }));
-  // const token = "pankaja";
+  //const token = "pankaja";
   return (
     <Stack.Navigator
       screenOptions={token ? { headerShown: false } : { headerShown: false }}

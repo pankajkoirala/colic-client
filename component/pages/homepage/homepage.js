@@ -24,6 +24,8 @@ export default ExampleTwo = (props) => {
     getCrying_dataByDay,
     setGettingDataDate,
     setDataShow,
+    setModelOpen,
+    modelOpen,
   } = props;
 
   return (
@@ -72,7 +74,6 @@ export default ExampleTwo = (props) => {
               style={{
                 fontSize: 20,
                 paddingLeft: 30,
-                fontFamily: "Montserrat",
                 color: "grey",
                 paddingBottom: 30,
               }}
@@ -92,7 +93,6 @@ export default ExampleTwo = (props) => {
                 style={{
                   fontSize: 18,
                   // paddingLeft: 30,
-                  fontFamily: "Montserrat",
                   color: "grey",
                   // paddingBottom: 30,
                 }}
@@ -104,7 +104,6 @@ export default ExampleTwo = (props) => {
                 style={{
                   fontSize: 18,
                   // paddingLeft: 30,
-                  fontFamily: "Montserrat",
                   color: "black",
                   // paddingBottom: 30,
                   textAlign: "center",
@@ -119,7 +118,6 @@ export default ExampleTwo = (props) => {
                 style={{
                   fontSize: 18,
                   // paddingLeft: 30,
-                  fontFamily: "Montserrat",
                   color: "grey",
                   // paddingBottom: 30,
                 }}
@@ -130,7 +128,6 @@ export default ExampleTwo = (props) => {
                 style={{
                   fontSize: 18,
                   // paddingLeft: 30,
-                  fontFamily: "Montserrat",
                   color: "black",
                   // paddingBottom: 30,
                   textAlign: "center",
@@ -152,7 +149,6 @@ export default ExampleTwo = (props) => {
             <Text
               onPress={() => setDataShow(true)}
               style={{
-                fontFamily: "Montserrat",
                 color: "grey",
                 fontSize: 18,
                 paddingHorizontal: 20,
@@ -165,7 +161,6 @@ export default ExampleTwo = (props) => {
             <Text
               onPress={() => setDataShow(false)}
               style={{
-                fontFamily: "Montserrat",
                 color: "grey",
                 fontSize: 18,
                 paddingHorizontal: 20,
@@ -196,14 +191,12 @@ export default ExampleTwo = (props) => {
                         width: "20%",
                         textAlign: "center",
                         marginVertical: 6,
-                        fontFamily: "Montserrat",
                         fontSize: 20,
                       }
                     : {
                         width: "10.5%",
                         textAlign: "center",
                         marginVertical: 6,
-                        fontFamily: "Montserrat",
                         fontSize: 20,
                       }
                 }
@@ -257,7 +250,7 @@ export default ExampleTwo = (props) => {
           />
         </View>
         <TouchableOpacity
-          onPress={() => console.log("add data")}
+          onPress={() => setModelOpen(true)}
           style={{
             flex: 1,
             justifyContent: "center",
@@ -275,7 +268,7 @@ export default ExampleTwo = (props) => {
             style={{
               alignSelf: "center",
             }}
-            name="plus"
+            name={modelOpen ? "times" : "plus"}
             size={30}
             color="#ffff"
           />
@@ -347,7 +340,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "black",
     // backgroundColor: "grey",
-    fontFamily: "Montserrat",
     fontSize: 15,
   },
   editBack: {

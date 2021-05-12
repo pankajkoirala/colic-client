@@ -260,7 +260,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     alignSelf: "center",
     flex: 1,
-    fontFamily: "Montserrat",
+    //fontFamily: "Montserrat",
     fontWeight: "bold",
   },
   signUpFormView: {
@@ -288,7 +288,7 @@ const styles = StyleSheet.create({
   },
   errorMessage: {
     color: "red",
-    fontFamily: "Montserrat",
+    //  fontFamily: "Montserrat",
     textAlign: "center",
     marginTop: -4,
   },
@@ -319,7 +319,7 @@ const styles = StyleSheet.create({
   signUpButtonText: {
     fontSize: 20,
     color: "#ffff",
-    fontFamily: "Montserrat",
+    //fontFamily: "Montserrat",
   },
   or_line_view: {
     flexDirection: "row",
@@ -348,7 +348,7 @@ const styles = StyleSheet.create({
   socialLoginText: {
     margin: 6,
     fontSize: 15,
-    fontFamily: "Montserrat",
+    //  fontFamily: "Montserrat",
   },
 
   socialLoginArrowIcon: {

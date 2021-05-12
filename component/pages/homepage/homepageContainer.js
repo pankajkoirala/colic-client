@@ -4,6 +4,8 @@ import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { CRYING_DATA } from "../../redux/action/action";
 import { dayCryingData, weeCryingData } from "../../service/cryingDataService";
+import DataSendingModel from "./dataSendingModel";
+import { View } from "react-native";
 
 export default HomepageContainer = (props) => {
   const dispatch = useDispatch();
@@ -16,14 +18,11 @@ export default HomepageContainer = (props) => {
       blogs_data: state.blogs_data.blogs_data,
     })
   );
-  console.log(
-    "🚀 ~ file: homepageContainer.js ~ line 11 ~ profileDetail",
-    profileDetail
-  );
 
   const [day, setDay] = useState("3");
   const [gettingDataDate, setGettingDataDate] = useState(new Date());
   const [dataShow, setDataShow] = useState(false);
+  const [modelOpen, setModelOpen] = useState(false);
 
   //-----------------------------------------------------------------------------------------------------------------------------------
   const cryingDataDespatch = (data) => {
@@ -161,15 +160,20 @@ export default HomepageContainer = (props) => {
   };
 
   return (
-    <HomePage
-      day={day}
-      setDay={setDay}
-      labelByDay={labelByDay}
-      styleValue={styleValue}
-      profileDetail={profileDetail}
-      setGettingDataDate={setGettingDataDate}
-      setDataShow={setDataShow}
-      {...props}
-    />
+    <View>
+      <DataSendingModel setModelOpen={setModelOpen} modelOpen={modelOpen} />
+      <HomePage
+        day={day}
+        setDay={setDay}
+        labelByDay={labelByDay}
+        styleValue={styleValue}
+        profileDetail={profileDetail}
+        setGettingDataDate={setGettingDataDate}
+        setDataShow={setDataShow}
+        setModelOpen={setModelOpen}
+        {...props}
+        modelOpen={modelOpen}
+      />
+    </View>
   );
 };

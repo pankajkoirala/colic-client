@@ -24,8 +24,7 @@ function CustomDrawerContent(props) {
       <View style={styles.profileImageView}>
         <Image
           source={{
-            uri:
-              "https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg",
+            uri: "https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg",
           }}
           style={styles.profileImage}
           imageStyle={{
@@ -107,7 +106,7 @@ const styles = StyleSheet.create({
   drawerMenuItem: {
     padding: 5,
     alignItems: "center",
-    fontFamily: "Montserrat",
+    //fontFamily: "Montserrat",
     textAlign: "center",
   },
 });

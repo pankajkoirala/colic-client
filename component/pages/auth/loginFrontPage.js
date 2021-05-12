@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   colicIconText: {
     fontSize: 45,
     alignSelf: "center",
-    fontFamily: "Montserrat",
+    //    fontFamily: "Montserrat",
     color: "white",
   },
   loginBottomView: {
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
   loginBottomText: {
     fontSize: 20,
     color: "#ffff",
-    fontFamily: "Montserrat",
+    //fontFamily: "Montserrat",
     textAlign: "center",
   },
   doNotHaveAcc: {
@@ -77,13 +77,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     margin: 6,
     fontSize: 16,
-    fontFamily: "Montserrat",
+    //fontFamily: "Montserrat",
     color: "grey",
   },
   registerText: {
     textAlign: "center",
     fontSize: 16,
-    fontFamily: "Montserrat",
+    //fontFamily: "Montserrat",
     textDecorationLine: "underline",
     color: "grey",
   },
