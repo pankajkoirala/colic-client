@@ -76,3 +76,56 @@ export default function AppStack(props) {
     </Stack.Navigator>
   );
 }
+
+const ProfileScreen = {
+  Profile: Profile,
+};
+
+const HomeScreen = {
+  Home: Homepage,
+};
+const BlogScreen = {
+  Blog: BlogPage,
+  SingleBlogView: SingleBlogView,
+};
+
+const FileScreen = {
+  ContactUs: ContactUsPage,
+};
+
+export function ProfileStack(props) {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      {Object.entries(ProfileScreen).map(([name, component]) => (
+        <Stack.Screen name={name} component={component} key={name} />
+      ))}
+    </Stack.Navigator>
+  );
+}
+export function HomePageStack(props) {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      {Object.entries(HomeScreen).map(([name, component]) => (
+        <Stack.Screen name={name} component={component} key={name} />
+      ))}
+    </Stack.Navigator>
+  );
+}
+export function BlogStack(props) {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      {Object.entries(BlogScreen).map(([name, component]) => (
+        <Stack.Screen name={name} component={component} key={name} />
+      ))}
+    </Stack.Navigator>
+  );
+}
+export function FileStack(props) {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      {Object.entries(FileScreen).map(([name, component]) => (
+        <Stack.Screen name={name} component={component} key={name} />
+      ))}
+    </Stack.Navigator>
+  );
+}

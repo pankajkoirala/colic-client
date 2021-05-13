@@ -3,7 +3,11 @@ import HomePage from "./homepage";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { CRYING_DATA } from "../../redux/action/action";
-import { dayCryingData, weeCryingData } from "../../service/cryingDataService";
+import {
+  dayCryingData,
+  weeCryingData,
+  postCryingData,
+} from "../../service/cryingDataService";
 import DataSendingModel from "./dataSendingModel";
 import { View } from "react-native";
 
@@ -23,12 +27,19 @@ export default HomepageContainer = (props) => {
   const [gettingDataDate, setGettingDataDate] = useState(new Date());
   const [dataShow, setDataShow] = useState(false);
   const [modelOpen, setModelOpen] = useState(false);
-
+  const [fromHours, setFromHours] = useState(moment());
+  const [toHours, setToHours] = useState(moment());
+  const [intensity, setIntensity] = useState(0);
+  const [openTimePicker1, setOpenTimePicker1] = useState(false);
+  const [openTimePicker2, setOpenTimePicker2] = useState(false);
+  const [cryingData, setCryingData] = useState([]);
   //-----------------------------------------------------------------------------------------------------------------------------------
   const cryingDataDespatch = (data) => {
     dispatch({ type: CRYING_DATA, payload: data });
   };
-
+  const reloadFetchData = () => {
+    reload.setReload(!reload.reload);
+  };
   useEffect(() => {
     if (profileDetail.id) {
       if (dataShow === false) {
@@ -40,11 +51,32 @@ export default HomepageContainer = (props) => {
         dayCryingData(profileDetail.id, token, reqDate, cryingDataDespatch);
       }
     }
-  }, [gettingDataDate, profileDetail.id]);
+  }, [gettingDataDate, profileDetail.id, dataShow]);
 
   //--------------------------------------------------------------------------------------------------------------------------------
   //data get by day
+  let baby_data = [];
+  let startTime = parseInt(moment(fromHours).format("H"));
+  let endTime = parseInt(moment(toHours).format("H"));
+  const todayDate = moment().format("YYYY-MM-DD") + "T12:00:00";
 
+  useEffect(() => {
+    const posting_baby_data = [];
+    for (let index = startTime; index <= endTime; index++) {
+      posting_baby_data.push({ intensity: intensity, startTime: index });
+    }
+
+    setCryingData(posting_baby_data);
+  }, [fromHours, toHours, intensity]);
+  const sendingData_Crying = () => {
+    const sendingData = {
+      user_id: profileDetail.id,
+      posteddate: todayDate,
+      baby_data: cryingData,
+    };
+
+    postCryingData(profileDetail.id, token, sendingData, reloadFetchData);
+  };
   //--------------------------------------------------------------------------------------------------------
 
   //lebel according to date
@@ -161,7 +193,21 @@ export default HomepageContainer = (props) => {
 
   return (
     <View>
-      <DataSendingModel setModelOpen={setModelOpen} modelOpen={modelOpen} />
+      <DataSendingModel
+        fromHours={fromHours}
+        setFromHours={setFromHours}
+        toHours={toHours}
+        setToHours={setToHours}
+        intensity={intensity}
+        setIntensity={setIntensity}
+        openTimePicker1={openTimePicker1}
+        setOpenTimePicker1={setOpenTimePicker1}
+        openTimePicker2={openTimePicker2}
+        setOpenTimePicker2={setOpenTimePicker2}
+        setModelOpen={setModelOpen}
+        modelOpen={modelOpen}
+        sendingData_Crying={sendingData_Crying}
+      />
       <HomePage
         day={day}
         setDay={setDay}

@@ -12,10 +12,10 @@ import {
 } from "react-native";
 import FontAwesome5, { FA5Style } from "react-native-vector-icons/FontAwesome5";
 const ProfileUploader = (props) => {
-  const { setModelOpen, openTimePicker, setOpenTimePicker, setHours } = props;
+  const { setModelOpen, openTimePicker, setOpenTimePicker, setHours, mode } =
+    props;
 
   const [date, setDate] = useState(new Date());
-  const [mode, setMode] = useState("date");
   //const [show, setShow] = useState(true);
 
   useEffect(() => {
@@ -23,11 +23,6 @@ const ProfileUploader = (props) => {
   }, [date]);
 
   const onChange = (event, selectedDate) => {
-    console.log(
-      "🚀 ~ file: datePicker.js ~ line 26 ~ onChange ~ selectedDate",
-      selectedDate
-    );
-
     const currentDate = selectedDate || date;
     setDate(currentDate);
     if (setHours) {
@@ -78,7 +73,7 @@ const ProfileUploader = (props) => {
                     <DateTimePicker
                       testID="dateTimePicker"
                       value={date}
-                      mode={"time"}
+                      mode={mode}
                       is24Hour={false}
                       display="default"
                       onChange={onChange}
@@ -123,7 +118,7 @@ const ProfileUploader = (props) => {
             <DateTimePicker
               testID="dateTimePicker"
               value={date}
-              mode={"time"}
+              mode={mode}
               is24Hour={false}
               display="default"
               onChange={onChange}

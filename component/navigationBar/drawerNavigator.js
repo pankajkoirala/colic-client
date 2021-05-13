@@ -4,10 +4,11 @@ import {
   DrawerContentScrollView,
   DrawerItem,
 } from "@react-navigation/drawer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AUTH_TOKEN } from "../redux/action/action";
 import BottomNavigator from "./buttomNav";
 import { View, Image, StyleSheet } from "react-native";
+import { base_URL } from "../utils/const";
 
 //import * as Screens from "../components/Screens";
 const Drawer = createDrawerNavigator();
@@ -19,12 +20,16 @@ function CustomDrawerContent(props) {
     dispatch({ type: AUTH_TOKEN, payload: "" });
   };
 
+  const { profileDetail } = useSelector((state) => ({
+    profileDetail: state.profileDetail.profileDetail,
+  }));
+
   return (
     <DrawerContentScrollView {...props}>
       <View style={styles.profileImageView}>
         <Image
           source={{
-            uri: "https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start-0e837dcc57769db2306d8d659f53555feb500b3c5d456879b9c843d1872e7baa.jpg",
+            uri: base_URL + "/" + profileDetail.profileimage,
           }}
           style={styles.profileImage}
           imageStyle={{

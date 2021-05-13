@@ -146,30 +146,32 @@ export default ExampleTwo = (props) => {
               marginBottom: 40,
             }}
           >
-            <Text
-              onPress={() => setDataShow(true)}
-              style={{
-                color: "grey",
-                fontSize: 18,
-                paddingHorizontal: 20,
-                textDecorationLine: "underline",
-                textDecorationStyle: "solid",
-              }}
-            >
-              today
-            </Text>
-            <Text
-              onPress={() => setDataShow(false)}
-              style={{
-                color: "grey",
-                fontSize: 18,
-                paddingHorizontal: 20,
-                textDecorationLine: "underline",
-                textDecorationStyle: "solid",
-              }}
-            >
-              weekly
-            </Text>
+            <TouchableOpacity onPress={() => setDataShow(true)}>
+              <Text
+                style={{
+                  color: "grey",
+                  fontSize: 18,
+                  paddingHorizontal: 20,
+                  textDecorationLine: "underline",
+                  textDecorationStyle: "solid",
+                }}
+              >
+                today
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setDataShow(false)}>
+              <Text
+                style={{
+                  color: "grey",
+                  fontSize: 18,
+                  paddingHorizontal: 20,
+                  textDecorationLine: "underline",
+                  textDecorationStyle: "solid",
+                }}
+              >
+                weekly
+              </Text>
+            </TouchableOpacity>
           </View>
           <Text onPress={() => setShowDateMode(!showDateMode)}>
             Date Select
@@ -245,6 +247,7 @@ export default ExampleTwo = (props) => {
           }}
         >
           <DateModel
+            {...props}
             showDateMode={showDateMode}
             setFinalSelectedDate={setGettingDataDate}
           />

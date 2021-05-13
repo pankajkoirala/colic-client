@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import BlogPage from "../pages/blog/blogContainer";
-import ContactUs from "../pages/contactus/contactus";
-import Profile from "./../pages/profile/profileContainer";
-import Stake from "./stack";
+
+import Stake, {
+  ProfileStack,
+  HomePageStack,
+  BlogStack,
+  FileStack,
+} from "./stack";
 import { Text, View, Animated } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import Home from "../pages/homepage/homepageContainer";
+
 //import * as Screens from "../components/Screens";
 const Bottom = createBottomTabNavigator();
 
 const AnimatedIcon = Animated.createAnimatedComponent(FontAwesome5);
-
 function MyTabBar({ state, descriptors, navigation }) {
   const focusedOptions = descriptors[state.routes[state.index].key].options;
 
@@ -23,6 +25,7 @@ function MyTabBar({ state, descriptors, navigation }) {
     <View style={{ flexDirection: "row" }}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
+
         const label =
           options.tabBarLabel !== undefined
             ? options.tabBarLabel
@@ -31,6 +34,7 @@ function MyTabBar({ state, descriptors, navigation }) {
             : route.name;
 
         const isFocused = state.index === index;
+
         let opacityValue = new Animated.Value(0);
         let marginValue = new Animated.Value(0);
         let bgColorValue = new Animated.Value(0);
@@ -40,49 +44,48 @@ function MyTabBar({ state, descriptors, navigation }) {
           Animated.parallel([
             Animated.spring(bgColorValue, {
               toValue: 0,
-              duration: 500,
+              duration: 400,
               useNativeDriver: false,
             }),
             Animated.spring(iconValue, {
               toValue: 0,
-              duration: 500,
+              duration: 400,
               useNativeDriver: false,
             }),
             Animated.spring(marginValue, {
               toValue: 0,
-              duration: 500,
+              duration: 400,
               useNativeDriver: false,
             }),
             Animated.spring(opacityValue, {
               toValue: 0,
-              duration: 500,
+              duration: 400,
               useNativeDriver: false,
             }),
           ]).start();
         }, [state]);
 
         function animateOpacity() {
-          // marginValue.setValue( -20);
           Animated.parallel(
             [
               Animated.timing(bgColorValue, {
                 toValue: 1,
-                duration: 500,
+                duration: 400,
                 useNativeDriver: false,
               }),
               Animated.timing(iconValue, {
                 toValue: 1,
-                duration: 500,
+                duration: 400,
                 useNativeDriver: false,
               }),
               Animated.timing(marginValue, {
                 toValue: 1,
-                duration: 500,
+                duration: 400,
                 useNativeDriver: false,
               }),
               Animated.timing(opacityValue, {
                 toValue: 1,
-                duration: 500,
+                duration: 400,
                 useNativeDriver: false,
               }),
             ],
@@ -91,22 +94,22 @@ function MyTabBar({ state, descriptors, navigation }) {
             Animated.parallel([
               Animated.spring(bgColorValue, {
                 toValue: 0,
-                duration: 500,
+                duration: 400,
                 useNativeDriver: false,
               }),
               Animated.spring(iconValue, {
                 toValue: 0,
-                duration: 500,
+                duration: 400,
                 useNativeDriver: false,
               }),
               Animated.spring(marginValue, {
                 toValue: 0,
-                duration: 500,
+                duration: 400,
                 useNativeDriver: false,
               }),
               Animated.spring(opacityValue, {
                 toValue: 0,
-                duration: 500,
+                duration: 400,
                 useNativeDriver: false,
               }),
             ]).start(() => {
@@ -124,7 +127,7 @@ function MyTabBar({ state, descriptors, navigation }) {
 
         let marginal = marginValue.interpolate({
           inputRange: [0, 1],
-          outputRange: [0, -10],
+          outputRange: [0, -20],
         });
 
         let opacity = opacityValue.interpolate({
@@ -134,7 +137,7 @@ function MyTabBar({ state, descriptors, navigation }) {
 
         let bgColor = bgColorValue.interpolate({
           inputRange: [0, 1],
-          outputRange: ["#f7f7f7", "#2E7F9F"],
+          outputRange: ["white", "black"],
         });
 
         let iconColor = iconValue.interpolate({
@@ -152,7 +155,6 @@ function MyTabBar({ state, descriptors, navigation }) {
             target: route.key,
           });
         };
-
         return (
           <View
             key={index}
@@ -174,8 +176,7 @@ function MyTabBar({ state, descriptors, navigation }) {
               onPress={onPress}
               onLongPress={onLongPress}
               style={{
-                color: isFocused ? "#ffff" : "#222",
-                margin: 2,
+                color: isFocused ? "#ffff" : "",
                 transform: [
                   {
                     translateY: marginal,
@@ -185,8 +186,21 @@ function MyTabBar({ state, descriptors, navigation }) {
                 opacity: opacity,
               }}
             >
-              {/* {label} */}
-              <AnimatedIcon name={route.name} size={35} color="#000000" />
+              <AnimatedIcon name={route.name} size={30} color="#000000" />
+            </Animated.Text>
+            <Animated.Text
+              style={{
+                color: bgColor,
+                fontWeight: "bold",
+                marginBottom: -12,
+                transform: [
+                  {
+                    translateY: marginal,
+                  },
+                ],
+              }}
+            >
+              {label}
             </Animated.Text>
           </View>
         );
@@ -206,21 +220,31 @@ export default function BottomNavigator(props) {
       />
       <Bottom.Screen
         name={"file"}
-        component={ContactUs}
+        component={FileStack}
         key={"file"}
         {...props}
       />
-      <Bottom.Screen name={"home"} component={Home} key={"home"} {...props} />
+      <Bottom.Screen
+        name={"home"}
+        component={HomePageStack}
+        key={"home"}
+        {...props}
+      />
       <Bottom.Screen
         name={"blogger"}
-        component={BlogPage}
+        component={BlogStack}
         key={"blog"}
         {...props}
       />
       <Bottom.Screen
         name={"cog"}
-        component={Profile}
+        component={ProfileStack}
         key={"setting"}
+        options={({ route }) => {
+          return {
+            icon: "local-hospital",
+          };
+        }}
         {...props}
       />
     </Bottom.Navigator>

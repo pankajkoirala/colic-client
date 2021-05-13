@@ -35,7 +35,6 @@ function ProfileContainer(props) {
 
   //reload get date service
   const reloadFetchData = () => {
-    console.log("pankajsjajd");
     reload.setReload(!reload.reload);
     setLoader(false);
   };

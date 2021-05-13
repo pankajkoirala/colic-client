@@ -10,27 +10,25 @@ import {
 } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import Slider from "@react-native-community/slider";
+import moment from "moment";
+import { postCryingData } from "../../service/cryingDataService";
 const ProfileUploader = (props) => {
-  const { setModelOpen, modelOpen } = props;
-  const [fromHours, setFromHours] = useState("");
-  const [toHours, setToHours] = useState("");
+  const {
+    setModelOpen,
+    modelOpen,
+    fromHours,
+    setFromHours,
+    toHours,
+    setToHours,
+    intensity,
+    setIntensity,
+    openTimePicker1,
+    setOpenTimePicker1,
+    openTimePicker2,
+    setOpenTimePicker2,
+    sendingData_Crying,
+  } = props;
 
-  const [intensity, setIntensity] = useState(0);
-  const [openTimePicker, setOpenTimePicker] = useState(false);
-
-  let baby_data = [];
-  /* useEffect(() => {
-    for (let index = fromHours; index <= toHours; index++) {
-      baby_data.push({ intensity: intensity, startTime: index });
-    }
-    console.log(
-      "---------------------------------------------------------------------------------------------------------------------------------------"
-    );
-    console.log(
-      "🚀 ~ file: dataSendingModel.js ~ line 31 ~ ProfileUploader ~ baby_data",
-      baby_data
-    );
-  }, [fromHours, toHours, intensity]);*/
   return (
     <View style={styles.upperCenteredView}>
       <Modal
@@ -48,7 +46,7 @@ const ProfileUploader = (props) => {
               onPress={() => {
                 setModelOpen(false);
 
-                setOpenTimePicker(false);
+                //setOpenTimePicker(false);
               }}
               style={{ alignSelf: "flex-end" }}
             >
@@ -66,7 +64,7 @@ const ProfileUploader = (props) => {
               <View>
                 <Text style={{ textAlign: "center" }}>starting Time</Text>
                 <TouchableOpacity
-                  onPress={() => setOpenTimePicker(true)}
+                  onPress={() => setOpenTimePicker1(true)}
                   style={{
                     height: 40,
                     width: 100,
@@ -83,11 +81,12 @@ const ProfileUploader = (props) => {
                       fontSize: 20,
                     }}
                   >
-                    12:12 AM
+                    {moment(fromHours).format("hh:mm A")}
                   </Text>
                   <DatePicker
-                    openTimePicker={openTimePicker}
-                    setOpenTimePicker={setOpenTimePicker}
+                    mode={"time"}
+                    openTimePicker={openTimePicker1}
+                    setOpenTimePicker={setOpenTimePicker1}
                     setHours={setFromHours}
                   />
                 </TouchableOpacity>
@@ -95,7 +94,7 @@ const ProfileUploader = (props) => {
               <View>
                 <Text style={{ textAlign: "center" }}>end Time</Text>
                 <TouchableOpacity
-                  onPress={() => setOpenTimePicker(true)}
+                  onPress={() => setOpenTimePicker2(true)}
                   style={{
                     height: 40,
                     width: 100,
@@ -112,11 +111,12 @@ const ProfileUploader = (props) => {
                       fontSize: 20,
                     }}
                   >
-                    12:12 PM
+                    {moment(toHours).format("hh:mm A")}
                   </Text>
                   <DatePicker
-                    openTimePicker={openTimePicker}
-                    setOpenTimePicker={setOpenTimePicker}
+                    openTimePicker={openTimePicker2}
+                    setOpenTimePicker={setOpenTimePicker2}
+                    mode={"time"}
                     setHours={setToHours}
                   />
                 </TouchableOpacity>
@@ -145,7 +145,8 @@ const ProfileUploader = (props) => {
               }}
               onPress={() => {
                 setModelOpen(false);
-                setOpenTimePicker(false);
+                //  setOpenTimePicker(false);
+                sendingData_Crying();
               }}
             >
               <View>

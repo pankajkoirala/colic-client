@@ -20,18 +20,6 @@ export const patientProfileUpdate = (id, data, token, dispatch) => {
 };
 
 export const ProfileImageUpdate = (id, data, token, dispatch) => {
-  console.log(
-    "🚀 ~ file: profileService.js ~ line 23 ~ ProfileImageUpdate ~ token",
-    token
-  );
-  console.log(
-    "🚀 ~ file: profileService.js ~ line 23 ~ ProfileImageUpdate ~ data",
-    data
-  );
-  console.log(
-    "🚀 ~ file: profileService.js ~ line 23 ~ ProfileImageUpdate ~ id",
-    id
-  );
   const fileData = new FormData();
   fileData.append("profileimage", data);
 
