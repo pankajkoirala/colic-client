@@ -1,9 +1,14 @@
 import axios from "axios";
 import { base_URL } from "../utils/const";
-import { LOGIN_FAILED } from "../../common/const";
-import { successAlert } from "../../common/alert";
+import { successAlert, errorAlert } from "../../common/alert";
 
-export const patientProfileUpdate = (id, data, token, dispatch) => {
+export const patientProfileUpdate = (
+  id,
+  data,
+  token,
+  dispatch,
+  setLoaderOff
+) => {
   axios({
     url: `${base_URL}/auth/update_profile/${id}`,
     method: "put",
@@ -11,15 +16,16 @@ export const patientProfileUpdate = (id, data, token, dispatch) => {
     headers: { authorization: token },
   })
     .then((res) => {
-      dispatch();
       successAlert(res.data.message);
+      dispatch();
     })
     .catch((err) => {
+      errorAlert(" Error  try Again", setLoaderOff);
       console.log(err);
     });
 };
 
-export const ProfileImageUpdate = (id, data, token, dispatch) => {
+export const ProfileImageUpdate = (id, data, token, dispatch, setLoaderOff) => {
   const fileData = new FormData();
   fileData.append("profileimage", data);
 
@@ -35,6 +41,7 @@ export const ProfileImageUpdate = (id, data, token, dispatch) => {
       successAlert(res.data.message);
     })
     .catch((err) => {
+      errorAlert(" Error  try Again", setLoaderOff);
       console.log(err.response.data);
     });
 };

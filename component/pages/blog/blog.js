@@ -12,7 +12,7 @@ export default Blog = (props) => {
   const { profileDetail, blogs_data } = props;
 
   return (
-    <View style={{ paddingTop: 20, height: "100%", paddingBottom: 50 }}>
+    <View style={styles.blogContainer}>
       <View style={styles.editBack}>
         <View style={styles.menuNameView}>
           <FontAwesome5Icon
@@ -24,22 +24,13 @@ export default Blog = (props) => {
         <TouchableOpacity onPress={() => props.navigation.navigate("Profile")}>
           <Image
             source={{
-              uri: `https://static.remove.bg/remove-bg-web/2a274ebbb5879d870a69caae33d94388a88e0e35/assets/start_remove-79a4598a05a77ca999df1dcb434160994b6fde2c3e9101984fb1be0f16d0a74e.png`,
+              uri: `${base_URL}/${profileDetail.profileimage}`,
             }}
             style={styles.profileImg}
           />
         </TouchableOpacity>
       </View>
-      <View
-        style={{
-          paddingTop: 10,
-          paddingHorizontal: 20,
-          justifyContent: "space-between",
-          flexDirection: "row",
-          borderBottomColor: "#b8b894",
-          borderBottomWidth: 2,
-        }}
-      >
+      <View style={styles.categoryView}>
         <TouchableOpacity
           onPress={() => setCategory("category1")}
           style={
@@ -93,6 +84,15 @@ export default Blog = (props) => {
 };
 
 const styles = StyleSheet.create({
+  blogContainer: { paddingTop: 20, height: "100%", paddingBottom: 50 },
+  categoryView: {
+    paddingTop: 10,
+    paddingHorizontal: 20,
+    justifyContent: "space-between",
+    flexDirection: "row",
+    borderBottomColor: "#b8b894",
+    borderBottomWidth: 2,
+  },
   selectCategory: {
     width: 100,
     borderBottomColor: "#ffd11a",
@@ -109,9 +109,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 10,
   },
-  editText: {
-    fontSize: 25,
-  },
+
   profileImg: {
     height: 50,
     width: 50,

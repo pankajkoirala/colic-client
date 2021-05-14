@@ -4,8 +4,15 @@ import { View, StyleSheet, Pressable } from "react-native";
 import { Text } from "react-native-elements";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { activateUser } from "../../../service/authService";
+import Loader from "./../../../../common/loader";
 
 export default VerifyUser = (props) => {
+  const [loaderIsOpen, setLoaderIsOpen] = useState(false);
+
+  const setLoaderOff = () => {
+    setLoaderIsOpen(false);
+  };
+
   const ref_OTP1 = useRef();
   const ref_OTP2 = useRef();
   const ref_OTP3 = useRef();
@@ -20,11 +27,14 @@ export default VerifyUser = (props) => {
   } = useForm();
 
   const onSubmit = (data) => {
-    activateUser(data, props);
+    setLoaderIsOpen(true);
+    activateUser(data, props, setLoaderOff);
   };
 
   return (
     <View style={styles.verifyUserContainer}>
+      <Loader loaderIsOpen={loaderIsOpen} />
+
       <View style={styles.colicIcon}>
         <Text style={styles.colicIconText}>COLIC</Text>
       </View>

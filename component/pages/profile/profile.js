@@ -13,12 +13,10 @@ import {
   Image,
   ScrollView,
   ImageBackground,
-  ActivityIndicator,
 } from "react-native";
 import { GENDER } from "../../../common/const";
 import PickerInput from "../../../common/selecteOption";
 import DateInsert from "../../../common/dateInsert";
-import ImageInput from "../../../common/imagePicker";
 import { base_URL } from "../../utils/const";
 import profileImageBG from "./../../../assets/profileBGimage.jpg";
 
@@ -83,13 +81,7 @@ function Profile(props) {
             </View>
           </View>
         </ImageBackground>
-
         <View style={styles.formView}>
-          <ActivityIndicator
-            animating={loader}
-            style={styles.loaderSpinner}
-            size="large"
-          />
           <View style={styles.inputView}>
             <Text>FullName</Text>
             <Controller
@@ -157,7 +149,8 @@ function Profile(props) {
               name="email"
               rules={{
                 required: true,
-                pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                pattern:
+                  /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
               }}
               defaultValue=""
             />

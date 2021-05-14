@@ -7,7 +7,7 @@ import {
   fingerPrintSaveAlert,
 } from "../../common/alert";
 
-export const AuthLogin = (data, dispatch) => {
+export const AuthLogin = (data, dispatch, setLoaderOff) => {
   axios({
     url: `${base_URL}/auth/login`,
     method: "post",
@@ -18,12 +18,11 @@ export const AuthLogin = (data, dispatch) => {
       fingerPrintSaveAlert(`Bearer ${res.data.token}`, data);
     })
     .catch((err) => {
-      errorAlert(LOGIN_FAILED);
-      console.log("pankajsjda", err.response.data.message);
+      errorAlert(LOGIN_FAILED, setLoaderOff);
     });
 };
 
-export const fingerPrintLogin = (data, dispatch) => {
+export const fingerPrintLogin = (data, dispatch, setLoaderOff) => {
   axios({
     url: `${base_URL}/auth/login`,
     method: "post",
@@ -33,12 +32,11 @@ export const fingerPrintLogin = (data, dispatch) => {
       dispatch(`Bearer ${res.data.token}`);
     })
     .catch((err) => {
-      console.log(err.response.data);
-      errorAlert(LOGIN_FAILED);
+      errorAlert(LOGIN_FAILED, setLoaderOff);
     });
 };
 
-export const activateUser = (data, props) => {
+export const activateUser = (data, props, setLoaderOff) => {
   let OTP = "";
   Object.values(data).forEach((arg) => {
     OTP = OTP + arg;
@@ -53,11 +51,11 @@ export const activateUser = (data, props) => {
       AlertWithNavigator(res?.data?.message, props, "login");
     })
     .catch((err) => {
-      errorAlert(err?.response?.data?.message);
+      errorAlert(err?.response?.data?.message, setLoaderOff);
     });
 };
 
-export const signup = (data, props) => {
+export const signup = (data, props, setLoaderOff) => {
   console.log(data);
   axios({
     url: `${base_URL}/auth/register`,
@@ -73,7 +71,7 @@ export const signup = (data, props) => {
     })
     .catch((err) => {
       console.log(err);
-      errorAlert(err?.response?.data?.message);
+      errorAlert(err?.response?.data?.message, setLoaderOff);
     });
 };
 

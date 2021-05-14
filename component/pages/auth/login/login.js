@@ -24,6 +24,7 @@ export default function Login(props) {
     handleSubmit,
     errors,
     onSubmit,
+    setLoaderOff,
   } = props;
 
   return (
@@ -97,7 +98,7 @@ export default function Login(props) {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.fingerPrintIcon}
-                onPress={() => scanFingerprint(dispatchData)}
+                onPress={() => scanFingerprint(dispatchData, setLoaderOff)}
               >
                 <FontAwesome5 name={"fingerprint"} size={40} />
               </TouchableOpacity>

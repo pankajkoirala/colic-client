@@ -7,23 +7,11 @@ export default Category1 = (props) => {
   const { blogs_data } = props;
   return (
     <ScrollView bounces={false}>
-      <View style={{ paddingTop: 10, paddingBottom: 40, height: "100%" }}>
+      <View style={styles.Category1Container}>
         {blogs_data.map((arg, i) => {
           return (
-            <View
-              key={i}
-              style={{
-                paddingHorizontal: 12,
-                paddingVertical: 18,
-              }}
-            >
-              <Text
-                style={{
-                  fontSize: 15,
-                  fontWeight: "bold",
-                  color: "#999966",
-                }}
-              >
+            <View key={i} style={styles.allBlogView}>
+              <Text style={styles.blogPostedDate}>
                 {moment(arg.posteddate).format("DD MMM YYYY")}
               </Text>
               <Text
@@ -32,43 +20,20 @@ export default Category1 = (props) => {
                     id: arg.id,
                   })
                 }
-                style={{
-                  paddingBottom: 10,
-                  fontSize: 20,
-                  fontWeight: "bold",
-                  color: "#4d4d33",
-                  textTransform: "capitalize",
-                }}
+                style={styles.blogTitle}
               >
                 {arg.title}
               </Text>
-              <Text
-                style={{
-                  textTransform: "capitalize",
-                  textAlign: "justify",
-                }}
-              >
+              <Text style={styles.blogContant}>
                 {arg.content.slice(0, 250)}...
               </Text>
               <Text>
                 Author:
-                <Text
-                  style={{
-                    textTransform: "capitalize",
-                  }}
-                >
-                  {arg.author}
-                </Text>
+                <Text style={styles.blogAuthor}>{arg.author}</Text>
               </Text>
               <Text>
                 Source:
-                <Text
-                  style={{
-                    textTransform: "capitalize",
-                  }}
-                >
-                  {arg.source}
-                </Text>
+                <Text style={styles.blogSource}>{arg.source}</Text>
               </Text>
             </View>
           );
@@ -78,4 +43,32 @@ export default Category1 = (props) => {
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  Category1Container: { paddingTop: 10, paddingBottom: 40, height: "100%" },
+  allBlogView: {
+    paddingHorizontal: 12,
+    paddingVertical: 18,
+  },
+  blogPostedDate: {
+    fontSize: 15,
+    fontWeight: "bold",
+    color: "#999966",
+  },
+  blogTitle: {
+    paddingBottom: 10,
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "#4d4d33",
+    textTransform: "capitalize",
+  },
+  blogContant: {
+    textTransform: "capitalize",
+    textAlign: "justify",
+  },
+  blogAuthor: {
+    textTransform: "capitalize",
+  },
+  blogSource: {
+    textTransform: "capitalize",
+  },
+});

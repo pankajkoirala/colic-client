@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
 import { useForm, Controller } from "react-hook-form";
-import { View } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
+import Loader from "./../../../common/loader";
 import Profile from "./profile";
 import {
   patientProfileUpdate,
@@ -19,10 +19,9 @@ function ProfileContainer(props) {
       reload: state.reload.reload,
     })
   );
-
+  const [loaderIsOpen, setLoaderIsOpen] = useState(false);
   const [profileImage, setProfileImage] = useState({});
   const [editState, setEditState] = useState(false);
-  const [loader, setLoader] = useState(false);
 
   //existing profile value set
   useEffect(() => {
@@ -36,16 +35,21 @@ function ProfileContainer(props) {
   //reload get date service
   const reloadFetchData = () => {
     reload.setReload(!reload.reload);
-    setLoader(false);
+    setLoaderIsOpen(false);
+  };
+  const setLoaderOff = () => {
+    setLoaderIsOpen(false);
   };
 
   const ImageUploadFunction = () => {
     if (profileImage != null) {
+      setLoaderIsOpen(true);
       ProfileImageUpdate(
         profileDetail?.id,
         profileImage,
         token,
-        reloadFetchData
+        reloadFetchData,
+        setLoaderOff
       );
     } else {
       alert("Please Select Photo first");
@@ -62,29 +66,37 @@ function ProfileContainer(props) {
   const onSubmit = (data) => {
     if (editState === true) {
       setEditState(false);
-      patientProfileUpdate(profileDetail?.id, data, token, reloadFetchData);
-      setLoader(true);
+      patientProfileUpdate(
+        profileDetail?.id,
+        data,
+        token,
+        reloadFetchData,
+        setLoaderOff
+      );
+      setLoaderIsOpen(true);
     } else {
       setEditState(true);
     }
   };
 
   return (
-    <Profile
-      handleSubmit={handleSubmit}
-      control={control}
-      errors={errors}
-      onSubmit={onSubmit}
-      profileImage={profileImage}
-      setProfileImage={setProfileImage}
-      ImageUploadFunction={ImageUploadFunction}
-      editState={editState}
-      setEditState={setEditState}
-      profileDetail={profileDetail}
-      setValue={setValue}
-      loader={loader}
-      {...props}
-    />
+    <>
+      <Loader loaderIsOpen={loaderIsOpen} />
+      <Profile
+        handleSubmit={handleSubmit}
+        control={control}
+        errors={errors}
+        onSubmit={onSubmit}
+        profileImage={profileImage}
+        setProfileImage={setProfileImage}
+        ImageUploadFunction={ImageUploadFunction}
+        editState={editState}
+        setEditState={setEditState}
+        profileDetail={profileDetail}
+        setValue={setValue}
+        {...props}
+      />
+    </>
   );
 }
 export default ProfileContainer;

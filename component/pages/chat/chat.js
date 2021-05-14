@@ -2,7 +2,6 @@ import React, { Component, useState } from "react";
 import { View } from "react-native";
 import { Text } from "react-native-elements";
 import { TouchableOpacity } from "react-native-gesture-handler";
-
 export default Blog = () => {
   return (
     <View

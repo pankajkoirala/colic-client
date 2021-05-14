@@ -3,7 +3,7 @@ import { base_URL } from "../utils/const";
 import { LOGIN_FAILED } from "../../common/const";
 import { successAlert, errorAlert } from "../../common/alert";
 
-export const weeCryingData = (id, token, date, dispatch) => {
+export const weeCryingData = (id, token, date, dispatch, setLoaderOff) => {
   axios
     .post(
       `${base_URL}/baby/get_week_crying_data`,
@@ -22,11 +22,11 @@ export const weeCryingData = (id, token, date, dispatch) => {
       dispatch(res.data.message);
     })
     .catch((err) => {
-      console.log(err);
+      errorAlert("Try Again", setLoaderOff);
     });
 };
 
-export const dayCryingData = (id, token, date, dispatch) => {
+export const dayCryingData = (id, token, date, dispatch, setLoaderOff) => {
   axios
     .post(
       `${base_URL}/baby/get_day_crying_data`,
@@ -45,11 +45,11 @@ export const dayCryingData = (id, token, date, dispatch) => {
       dispatch(res.data.message);
     })
     .catch((err) => {
-      console.log("server error", err.response);
+      errorAlert("Try Again", setLoaderOff);
     });
 };
 
-export const postCryingData = (id, token, date, dispatch) => {
+export const postCryingData = (id, token, date, dispatch, setLoaderOff) => {
   axios
     .post(`${base_URL}/baby/crying_data`, date, {
       headers: {
@@ -59,11 +59,9 @@ export const postCryingData = (id, token, date, dispatch) => {
     })
     .then((res) => {
       dispatch();
-      console.log(res.data.data);
       successAlert("Data Send Successfully");
     })
     .catch((err) => {
-      errorAlert("Try Again");
-      console.log(err);
+      errorAlert("Try Again", setLoaderOff);
     });
 };

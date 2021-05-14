@@ -79,6 +79,11 @@ export default function AppStack(props) {
 
 const ProfileScreen = {
   Profile: Profile,
+  Chat: Chat,
+  Home: Homepage,
+  Blog: BlogPage,
+  ContactUs: ContactUsPage,
+  SingleBlogView: SingleBlogView,
 };
 
 const HomeScreen = {
@@ -87,10 +92,19 @@ const HomeScreen = {
 const BlogScreen = {
   Blog: BlogPage,
   SingleBlogView: SingleBlogView,
+  Chat: Chat,
+  Home: Homepage,
+  Profile: Profile,
+  ContactUs: ContactUsPage,
 };
 
 const FileScreen = {
   ContactUs: ContactUsPage,
+  Chat: Chat,
+  Home: Homepage,
+  Blog: BlogPage,
+  Profile: Profile,
+  SingleBlogView: SingleBlogView,
 };
 
 export function ProfileStack(props) {

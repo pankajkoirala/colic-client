@@ -14,18 +14,16 @@ import { base_URL } from "../../utils/const";
 import BgImage from "./../../../assets/chartBGimage.jpg";
 
 export default ExampleTwo = (props) => {
-  const [showDateMode, setShowDateMode] = useState(true);
+  const [showDateMode, setShowDateMode] = useState(false);
   const {
     day,
-    setDay,
     styleValue,
     labelByDay,
     profileDetail,
-    getCrying_dataByDay,
-    setGettingDataDate,
     setDataShow,
     setModelOpen,
     modelOpen,
+    setGettingDataDate,
   } = props;
 
   return (
@@ -47,15 +45,7 @@ export default ExampleTwo = (props) => {
                 name={"bars"}
                 size={35}
               />
-              <Text
-                style={{
-                  paddingHorizontal: 10,
-                  fontSize: 25,
-                  fontWeight: "bold",
-                }}
-              >
-                {profileDetail.name}
-              </Text>
+              <Text style={styles.userName}>{profileDetail.name}</Text>
             </View>
             <TouchableOpacity
               onPress={() => props.navigation.navigate("Profile")}
@@ -70,72 +60,17 @@ export default ExampleTwo = (props) => {
           </View>
 
           <View>
-            <Text
-              style={{
-                fontSize: 20,
-                paddingLeft: 30,
-                color: "grey",
-                paddingBottom: 30,
-              }}
-            >
-              here is your baby's reading
-            </Text>
+            <Text style={styles.babyReading}>here is your baby's reading</Text>
           </View>
-          <View
-            style={{
-              flexDirection: "row",
-              display: "flex",
-              justifyContent: "space-around",
-            }}
-          >
+          <View style={styles.averageCryingView}>
             <View>
-              <Text
-                style={{
-                  fontSize: 18,
-                  // paddingLeft: 30,
-                  color: "grey",
-                  // paddingBottom: 30,
-                }}
-              >
-                Average Crying
-              </Text>
+              <Text style={styles.averageCryingLabel}>Average Crying</Text>
 
-              <Text
-                style={{
-                  fontSize: 18,
-                  // paddingLeft: 30,
-                  color: "black",
-                  // paddingBottom: 30,
-                  textAlign: "center",
-                  paddingVertical: 4,
-                }}
-              >
-                4/3
-              </Text>
+              <Text style={styles.averageCryingValue}>4/3</Text>
             </View>
             <View>
-              <Text
-                style={{
-                  fontSize: 18,
-                  // paddingLeft: 30,
-                  color: "grey",
-                  // paddingBottom: 30,
-                }}
-              >
-                Average Volume
-              </Text>
-              <Text
-                style={{
-                  fontSize: 18,
-                  // paddingLeft: 30,
-                  color: "black",
-                  // paddingBottom: 30,
-                  textAlign: "center",
-                  paddingVertical: 4,
-                }}
-              >
-                4/3
-              </Text>
+              <Text style={styles.averageCryingLabel}>Average Volume</Text>
+              <Text style={styles.averageCryingValue}>4/3</Text>
             </View>
           </View>
           <View
@@ -147,35 +82,19 @@ export default ExampleTwo = (props) => {
             }}
           >
             <TouchableOpacity onPress={() => setDataShow(true)}>
-              <Text
-                style={{
-                  color: "grey",
-                  fontSize: 18,
-                  paddingHorizontal: 20,
-                  textDecorationLine: "underline",
-                  textDecorationStyle: "solid",
-                }}
-              >
-                today
-              </Text>
+              <Text style={styles.todayeeklyCall}>today</Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => setDataShow(false)}>
-              <Text
-                style={{
-                  color: "grey",
-                  fontSize: 18,
-                  paddingHorizontal: 20,
-                  textDecorationLine: "underline",
-                  textDecorationStyle: "solid",
-                }}
-              >
-                weekly
-              </Text>
+              <Text style={styles.todayeeklyCall}>weekly</Text>
             </TouchableOpacity>
           </View>
-          <Text onPress={() => setShowDateMode(!showDateMode)}>
-            Date Select
-          </Text>
+          <TouchableOpacity>
+            <FontAwesome5
+              name="calendar"
+              size={30}
+              onPress={() => setShowDateMode(!showDateMode)}
+            />
+          </TouchableOpacity>
         </ImageBackground>
 
         <View
@@ -188,19 +107,7 @@ export default ExampleTwo = (props) => {
             return (
               <Text
                 style={
-                  i === 0
-                    ? {
-                        width: "20%",
-                        textAlign: "center",
-                        marginVertical: 6,
-                        fontSize: 20,
-                      }
-                    : {
-                        width: "10.5%",
-                        textAlign: "center",
-                        marginVertical: 6,
-                        fontSize: 20,
-                      }
+                  i === 0 ? styles.indexEqualToZero : styles.indexNotEqualToZero
                 }
                 key={i}
               >
@@ -239,38 +146,20 @@ export default ExampleTwo = (props) => {
           </View>
         </ScrollView>
 
-        <View
-          style={{
-            position: "absolute",
-            bottom: 0,
-            zIndex: 999,
-          }}
-        >
+        <View style={styles.addCryingDataIconView}>
           <DateModel
-            {...props}
-            showDateMode={showDateMode}
-            setFinalSelectedDate={setGettingDataDate}
+            openTimePicker={showDateMode}
+            setOpenTimePicker={setShowDateMode}
+            mode={"date"}
+            setHours={setGettingDataDate}
           />
         </View>
         <TouchableOpacity
           onPress={() => setModelOpen(true)}
-          style={{
-            flex: 1,
-            justifyContent: "center",
-            height: 50,
-            width: 50,
-            backgroundColor: "red",
-            borderRadius: 30,
-            position: "absolute",
-            alignSelf: "flex-end",
-            bottom: 20,
-            right: 20,
-          }}
+          style={styles.addCryingDataIcon}
         >
           <FontAwesome5
-            style={{
-              alignSelf: "center",
-            }}
+            style={styles.plusInto}
             name={modelOpen ? "times" : "plus"}
             size={30}
             color="#ffff"
@@ -283,11 +172,7 @@ export default ExampleTwo = (props) => {
 
 const styles = StyleSheet.create({
   container: { height: "100%", width: "100%", backgroundColor: "#fff" },
-  head: { height: 40, width: "100%", backgroundColor: "#f1f8ff" },
-  wrapper: { flexDirection: "row" },
-  title: { backgroundColor: "#f6f8fa" },
-  row: { height: 30, width: "100%" },
-  text: { textAlign: "center" },
+
   valueOne: {
     marginHorizontal: 20,
     padding: 4,
@@ -361,5 +246,70 @@ const styles = StyleSheet.create({
   },
   menuNameView: {
     flexDirection: "row",
+  },
+  userName: {
+    paddingHorizontal: 10,
+    fontSize: 25,
+    fontWeight: "bold",
+  },
+  babyReading: {
+    fontSize: 20,
+    paddingLeft: 30,
+    color: "grey",
+    paddingBottom: 30,
+  },
+  averageCryingView: {
+    flexDirection: "row",
+    display: "flex",
+    justifyContent: "space-around",
+  },
+  averageCryingLabel: {
+    fontSize: 18,
+    color: "grey",
+  },
+  averageCryingValue: {
+    fontSize: 18,
+    color: "black",
+    textAlign: "center",
+    paddingVertical: 4,
+  },
+  todayeeklyCall: {
+    color: "grey",
+    fontSize: 18,
+    paddingHorizontal: 20,
+    textDecorationLine: "underline",
+    textDecorationStyle: "solid",
+  },
+  indexEqualToZero: {
+    width: "20%",
+    textAlign: "center",
+    marginVertical: 6,
+    fontSize: 20,
+  },
+  indexNotEqualToZero: {
+    width: "10.5%",
+    textAlign: "center",
+    marginVertical: 6,
+    fontSize: 20,
+  },
+  addCryingDataIcon: {
+    flex: 1,
+    justifyContent: "center",
+    height: 50,
+    width: 50,
+    backgroundColor: "#ffc61a",
+    borderRadius: 30,
+    position: "absolute",
+    alignSelf: "flex-end",
+    bottom: 20,
+    right: 20,
+  },
+  addCryingDataIconView: {
+    position: "absolute",
+    bottom: 0,
+    zIndex: 999,
+  },
+  plusInto: {
+    alignSelf: "center",
   },
 });

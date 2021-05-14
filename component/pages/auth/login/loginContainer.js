@@ -4,10 +4,12 @@ import { AUTH_TOKEN, RELOAD } from "../../../redux/action/action";
 import Login from "./login";
 import { useForm } from "react-hook-form";
 import { AuthLogin } from "../../../service/authService";
+import Loader from "./../../../../common/loader";
 
 export default LoginContainer = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loaderIsOpen, setLoaderIsOpen] = useState(false);
 
   const { reload, token } = useSelector((state) => ({
     reload: state.reload.reload,
@@ -18,7 +20,12 @@ export default LoginContainer = (props) => {
   const dispatch = useDispatch();
 
   const dispatchData = (data) => {
+    setLoaderIsOpen(false);
     dispatch({ type: AUTH_TOKEN, payload: data });
+  };
+
+  const setLoaderOff = () => {
+    setLoaderIsOpen(false);
   };
 
   const {
@@ -33,21 +40,25 @@ export default LoginContainer = (props) => {
       password: data?.password,
     };
 
-    AuthLogin(loginData, dispatchData);
+    AuthLogin(loginData, dispatchData, setLoaderOff);
   };
 
   return (
-    <Login
-      email={email}
-      setEmail={setEmail}
-      password={password}
-      setPassword={setPassword}
-      dispatchData={dispatchData}
-      control={control}
-      handleSubmit={handleSubmit}
-      errors={errors}
-      onSubmit={onSubmit}
-      {...props}
-    />
+    <>
+      <Loader loaderIsOpen={loaderIsOpen} />
+      <Login
+        email={email}
+        setEmail={setEmail}
+        password={password}
+        setPassword={setPassword}
+        dispatchData={dispatchData}
+        control={control}
+        handleSubmit={handleSubmit}
+        errors={errors}
+        onSubmit={onSubmit}
+        setLoaderOff={setLoaderOff}
+        {...props}
+      />
+    </>
   );
 };

@@ -3,6 +3,7 @@ import HomePage from "./homepage";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { CRYING_DATA } from "../../redux/action/action";
+import Loader from "./../../../common/loader";
 import {
   dayCryingData,
   weeCryingData,
@@ -33,22 +34,44 @@ export default HomepageContainer = (props) => {
   const [openTimePicker1, setOpenTimePicker1] = useState(false);
   const [openTimePicker2, setOpenTimePicker2] = useState(false);
   const [cryingData, setCryingData] = useState([]);
+  const [loaderIsOpen, setLoaderIsOpen] = useState(false);
+  console.log(
+    "🚀 ~ file: homepageContainer.js ~ line 29 ~ gettingDataDate",
+    gettingDataDate
+  );
+
   //-----------------------------------------------------------------------------------------------------------------------------------
   const cryingDataDespatch = (data) => {
     dispatch({ type: CRYING_DATA, payload: data });
   };
   const reloadFetchData = () => {
     reload.setReload(!reload.reload);
+    setLoaderIsOpen(false);
+  };
+  const setLoaderOff = () => {
+    setLoaderIsOpen(false);
   };
   useEffect(() => {
     if (profileDetail.id) {
       if (dataShow === false) {
         let reqDate = moment(gettingDataDate).format("YYYY-MM-DD");
-        weeCryingData(profileDetail.id, token, reqDate, cryingDataDespatch);
+        weeCryingData(
+          profileDetail.id,
+          token,
+          reqDate,
+          cryingDataDespatch,
+          setLoaderOff
+        );
       } else {
         let reqDate = moment(gettingDataDate).format("YYYY-MM-DD");
 
-        dayCryingData(profileDetail.id, token, reqDate, cryingDataDespatch);
+        dayCryingData(
+          profileDetail.id,
+          token,
+          reqDate,
+          cryingDataDespatch,
+          setLoaderOff
+        );
       }
     }
   }, [gettingDataDate, profileDetail.id, dataShow]);
@@ -74,8 +97,14 @@ export default HomepageContainer = (props) => {
       posteddate: todayDate,
       baby_data: cryingData,
     };
-
-    postCryingData(profileDetail.id, token, sendingData, reloadFetchData);
+    setLoaderIsOpen(true);
+    postCryingData(
+      profileDetail.id,
+      token,
+      sendingData,
+      reloadFetchData,
+      setLoaderOff
+    );
   };
   //--------------------------------------------------------------------------------------------------------
 
@@ -193,6 +222,7 @@ export default HomepageContainer = (props) => {
 
   return (
     <View>
+      <Loader loaderIsOpen={loaderIsOpen} />
       <DataSendingModel
         fromHours={fromHours}
         setFromHours={setFromHours}

@@ -2,7 +2,7 @@ import * as LocalAuthentication from "expo-local-authentication";
 import { fingerPrintLogin } from "../component/service/authService";
 import { getDefaultUser } from "./fingerPrintStorage";
 
-async function checkCompatible(dispatch) {
+async function checkCompatible(dispatch, setLoaderOff) {
   let hasBiometric = await LocalAuthentication.hasHardwareAsync();
   console.log(
     "🚀 ~ file: fingerprintUnlock.js ~ line 9 ~ checkCompatible ~ hasBiometric",
@@ -12,17 +12,17 @@ async function checkCompatible(dispatch) {
   let hasUser = await getDefaultUser();
 
   if (hasBiometric && hasSetup && hasUser && hasUser.email) {
-    fingerPrintLogin(hasUser, dispatch);
+    fingerPrintLogin(hasUser, dispatch, setLoaderOff);
   }
 }
 
-export async function scanFingerprint(dispatchData) {
+export async function scanFingerprint(dispatchData, setLoaderOff) {
   let result = await LocalAuthentication.authenticateAsync({
     promptMessage: "Touch the fingerprint sensor",
     fallbackLabel: "",
   });
   if (result.success) {
-    checkCompatible(dispatchData);
+    checkCompatible(dispatchData, setLoaderOff);
   } else {
     console.log("err");
   }

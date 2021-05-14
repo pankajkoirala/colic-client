@@ -1,61 +1,59 @@
-import React, { Component } from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
-import Spinner from "react-native-loading-spinner-overlay";
+import React, { useState } from "react";
 
-const instructions = Platform.select({
-  ios: "Press Cmd+R to reload,\n" + "Cmd+D or shake for dev menu",
-  android:
-    "Double tap R on your keyboard to reload,\n" +
-    "Shake or press menu button for dev menu",
-});
+import { Modal, StyleSheet, View, ActivityIndicator } from "react-native";
+import FontAwesome5, { FA5Style } from "react-native-vector-icons/FontAwesome5";
+const ProfileUploader = (props) => {
+  const { setModelOpen, loaderIsOpen, setHours, mode } = props;
 
-export default class App extends Component {
-  state = {
-    spinner: false,
-  };
-
-  componentDidMount() {
-    setInterval(() => {
-      this.setState({
-        spinner: !this.state.spinner,
-      });
-    }, 3000);
-  }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        <Spinner
-          visible={this.state.spinner}
-          textContent={"Loading..."}
-          textStyle={styles.spinnerTextStyle}
-        />
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-      </View>
-    );
-  }
-}
+  return (
+    <View style={styles.upperCenteredView}>
+      <Modal animationType="fade" transparent={true} visible={loaderIsOpen}>
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <ActivityIndicator
+              animating={loaderIsOpen}
+              style={styles.loaderSpinner}
+              size="large"
+            />
+          </View>
+        </View>
+      </Modal>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
-  spinnerTextStyle: {
-    color: "#FFF",
-  },
-  container: {
-    flex: 1,
+  upperCenteredView: {
+    display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#F5FCFF",
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: "center",
-    margin: 10,
+  centeredView: {
+    // flex: 1,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#00000099",
+    height: "100%",
   },
-  instructions: {
-    textAlign: "center",
-    color: "#333333",
-    marginBottom: 5,
+  modalView: {
+    margin: 150,
+    borderRadius: 4,
+    padding: 15,
+    alignItems: "center",
+    shadowColor: "#000",
+    width: "70%",
+    opacity: 1,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowColor: "black",
+
+    shadowRadius: 4,
+    elevation: 5,
   },
 });
+
+export default ProfileUploader;
