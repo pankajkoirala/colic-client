@@ -58,10 +58,19 @@ export const postCryingData = (id, token, date, dispatch, setLoaderOff) => {
       },
     })
     .then((res) => {
-      dispatch();
-      successAlert("Data Send Successfully");
+      var executed = false;
+      if (!executed) {
+        successAlert("Data Send Successfully");
+        dispatch();
+        executed = true;
+      }
     })
     .catch((err) => {
-      errorAlert("Try Again", setLoaderOff);
+      var executed = false;
+      if (!executed) {
+        errorAlert("Try Again", setLoaderOff);
+        console.log(err);
+        executed = true;
+      }
     });
 };

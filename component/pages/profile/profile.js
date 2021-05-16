@@ -112,7 +112,7 @@ function Profile(props) {
               render={({ field: { onChange, onBlur, value } }) => (
                 <View style={styles.inputInnerView}>
                   <TextInput
-                    editable={editState}
+                    editable={false}
                     onBlur={onBlur}
                     onChangeText={(value) => onChange(value)}
                     value={value}
@@ -136,7 +136,7 @@ function Profile(props) {
                 <View style={styles.inputInnerView}>
                   <TextInput
                     onBlur={onBlur}
-                    editable={editState}
+                    editable={false}
                     onChangeText={(value) => onChange(value)}
                     value={value}
                     style={{ height: 30 }}
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 15,
-    paddingTop: 20,
+    paddingTop: 30,
   },
   editText: {
     fontSize: 25,

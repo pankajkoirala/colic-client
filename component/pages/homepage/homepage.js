@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Image,
   ImageBackground,
+  SafeAreaView,
 } from "react-native";
 import { Text, FAB } from "react-native-elements";
 import DateModel from "./../../../common/ModelDateInsert/datePicker";
@@ -15,6 +16,7 @@ import BgImage from "./../../../assets/chartBGimage.jpg";
 
 export default ExampleTwo = (props) => {
   const [showDateMode, setShowDateMode] = useState(false);
+
   const {
     day,
     styleValue,
@@ -88,7 +90,12 @@ export default ExampleTwo = (props) => {
               <Text style={styles.todayeeklyCall}>weekly</Text>
             </TouchableOpacity>
           </View>
-          <TouchableOpacity>
+          <TouchableOpacity
+            style={{
+              marginBottom: 10,
+              alignItems: "center",
+            }}
+          >
             <FontAwesome5
               name="calendar"
               size={30}
@@ -148,8 +155,8 @@ export default ExampleTwo = (props) => {
 
         <View style={styles.addCryingDataIconView}>
           <DateModel
+            setOpenTimePicker={() => setShowDateMode()}
             openTimePicker={showDateMode}
-            setOpenTimePicker={setShowDateMode}
             mode={"date"}
             setHours={setGettingDataDate}
           />
@@ -234,7 +241,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 20,
-    paddingTop: 20,
+    paddingTop: 30,
   },
   editText: {
     fontSize: 25,

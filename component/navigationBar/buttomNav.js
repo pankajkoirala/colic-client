@@ -197,7 +197,7 @@ function MyTabs({ descriptors, state, route, navigation, index }) {
             backgroundColor: bgColor,
             padding: 5,
             paddingBottom: 0,
-            borderRadius: "50%",
+            borderRadius: 30,
           }}
         >
           <AnimatedIcon name={options.icon} color={iconColor} size={30} />

@@ -35,8 +35,9 @@ export default HomepageContainer = (props) => {
   const [openTimePicker2, setOpenTimePicker2] = useState(false);
   const [cryingData, setCryingData] = useState([]);
   const [loaderIsOpen, setLoaderIsOpen] = useState(false);
+
   console.log(
-    "🚀 ~ file: homepageContainer.js ~ line 29 ~ gettingDataDate",
+    "🚀 ~ file: homepageContainer.js ~ line 29 ~ gettingDataDate value aaunu parne",
     gettingDataDate
   );
 
