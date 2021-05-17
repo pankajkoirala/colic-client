@@ -26,6 +26,9 @@ export default ExampleTwo = (props) => {
     setModelOpen,
     modelOpen,
     setGettingDataDate,
+    averageCryingInFraction,
+    averageVolumeInFraction,
+    dataShow,
   } = props;
 
   return (
@@ -68,11 +71,15 @@ export default ExampleTwo = (props) => {
             <View>
               <Text style={styles.averageCryingLabel}>Average Crying</Text>
 
-              <Text style={styles.averageCryingValue}>4/3</Text>
+              <Text style={styles.averageCryingValue}>
+                {averageCryingInFraction}
+              </Text>
             </View>
             <View>
               <Text style={styles.averageCryingLabel}>Average Volume</Text>
-              <Text style={styles.averageCryingValue}>4/3</Text>
+              <Text style={styles.averageCryingValue}>
+                {averageVolumeInFraction}
+              </Text>
             </View>
           </View>
           <View
@@ -84,10 +91,26 @@ export default ExampleTwo = (props) => {
             }}
           >
             <TouchableOpacity onPress={() => setDataShow(true)}>
-              <Text style={styles.todayeeklyCall}>today</Text>
+              <Text
+                style={
+                  !dataShow
+                    ? styles.todayWeeklyCall
+                    : styles.todayWeeklyCallSelected
+                }
+              >
+                today
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity onPress={() => setDataShow(false)}>
-              <Text style={styles.todayeeklyCall}>weekly</Text>
+              <Text
+                style={
+                  dataShow
+                    ? styles.todayWeeklyCall
+                    : styles.todayWeeklyCallSelected
+                }
+              >
+                weekly
+              </Text>
             </TouchableOpacity>
           </View>
           <TouchableOpacity
@@ -280,13 +303,23 @@ const styles = StyleSheet.create({
     textAlign: "center",
     paddingVertical: 4,
   },
-  todayeeklyCall: {
+  todayWeeklyCall: {
     color: "grey",
     fontSize: 18,
     paddingHorizontal: 20,
     textDecorationLine: "underline",
     textDecorationStyle: "solid",
+    fontWeight: "bold",
   },
+  todayWeeklyCallSelected: {
+    color: "#ffc61a",
+    fontSize: 18,
+    paddingHorizontal: 20,
+    textDecorationLine: "underline",
+    textDecorationStyle: "solid",
+    fontWeight: "bold",
+  },
+
   indexEqualToZero: {
     width: "20%",
     textAlign: "center",
@@ -314,7 +347,7 @@ const styles = StyleSheet.create({
   addCryingDataIconView: {
     position: "absolute",
     bottom: 0,
-    zIndex: 999,
+    //zIndex: 999,
   },
   plusInto: {
     alignSelf: "center",

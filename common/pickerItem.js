@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+/*import React, { useState } from "react";
 import { Picker } from "@react-native-picker/picker";
 import {
   View,
@@ -143,4 +143,4 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     marginVertical: 5,
   },
-});
+});*/

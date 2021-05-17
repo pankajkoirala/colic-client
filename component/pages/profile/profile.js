@@ -3,6 +3,7 @@ import { Controller } from "react-hook-form";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import moment from "moment";
 import ImageImportModel from "./../../../common/profileUploadModul";
+import GenderPicker from "./../../../common/genderPicker";
 
 import {
   TextInput,
@@ -48,7 +49,7 @@ function Profile(props) {
         >
           <View
             style={{
-              height: "40%",
+              height: "35%",
             }}
           >
             <View style={styles.editBack}>
@@ -184,15 +185,12 @@ function Profile(props) {
             <Controller
               control={control}
               render={({ field: { onChange, value } }) => (
-                <View>
-                  <PickerInput
+                <View style={styles.genderPicker}>
+                  {Platform.OS === "ios" && <Text>{profileDetail.gender}</Text>}
+                  <GenderPicker
+                    onChange={onChange}
                     oldValue={profileDetail.gender}
                     editable={editState}
-                    type={"text"}
-                    picks={GENDER}
-                    label={"gender"}
-                    value={value}
-                    onChange={onChange}
                   />
                 </View>
               )}
@@ -250,16 +248,22 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
   },
   formView: {
+    flex: 1,
     alignItems: "center",
     width: "100%",
-    height: "100%",
-    paddingTop: 20,
+    height: 500,
+    paddingTop: 10,
     backgroundColor: "white",
   },
   inputInnerView: {
     borderColor: "black",
     borderBottomWidth: 2,
     height: 30,
+  },
+  genderPicker: {
+    borderColor: "black",
+    borderBottomWidth: 2,
+    height: 50,
   },
 
   errorMessage: {

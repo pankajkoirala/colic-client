@@ -38,7 +38,12 @@ const FetchDataComponent = () => {
           }
         )
         .then((res) => {
-          dispatch({ type: CRYING_DATA, payload: res.data.message });
+          var executed = false;
+
+          if (!executed) {
+            dispatch({ type: CRYING_DATA, payload: res.data.message });
+            executed = true;
+          }
         })
         .catch((err) => {
           console.log("server error", err.response);
@@ -53,7 +58,12 @@ const FetchDataComponent = () => {
         },
       })
       .then((res) => {
-        dispatch({ type: PROFILE_DETAIL, payload: res.data.message[0] });
+        var executed = false;
+
+        if (!executed) {
+          dispatch({ type: PROFILE_DETAIL, payload: res.data.message[0] });
+          executed = true;
+        }
       })
       .catch((err) => {
         console.log("get profile pic", err);
@@ -72,7 +82,11 @@ const FetchDataComponent = () => {
         },
       })
       .then((res) => {
-        dispatch({ type: BLOGS_DATA, payload: res.data.message });
+        var executed = false;
+        if (!executed) {
+          dispatch({ type: BLOGS_DATA, payload: res.data.message });
+          executed = true;
+        }
       })
       .catch((err) => {
         console.log("get profile pic", err.response);

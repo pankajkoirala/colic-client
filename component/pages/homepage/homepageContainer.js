@@ -14,15 +14,48 @@ import { View } from "react-native";
 
 export default HomepageContainer = (props) => {
   const dispatch = useDispatch();
-  const { token, profileDetail, reload, crying_data, blogs_data } = useSelector(
+  const { token, profileDetail, reload, crying_data } = useSelector(
     (state) => ({
       token: state.token.token,
       profileDetail: state.profileDetail.profileDetail,
       reload: state.reload.reload,
       crying_data: state.crying_data.crying_data,
-      blogs_data: state.blogs_data.blogs_data,
     })
   );
+  //-------------------------------------------------------------------------------------------------------------------------------------
+  //average crying alculation
+  const getFraction = (decimal) => {
+    for (var denominator = 1; (decimal * denominator) % 1 !== 0; denominator++);
+    let numerator = decimal * denominator;
+    return numerator + "/" + denominator;
+  };
+  let averagedata = crying_data.map((arg) => arg.baby_data);
+  let totalSum = 0;
+  for (let index = 0; index < averagedata.length; index++) {
+    averagedata[index].map((arg1) => {
+      if (arg1.intensity !== 0) {
+        totalSum = totalSum + 1;
+      }
+    });
+  }
+
+  let averageInDecimal = (totalSum / 168).toFixed(1);
+  const averageCryingInFraction = getFraction(averageInDecimal);
+
+  //-----------------------------------------------------------------------------------------------------------------
+  //average volume
+  let averageVolumedata = crying_data.map((arg) => arg.baby_data);
+  let totalVolumeSum = 0;
+  for (let index = 0; index < averagedata.length; index++) {
+    averageVolumedata[index].map(
+      (arg1) => (totalVolumeSum = totalVolumeSum + parseInt(arg1.intensity))
+    );
+  }
+
+  let averageVolumeInDecimal = (totalVolumeSum / 168).toFixed(1);
+  const averageVolumeInFraction = getFraction(averageVolumeInDecimal);
+
+  //----------------------------------------------------------------------------------------------------------------------------------------------
 
   const [day, setDay] = useState("3");
   const [gettingDataDate, setGettingDataDate] = useState(new Date());
@@ -35,11 +68,6 @@ export default HomepageContainer = (props) => {
   const [openTimePicker2, setOpenTimePicker2] = useState(false);
   const [cryingData, setCryingData] = useState([]);
   const [loaderIsOpen, setLoaderIsOpen] = useState(false);
-
-  console.log(
-    "🚀 ~ file: homepageContainer.js ~ line 29 ~ gettingDataDate value aaunu parne",
-    gettingDataDate
-  );
 
   //-----------------------------------------------------------------------------------------------------------------------------------
   const cryingDataDespatch = (data) => {
@@ -247,9 +275,12 @@ export default HomepageContainer = (props) => {
         profileDetail={profileDetail}
         setGettingDataDate={setGettingDataDate}
         setDataShow={setDataShow}
+        dataShow={dataShow}
         setModelOpen={setModelOpen}
         {...props}
         modelOpen={modelOpen}
+        averageCryingInFraction={averageCryingInFraction}
+        averageVolumeInFraction={averageVolumeInFraction}
       />
     </View>
   );

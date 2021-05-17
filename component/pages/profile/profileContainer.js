@@ -19,6 +19,7 @@ function ProfileContainer(props) {
       reload: state.reload.reload,
     })
   );
+
   const [loaderIsOpen, setLoaderIsOpen] = useState(false);
   const [profileImage, setProfileImage] = useState({});
   const [editState, setEditState] = useState(false);

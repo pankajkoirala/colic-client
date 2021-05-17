@@ -16,12 +16,21 @@ export const patientProfileUpdate = (
     headers: { authorization: token },
   })
     .then((res) => {
-      successAlert(res.data.message);
-      dispatch();
+      var executed = false;
+
+      if (!executed) {
+        dispatch();
+        successAlert(res.data.message);
+        executed = true;
+      }
     })
     .catch((err) => {
-      errorAlert(" Error  try Again", setLoaderOff);
-      console.log(err);
+      var executed = false;
+      if (!executed) {
+        errorAlert(" Error  try Again", setLoaderOff);
+        console.log(err);
+        executed = true;
+      }
     });
 };
 
@@ -37,11 +46,18 @@ export const ProfileImageUpdate = (id, data, token, dispatch, setLoaderOff) => {
     headers: { authorization: token },
   })
     .then((res) => {
-      dispatch();
-      successAlert(res.data.message);
+      var executed = false;
+      if (!executed) {
+        dispatch();
+        successAlert(res.data.message);
+        executed = true;
+      }
     })
     .catch((err) => {
-      errorAlert(" Error  try Again", setLoaderOff);
-      console.log(err.response.data);
+      var executed = false;
+      if (!executed) {
+        errorAlert(" Error  try Again", setLoaderOff);
+        executed = true;
+      }
     });
 };

@@ -2,10 +2,10 @@ import React, { Component, useState } from "react";
 import { View } from "react-native";
 import { Text } from "react-native-elements";
 import { TouchableOpacity } from "react-native-gesture-handler";
-export default Blog = () => {
+
+export default Chat = () => {
   return (
     <View
-      disableFullscreenUI={true}
       style={{
         flex: 1,
         display: "flex",
@@ -16,9 +16,7 @@ export default Blog = () => {
       <TouchableOpacity
         onPress={() => console.log("pankhghg577hgaj")}
         style={{ height: 100, width: 100 }}
-      >
-        <Text>This is Chat page</Text>
-      </TouchableOpacity>
+      ></TouchableOpacity>
     </View>
   );
 };

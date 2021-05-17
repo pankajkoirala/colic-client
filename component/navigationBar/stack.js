@@ -43,6 +43,11 @@ const AuthScreen = {
 
 const AppScreen = {
   Chat: Chat,
+  Profile: Profile,
+  Home: Homepage,
+  Blog: BlogPage,
+  SingleBlogView: SingleBlogView,
+  ContactUs: ContactUsPage,
 };
 
 export default function AppStack(props) {
@@ -74,18 +79,38 @@ export default function AppStack(props) {
 
 const ProfileScreen = {
   Profile: Profile,
+  Chat: Chat,
+  Home: Homepage,
+  Blog: BlogPage,
+  SingleBlogView: SingleBlogView,
+  ContactUs: ContactUsPage,
 };
 
 const HomeScreen = {
   Home: Homepage,
+  Chat: Chat,
+  Profile: Profile,
+  Blog: BlogPage,
+  SingleBlogView: SingleBlogView,
+  ContactUs: ContactUsPage,
 };
 const BlogScreen = {
   Blog: BlogPage,
   SingleBlogView: SingleBlogView,
+  Chat: Chat,
+  Profile: Profile,
+  Home: Homepage,
+
+  ContactUs: ContactUsPage,
 };
 
 const FileScreen = {
   ContactUs: ContactUsPage,
+  Chat: Chat,
+  Profile: Profile,
+  Home: Homepage,
+  Blog: BlogPage,
+  SingleBlogView: SingleBlogView,
 };
 
 export function ProfileStack(props) {

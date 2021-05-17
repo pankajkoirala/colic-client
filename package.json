@@ -9,8 +9,8 @@
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.15.1",
+    "@react-native-community/picker": "^1.8.1",
     "@react-native-community/slider": "^3.0.3",
-    "@react-native-picker/picker": "^1.16.0",
     "@react-navigation/bottom-tabs": "^5.11.8",
     "@react-navigation/drawer": "^5.12.4",
     "@react-navigation/stack": "^5.14.5",
@@ -25,6 +25,7 @@
     "react-dom": "16.13.1",
     "react-hook-form": "^7.0.4",
     "react-native": "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz",
+    "react-native-animated-loader": "^0.0.9",
     "react-native-datepicker": "^1.7.2",
     "react-native-elements": "^3.4.1",
     "react-native-gesture-handler": "^1.10.3",

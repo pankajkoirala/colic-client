@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+/*import React, { useState } from "react";
 import { Picker } from "@react-native-picker/picker";
 import { Controller } from "react-hook-form";
 import {
@@ -70,11 +70,7 @@ export default function PickerInput(props) {
             >
               {android.map((i, ind) => {
                 return (
-                  <Picker.Item
-                    label={i || oldValue || "Select One"}
-                    value={i}
-                    key={ind}
-                  />
+                  <Picker.Item label={i || oldValue} value={i} key={ind} />
                 );
               })}
             </Picker>
@@ -92,9 +88,7 @@ export default function PickerInput(props) {
               color="#024A8E"
             />
             <View style={styles.inputios}>
-              <Text>
-                {picks.find((i) => i === value) || oldValue || "Select One"}
-              </Text>
+              <Text>{picks.find((i) => i === value) || oldValue}</Text>
             </View>
           </TouchableOpacity>
         )}
@@ -155,4 +149,4 @@ const styles = StyleSheet.create({
     // borderRadius: 15,
     marginVertical: 5,
   },
-});
+});*/

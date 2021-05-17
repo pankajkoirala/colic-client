@@ -42,23 +42,14 @@ export const fingerPrintSaveAlert = async (token, data) => {
   }
 };
 
-export const errorAlert = async (message, loaderOff) => {
-  await Alert.alert(
-    "Error",
-    `${message}`,
-    [
-      {
-        text: "ok",
-      },
-    ],
-    {
-      cancelable: true,
-      onDismisss: () => loaderOff(),
-    }
-  );
+export const errorAlert = (msg, loaderOff) => {
+  Alert.alert("Error", msg, [{ text: "OK", onPress: () => loaderOff() }], {
+    cancelable: true,
+  });
 };
-export const successAlert = async (message) => {
-  await Alert.alert("Success", message, {
+
+export const successAlert = (msg) => {
+  Alert.alert("Success", msg, [{ text: "OK" }], {
     cancelable: true,
   });
 };
