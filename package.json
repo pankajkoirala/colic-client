@@ -25,7 +25,6 @@
     "react-dom": "16.13.1",
     "react-hook-form": "^7.0.4",
     "react-native": "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz",
-    "react-native-animated-loader": "^0.0.9",
     "react-native-datepicker": "^1.7.2",
     "react-native-elements": "^3.4.1",
     "react-native-gesture-handler": "^1.10.3",
@@ -37,7 +36,8 @@
     "redux-devtools-extension": "^2.13.9",
     "redux-logger": "^3.0.6",
     "redux-persist": "^6.0.0",
-    "redux-thunk": "^2.3.0"
+    "redux-thunk": "^2.3.0",
+    "rn-progress-loader": "^1.0.8"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

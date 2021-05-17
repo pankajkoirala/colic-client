@@ -35,6 +35,7 @@ function Profile(props) {
     loader,
     setProfileImage,
   } = props;
+  const [genderOpen, setGenderOpen] = useState(false);
   return (
     <ScrollView style={styles.profileContainer} bounces={false}>
       <View style={styles.fullPageView}>
@@ -186,8 +187,14 @@ function Profile(props) {
               control={control}
               render={({ field: { onChange, value } }) => (
                 <View style={styles.genderPicker}>
-                  {Platform.OS === "ios" && <Text>{profileDetail.gender}</Text>}
+                  {Platform.OS === "ios" && (
+                    <TouchableOpacity onPress={() => setGenderOpen(true)}>
+                      <Text>{value || profileDetail.gender}</Text>
+                    </TouchableOpacity>
+                  )}
                   <GenderPicker
+                    setGenderOpen={setGenderOpen}
+                    genderOpen={genderOpen}
                     onChange={onChange}
                     oldValue={profileDetail.gender}
                     editable={editState}

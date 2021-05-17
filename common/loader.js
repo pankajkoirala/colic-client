@@ -1,23 +1,20 @@
-import React, { useState } from "react";
-import { StyleSheet } from "react-native";
-import AnimatedLoader from "react-native-animated-loader";
+import * as React from "react";
+import { Text, View, StyleSheet } from "react-native";
+import ProgressLoader from "rn-progress-loader";
 
-export default Loader = (props) => {
+export default function App(props) {
   const { setModelOpen, loaderIsOpen, setHours, mode } = props;
   return (
-    <AnimatedLoader
-      visible={loaderIsOpen}
-      overlayColor="rgba(245, 212, 66,0.5)"
-      animationStyle={styles.lottie}
-      speed={1}
-    ></AnimatedLoader>
+    <View>
+      <View>
+        <ProgressLoader
+          visible={loaderIsOpen}
+          isModal={true}
+          isHUD={true}
+          hudColor={"#000000"}
+          color={"#FFFFFF"}
+        />
+      </View>
+    </View>
   );
-};
-
-const styles = StyleSheet.create({
-  lottie: {
-    width: 100,
-    height: 100,
-    color: "#ffff1a",
-  },
-});
+}

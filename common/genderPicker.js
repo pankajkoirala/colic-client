@@ -7,18 +7,19 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  Platform,
   View,
 } from "react-native";
 const Pickers = (props) => {
   const [selectedValue, setSelectedValue] = useState("");
-  const { oldValue, onChange, editable } = props;
+  const { oldValue, onChange, editable, setGenderOpen, genderOpen } = props;
   return (
     <>
-      {Platform.OS === "ios" ? (
+      {Platform.OS === "ios" && genderOpen && (
         <Modal
           animationType="slide"
           transparent={true}
-          visible={true}
+          visible={genderOpen}
           onRequestClose={() => {
             Alert.alert("Modal has been closed.");
             setModalVisible(!modalVisible);
@@ -28,7 +29,7 @@ const Pickers = (props) => {
             <View style={styles.modalView}>
               <TouchableOpacity
                 onPress={() => {
-                  setModelOpen(false);
+                  setGenderOpen(false);
 
                   //setOpenTimePicker(false);
                 }}
@@ -38,19 +39,15 @@ const Pickers = (props) => {
                   <FontAwesome5 name={"times-circle"} size={26} />
                 </Text>
               </TouchableOpacity>
-              <View
-                style={{
-                  width: "100%",
-                  flexDirection: "row",
-                  justifyContent: "space-evenly",
-                }}
-              ></View>
+
               <Picker
                 selectedValue={selectedValue || oldValue}
-                style={{ height: 50, width: 400 }}
+                style={{ height: 150, width: 400 }}
+                enabled={editable}
                 onValueChange={(itemValue, itemIndex) => {
                   console.log(itemValue);
                   setSelectedValue(itemValue);
+                  onChange(itemValue);
                 }}
               >
                 <Picker.Item label="Select One" value="" key="1" />
@@ -58,20 +55,19 @@ const Pickers = (props) => {
                 <Picker.Item label="Female" value="Female" key="3" />
                 <Picker.Item label="Other" value="Other" key="4" />
               </Picker>
+
               <TouchableOpacity
                 style={{
                   height: 40,
                   borderRadius: 20,
                   width: "50%",
                   backgroundColor: "black",
-                  display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
                 }}
                 onPress={() => {
-                  setModelOpen(false);
+                  setGenderOpen(false);
                   //  setOpenTimePicker(false);
-                  sendingData_Crying();
                 }}
               >
                 <View>
@@ -87,12 +83,15 @@ const Pickers = (props) => {
             </View>
           </View>
         </Modal>
-      ) : (
+      )}
+      {Platform.OS !== "ios" && (
         <Picker
           selectedValue={selectedValue || oldValue}
+          enabled={editable}
           onValueChange={(itemValue, itemIndex) => {
             console.log(itemValue);
             setSelectedValue(itemValue);
+            onChange(itemValue);
           }}
         >
           <Picker.Item label="Select One" value="" key="1" />
@@ -108,27 +107,23 @@ const Pickers = (props) => {
 export default Pickers;
 
 const styles = StyleSheet.create({
-  upperCenteredView: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-  },
   centeredView: {
     // flex: 1,
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
+    //display: "flex",
+    // justifyContent: "center",
+    flexGrow: 1,
+    flexDirection: "column",
+    justifyContent: "space-between",
+    bottom: 0,
     backgroundColor: "#00000099",
     height: "100%",
   },
   modalView: {
-    margin: 150,
     backgroundColor: "white",
-    borderRadius: 20,
     padding: 15,
     alignItems: "center",
     shadowColor: "#000",
-    width: "70%",
+    width: "100%",
     opacity: 1,
     shadowOffset: {
       width: 0,
@@ -140,14 +135,7 @@ const styles = StyleSheet.create({
     shadowRadius: 4,
     elevation: 5,
   },
-  cameraView: {
-    height: 40,
-    width: 40,
-    backgroundColor: "black",
-    borderRadius: 20,
-    justifyContent: "center",
-    alignItems: "center",
-  },
+
   button: {
     borderRadius: 20,
     padding: 10,
@@ -155,10 +143,5 @@ const styles = StyleSheet.create({
   },
   buttonClose: {
     backgroundColor: "#2196F3",
-  },
-  slider: {
-    marginVertical: 10,
-    color: "red",
-    width: "100%",
   },
 });
