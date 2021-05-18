@@ -147,9 +147,11 @@ export default ExampleTwo = (props) => {
           })}
         </View>
         <ScrollView
+          scrollEnabled={true}
+          horizontal={false}
           style={{
             width: "100%",
-            height: 500,
+            height: "100%",
           }}
           //bounces={true}
         >
@@ -206,7 +208,7 @@ const styles = StyleSheet.create({
   valueOne: {
     marginHorizontal: 20,
     padding: 4,
-    height: 40,
+    height: 38,
     textAlign: "center",
     backgroundColor: "#00cc44",
     color: "#00cc44",
@@ -259,6 +261,7 @@ const styles = StyleSheet.create({
     color: "black",
     // backgroundColor: "grey",
     fontSize: 15,
+    fontWeight: "bold",
   },
   editBack: {
     flexDirection: "row",

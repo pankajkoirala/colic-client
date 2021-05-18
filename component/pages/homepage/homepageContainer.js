@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import HomePage from "./homepage";
 import moment from "moment";
+import { Text } from "react-native-elements";
+
 import { useDispatch, useSelector } from "react-redux";
 import { CRYING_DATA } from "../../redux/action/action";
 import Loader from "./../../../common/loader";
@@ -141,19 +143,19 @@ export default HomepageContainer = (props) => {
   const dayLabel = (day) => {
     switch (day) {
       case 0:
-        return "S";
+        return <Text style={{ fontWeight: "bold" }}>S</Text>;
       case 1:
-        return "M";
+        return <Text style={{ fontWeight: "bold" }}>M</Text>;
       case 2:
-        return "T";
+        return <Text style={{ fontWeight: "bold" }}>T</Text>;
       case 3:
-        return "W";
+        return <Text style={{ fontWeight: "bold" }}>W</Text>;
       case 4:
-        return "T";
+        return <Text style={{ fontWeight: "bold" }}>T</Text>;
       case 5:
-        return "F";
+        return <Text style={{ fontWeight: "bold" }}>F</Text>;
       case 6:
-        return "S";
+        return <Text style={{ fontWeight: "bold" }}>S</Text>;
     }
   };
   //--------------------------------------------------------------------------------------------------------------------------------
@@ -161,6 +163,7 @@ export default HomepageContainer = (props) => {
 
   const babyCryingData = [
     [
+      { startTime: "12:00 AM" },
       { startTime: "1:00 AM" },
       { startTime: "2:00 AM" },
       { startTime: "3:00 AM" },
@@ -172,19 +175,18 @@ export default HomepageContainer = (props) => {
       { startTime: "9:00 AM" },
       { startTime: "10:00 AM" },
       { startTime: "11:00 AM" },
-      { startTime: "12:00 AM" },
-      { startTime: "1:00 pm" },
-      { startTime: "2:00 pm" },
-      { startTime: "3:00 pm" },
-      { startTime: "4:00 pm" },
-      { startTime: "5:00 pm" },
-      { startTime: "6:00 pm" },
-      { startTime: "7:00 pm" },
-      { startTime: "8:00 pm" },
-      { startTime: "9:00 pm" },
-      { startTime: "10:00 pm" },
-      { startTime: "11:00 pm" },
-      { startTime: "12:00 pm" },
+      { startTime: "12:00 PM" },
+      { startTime: "1:00 PM" },
+      { startTime: "2:00 PM" },
+      { startTime: "3:00 PM" },
+      { startTime: "4:00 PM" },
+      { startTime: "5:00 PM" },
+      { startTime: "6:00 PM" },
+      { startTime: "7:00 PM" },
+      { startTime: "8:00 PM" },
+      { startTime: "9:00 PM" },
+      { startTime: "10:00 PM" },
+      { startTime: "11:00 PM" },
     ],
   ];
   crying_data.map((arg) => babyCryingData.push(arg.baby_data));
@@ -213,7 +215,7 @@ export default HomepageContainer = (props) => {
       default:
         return {
           label: [
-            "Label",
+            <Text style={{ fontWeight: "bold" }}>LABEL</Text>,
             dayLabel(new Date(crying_data[0]?.date).getDay()),
             dayLabel(new Date(crying_data[1]?.date).getDay()),
             dayLabel(new Date(crying_data[2]?.date).getDay()),

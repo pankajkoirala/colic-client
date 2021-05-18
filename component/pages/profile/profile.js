@@ -15,8 +15,7 @@ import {
   ScrollView,
   ImageBackground,
 } from "react-native";
-import { GENDER } from "../../../common/const";
-import PickerInput from "../../../common/selecteOption";
+
 import DateInsert from "../../../common/dateInsert";
 import { base_URL } from "../../utils/const";
 import profileImageBG from "./../../../assets/profileBGimage.jpg";
@@ -186,9 +185,18 @@ function Profile(props) {
             <Controller
               control={control}
               render={({ field: { onChange, value } }) => (
-                <View style={styles.genderPicker}>
+                <View
+                  style={
+                    Platform.OS === "ios"
+                      ? styles.genderPickerIOS
+                      : styles.genderPicker
+                  }
+                >
                   {Platform.OS === "ios" && (
-                    <TouchableOpacity onPress={() => setGenderOpen(true)}>
+                    <TouchableOpacity
+                      disabled={!editState}
+                      onPress={() => setGenderOpen(true)}
+                    >
                       <Text>{value || profileDetail.gender}</Text>
                     </TouchableOpacity>
                   )}
@@ -267,12 +275,16 @@ const styles = StyleSheet.create({
     borderBottomWidth: 2,
     height: 30,
   },
+  genderPickerIOS: {
+    borderColor: "black",
+    borderBottomWidth: 2,
+    height: 30,
+  },
   genderPicker: {
     borderColor: "black",
     borderBottomWidth: 2,
     height: 50,
   },
-
   errorMessage: {
     color: "red",
   },

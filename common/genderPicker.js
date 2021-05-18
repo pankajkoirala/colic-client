@@ -26,60 +26,66 @@ const Pickers = (props) => {
           }}
         >
           <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-              <TouchableOpacity
-                onPress={() => {
-                  setGenderOpen(false);
-
-                  //setOpenTimePicker(false);
-                }}
-                style={{ alignSelf: "flex-end" }}
-              >
-                <Text>
-                  <FontAwesome5 name={"times-circle"} size={26} />
-                </Text>
-              </TouchableOpacity>
-
-              <Picker
-                selectedValue={selectedValue || oldValue}
-                style={{ height: 150, width: 400 }}
-                enabled={editable}
-                onValueChange={(itemValue, itemIndex) => {
-                  console.log(itemValue);
-                  setSelectedValue(itemValue);
-                  onChange(itemValue);
-                }}
-              >
-                <Picker.Item label="Select One" value="" key="1" />
-                <Picker.Item label="Male" value="Male" key="2" />
-                <Picker.Item label="Female" value="Female" key="3" />
-                <Picker.Item label="Other" value="Other" key="4" />
-              </Picker>
-
-              <TouchableOpacity
+            <View style={{ backgroundColor: "white" }}>
+              <View
                 style={{
-                  height: 40,
-                  borderRadius: 20,
-                  width: "50%",
-                  backgroundColor: "black",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-                onPress={() => {
-                  setGenderOpen(false);
-                  //  setOpenTimePicker(false);
+                  flexDirection: "row",
+                  justifyContent: "space-between",
                 }}
               >
-                <View>
+                <TouchableOpacity
+                  onPress={() => {
+                    setGenderOpen(false);
+
+                    //setOpenTimePicker(false);
+                  }}
+                >
                   <Text
                     style={{
-                      color: "#ffff",
+                      fontSize: 20,
+                      color: "blue",
+                      padding: 5,
                     }}
                   >
-                    Save
+                    Cancel
                   </Text>
-                </View>
-              </TouchableOpacity>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    setGenderOpen(false);
+
+                    //setOpenTimePicker(false);
+                  }}
+                >
+                  <Text
+                    style={{
+                      fontSize: 20,
+                      color: "blue",
+                      padding: 5,
+                    }}
+                  >
+                    Confirm
+                  </Text>
+                </TouchableOpacity>
+              </View>
+
+              <View style={styles.modalView}>
+                <Picker
+                  selectedValue={selectedValue || oldValue}
+                  style={{ height: 200, width: 400 }}
+                  enabled={editable}
+                  onValueChange={(itemValue, itemIndex) => {
+                    console.log(itemValue);
+                    setSelectedValue(itemValue);
+                    onChange(itemValue);
+                  }}
+                >
+                  <Picker.Item label="Select One" value="" key="1" />
+                  <Picker.Item label="Male" value="Male" key="2" />
+                  <Picker.Item label="Female" value="Female" key="3" />
+                  <Picker.Item label="Other" value="Other" key="4" />
+                </Picker>
+              </View>
             </View>
           </View>
         </Modal>
@@ -108,21 +114,17 @@ export default Pickers;
 
 const styles = StyleSheet.create({
   centeredView: {
-    // flex: 1,
-    //display: "flex",
-    // justifyContent: "center",
+    paddingTop: "120%",
     flexGrow: 1,
     flexDirection: "column",
     justifyContent: "space-between",
-    bottom: 0,
-    backgroundColor: "#00000099",
+    //backgroundColor: "#00000099",
     height: "100%",
   },
   modalView: {
-    backgroundColor: "white",
+    //backgroundColor: "white",
     padding: 15,
     alignItems: "center",
-    shadowColor: "#000",
     width: "100%",
     opacity: 1,
     shadowOffset: {
