@@ -127,7 +127,8 @@ function MyTabs({ descriptors, state, route, navigation, index }) {
 
   let marginal = marginValue.interpolate({
     inputRange: [0, 1],
-    outputRange: [0, -20],
+    outputRange: [0, 0],
+    //outputRange: [0, -20]
   });
 
   let opacity = opacityValue.interpolate({
@@ -190,11 +191,13 @@ function MyTabs({ descriptors, state, route, navigation, index }) {
           padding: 5,
           paddingBottom: 0,
           borderRadius: 50,
+          backgroundColor: bgColor,
+          height: 50,
+          width: 53,
         }}
       >
         <Animated.View
           style={{
-            backgroundColor: bgColor,
             padding: 5,
             paddingBottom: 0,
             borderRadius: 30,
@@ -202,16 +205,6 @@ function MyTabs({ descriptors, state, route, navigation, index }) {
         >
           <AnimatedIcon name={options.icon} color={iconColor} size={30} />
         </Animated.View>
-        <Animated.Text
-          style={{
-            color: "#ffd24d",
-            opacity: opacity,
-            fontSize: 15,
-            fontWeight: "bold",
-          }}
-        >
-          {label}
-        </Animated.Text>
       </Animated.View>
     </TouchableOpacity>
   );

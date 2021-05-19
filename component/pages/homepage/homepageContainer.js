@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import HomePage from "./homepage";
 import moment from "moment";
 import { Text } from "react-native-elements";
+import SampleJson from "./babyCryingSampleData.json";
 
 import { useDispatch, useSelector } from "react-redux";
 import { CRYING_DATA } from "../../redux/action/action";
@@ -24,6 +25,7 @@ export default HomepageContainer = (props) => {
       crying_data: state.crying_data.crying_data,
     })
   );
+
   //-------------------------------------------------------------------------------------------------------------------------------------
   //average crying alculation
   const getFraction = (decimal) => {
@@ -224,7 +226,7 @@ export default HomepageContainer = (props) => {
             dayLabel(new Date(crying_data[5]?.date).getDay()),
             dayLabel(new Date(crying_data[6]?.date).getDay()),
           ],
-          data: babyCryingData,
+          data: babyCryingData[1] ? babyCryingData : SampleJson,
         };
     }
   };

@@ -203,7 +203,12 @@ export default ExampleTwo = (props) => {
 };
 
 const styles = StyleSheet.create({
-  container: { height: "100%", width: "100%", backgroundColor: "#fff" },
+  container: {
+    height: "100%",
+    width: "100%",
+    backgroundColor: "#fff",
+    paddingBottom: 20,
+  },
 
   valueOne: {
     marginHorizontal: 20,

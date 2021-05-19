@@ -39,9 +39,7 @@ export default Blog = (props) => {
               : styles.nonSelectCategory
           }
         >
-          <Text style={{ paddingBottom: 4, textAlign: "center" }}>
-            category 1
-          </Text>
+          <Text style={{ paddingBottom: 4, textAlign: "center" }}>Blog </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => setCategory("category2")}
@@ -52,7 +50,7 @@ export default Blog = (props) => {
           }
         >
           <Text style={{ paddingBottom: 4, textAlign: "center" }}>
-            category 2
+            Research{" "}
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -63,9 +61,7 @@ export default Blog = (props) => {
               : styles.nonSelectCategory
           }
         >
-          <Text style={{ paddingBottom: 4, textAlign: "center" }}>
-            category 3
-          </Text>
+          <Text style={{ paddingBottom: 4, textAlign: "center" }}>Video </Text>
         </TouchableOpacity>
       </View>
       <View>
@@ -91,7 +87,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     flexDirection: "row",
     borderBottomColor: "#b8b894",
-    borderBottomWidth: 2,
+    borderBottomWidth: 1,
   },
   selectCategory: {
     width: 100,

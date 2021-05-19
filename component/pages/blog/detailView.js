@@ -1,13 +1,13 @@
 import moment from "moment";
 import React, { useState } from "react";
 import { TouchableOpacity } from "react-native";
-import { ScrollView } from "react-native";
+import { ScrollView, useWindowDimensions } from "react-native";
 import { Image } from "react-native";
 import { View, Text, StyleSheet } from "react-native";
+import HTML from "react-native-render-html";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import { useSelector } from "react-redux";
 import { base_URL } from "../../utils/const";
-
 export default SingleBlogView = (props) => {
   const { id } = props.route.params;
   const { blogs_data, profileDetail } = useSelector((state) => ({
@@ -16,7 +16,7 @@ export default SingleBlogView = (props) => {
   }));
 
   const selectedBlog = blogs_data.filter((arg) => arg.id === id)[0];
-
+  const contentWidth = useWindowDimensions().width;
   return (
     <View style={styles.blogDetailContainer}>
       <View style={styles.editBack}>
@@ -48,7 +48,12 @@ export default SingleBlogView = (props) => {
               "DD MMM YYYY"
             )}`}
           </Text>
-          <Text style={styles.blogContent}>{selectedBlog.content}</Text>
+          <Text style={styles.blogContent}>
+            <HTML
+              source={{ html: selectedBlog.content }}
+              contentWidth={contentWidth}
+            />
+          </Text>
           <View style={styles.sourceView}>
             <Text style={styles.sourceText}>
               {"Source : "}

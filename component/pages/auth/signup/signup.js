@@ -41,154 +41,157 @@ function Login(props) {
         </TouchableOpacity>
         <Text style={styles.signUpIcon}>Sign Up</Text>
       </View>
-      <View style={styles.signUpFormView}>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputLabel}> Username</Text>
-          <Controller
-            control={control}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <View>
-                <TextInput
-                  style={styles.inputArea}
-                  onBlur={onBlur}
-                  onChangeText={(value) => onChange(value)}
-                  value={value}
-                />
-                {errors.username && (
-                  <Text style={styles.errorMessage}>This is required.</Text>
-                )}
-              </View>
-            )}
-            name="username"
-            rules={{ required: true }}
-            defaultValue=""
-          />
+      <KeyboardAvoidingView>
+        <View style={styles.signUpFormView}>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputLabel}> Username</Text>
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <View>
+                  <TextInput
+                    style={styles.inputArea}
+                    onBlur={onBlur}
+                    onChangeText={(value) => onChange(value)}
+                    value={value}
+                  />
+                  {errors.username && (
+                    <Text style={styles.errorMessage}>This is required.</Text>
+                  )}
+                </View>
+              )}
+              name="username"
+              rules={{ required: true }}
+              defaultValue=""
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputLabel}> Email</Text>
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <View>
+                  <TextInput
+                    style={styles.inputArea}
+                    onBlur={onBlur}
+                    onChangeText={(value) => {
+                      onChange(value);
+                    }}
+                    value={value}
+                  />
+                  {errors.email && (
+                    <Text style={styles.errorMessage}>This is required.</Text>
+                  )}
+                </View>
+              )}
+              name="email"
+              rules={{
+                required: true,
+                pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+              }}
+              defaultValue=""
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputLabel}> Password</Text>
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <View>
+                  <TextInput
+                    style={styles.inputArea}
+                    onBlur={onBlur}
+                    onChangeText={(value) => onChange(value)}
+                    value={value}
+                    secureTextEntry={true}
+                  />
+                  {errors.password && (
+                    <Text style={styles.errorMessage}>This is required.</Text>
+                  )}
+                </View>
+              )}
+              name="password"
+              rules={{ required: true }}
+              defaultValue=""
+            />
+          </View>
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputLabel}> Confirm Password</Text>
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <View>
+                  <TextInput
+                    style={styles.inputArea}
+                    onBlur={onBlur}
+                    onChangeText={(value) => onChange(value)}
+                    value={value}
+                    secureTextEntry={true}
+                  />
+                  {errors.confirmPassword && (
+                    <Text style={styles.errorMessage}>This is required.</Text>
+                  )}
+                </View>
+              )}
+              name="confirmPassword"
+              rules={{ required: true }}
+              defaultValue=""
+            />
+          </View>
         </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputLabel}> Email</Text>
+        <View style={styles.checkBoxView}>
           <Controller
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (
               <View>
-                <TextInput
-                  style={styles.inputArea}
-                  onBlur={onBlur}
-                  onChangeText={(value) => {
-                    onChange(value);
+                <CheckBox
+                  title="By Signing up you agree to our terms and condition."
+                  containerStyle={styles.checkBox}
+                  checkedColor={errors.termAndCondition ? "red" : "black"}
+                  uncheckedColor={errors.termAndCondition ? "red" : "black"}
+                  checked={checkedOne}
+                  onPress={() => {
+                    setCheckedOne(!checkedOne);
+                    console.log(checkedOne);
+                    if (!checkedOne) {
+                      onChange(true);
+                    } else {
+                      onChange(false);
+                    }
                   }}
-                  value={value}
                 />
-                {errors.email && (
-                  <Text style={styles.errorMessage}>This is required.</Text>
-                )}
               </View>
             )}
-            name="email"
-            rules={{
-              required: true,
-              pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-            }}
-            defaultValue=""
-          />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputLabel}> Password</Text>
-          <Controller
-            control={control}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <View>
-                <TextInput
-                  style={styles.inputArea}
-                  onBlur={onBlur}
-                  onChangeText={(value) => onChange(value)}
-                  value={value}
-                  secureTextEntry={true}
-                />
-                {errors.password && (
-                  <Text style={styles.errorMessage}>This is required.</Text>
-                )}
-              </View>
-            )}
-            name="password"
+            name="termAndCondition"
             rules={{ required: true }}
             defaultValue=""
           />
-        </View>
-        <View style={styles.inputContainer}>
-          <Text style={styles.inputLabel}> Confirm Password</Text>
           <Controller
             control={control}
             render={({ field: { onChange, onBlur, value } }) => (
-              <View>
-                <TextInput
-                  style={styles.inputArea}
-                  onBlur={onBlur}
-                  onChangeText={(value) => onChange(value)}
-                  value={value}
-                  secureTextEntry={true}
-                />
-                {errors.confirmPassword && (
-                  <Text style={styles.errorMessage}>This is required.</Text>
-                )}
-              </View>
-            )}
-            name="confirmPassword"
-            rules={{ required: true }}
-            defaultValue=""
-          />
-        </View>
-      </View>
-      <View style={styles.checkBoxView}>
-        <Controller
-          control={control}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <View>
               <CheckBox
-                title="By Signing up you agree to our terms and condition."
+                title="Subscribe to our Newsletter and receive update on news and events."
                 containerStyle={styles.checkBox}
-                checkedColor={errors.termAndCondition ? "red" : "black"}
-                uncheckedColor={errors.termAndCondition ? "red" : "black"}
-                checked={checkedOne}
+                checkedColor="black"
+                uncheckedColor="black"
+                checked={checkedTwo}
                 onPress={() => {
-                  setCheckedOne(!checkedOne);
-                  console.log(checkedOne);
-                  if (!checkedOne) {
+                  setCheckedTwo(!checkedTwo);
+                  console.log(checkedTwo);
+                  if (!checkedTwo) {
                     onChange(true);
                   } else {
                     onChange(false);
                   }
                 }}
               />
-            </View>
-          )}
-          name="termAndCondition"
-          rules={{ required: true }}
-          defaultValue=""
-        />
-        <Controller
-          control={control}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <CheckBox
-              title="Subscribe to our Newsletter and receive update on news and events."
-              containerStyle={styles.checkBox}
-              checkedColor="black"
-              uncheckedColor="black"
-              checked={checkedTwo}
-              onPress={() => {
-                setCheckedTwo(!checkedTwo);
-                console.log(checkedTwo);
-                if (!checkedTwo) {
-                  onChange(true);
-                } else {
-                  onChange(false);
-                }
-              }}
-            />
-          )}
-          name="is_subscribe"
-          defaultValue="false"
-        />
-      </View>
+            )}
+            name="is_subscribe"
+            defaultValue="false"
+          />
+        </View>
+      </KeyboardAvoidingView>
+
       <TouchableOpacity
         onPress={handleSubmit(onSubmit)}
         style={styles.signUpButton}
@@ -290,7 +293,7 @@ const styles = StyleSheet.create({
     color: "red",
     //  fontFamily: "Montserrat",
     textAlign: "center",
-    marginTop: -4,
+    marginTop: 2,
   },
   checkBoxView: {
     width: "100%",

@@ -7,7 +7,7 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { AUTH_TOKEN } from "../redux/action/action";
 import BottomNavigator from "./buttomNav";
-import { View, Image, StyleSheet } from "react-native";
+import { View, Image, StyleSheet, Text } from "react-native";
 import { base_URL } from "../utils/const";
 
 //import * as Screens from "../components/Screens";
@@ -25,48 +25,52 @@ function CustomDrawerContent(props) {
   }));
 
   return (
-    <DrawerContentScrollView {...props}>
-      <View style={styles.profileImageView}>
-        <Image
-          source={{
-            uri: base_URL + "/" + profileDetail.profileimage,
-          }}
-          style={styles.profileImage}
-          imageStyle={{
-            resizeMode: "cover",
-          }}
+    <DrawerContentScrollView bounces={false} {...props}>
+      <View style={styles.drawerContainer}>
+        <View style={styles.profileImageView}>
+          <Image
+            source={{
+              uri: base_URL + "/" + profileDetail.profileimage,
+            }}
+            style={styles.profileImage}
+            imageStyle={{
+              resizeMode: "cover",
+            }}
+          />
+          <Text style={styles.usersName}>{profileDetail.name}</Text>
+        </View>
+
+        <DrawerItem
+          style={styles.drawerMenu}
+          labelStyle={styles.drawerMenuItem}
+          label="Home"
+          onPress={() => props.navigation.navigate("Home")}
+        />
+        <DrawerItem
+          style={styles.drawerMenu}
+          labelStyle={styles.drawerMenuItem}
+          label="Profile"
+          onPress={() => props.navigation.navigate("Profile")}
+        />
+        <DrawerItem
+          style={styles.drawerMenu}
+          labelStyle={styles.drawerMenuItem}
+          label="file"
+          onPress={() => props.navigation.navigate("ContactUs")}
+        />
+        <DrawerItem
+          style={styles.drawerMenu}
+          labelStyle={styles.drawerMenuItem}
+          label="blog"
+          onPress={() => props.navigation.navigate("Blog")}
+        />
+        <DrawerItem
+          style={styles.drawerMenu}
+          labelStyle={styles.drawerMenuItem}
+          label="Log Out"
+          onPress={() => dispatchData()}
         />
       </View>
-      <DrawerItem
-        style={styles.drawerMenu}
-        labelStyle={styles.drawerMenuItem}
-        label="Home"
-        onPress={() => props.navigation.navigate("Home")}
-      />
-      <DrawerItem
-        style={styles.drawerMenu}
-        labelStyle={styles.drawerMenuItem}
-        label="Profile"
-        onPress={() => props.navigation.navigate("Profile")}
-      />
-      <DrawerItem
-        style={styles.drawerMenu}
-        labelStyle={styles.drawerMenuItem}
-        label="contact us"
-        onPress={() => props.navigation.navigate("ContactUs")}
-      />
-      <DrawerItem
-        style={styles.drawerMenu}
-        labelStyle={styles.drawerMenuItem}
-        label="blog"
-        onPress={() => props.navigation.navigate("Blog")}
-      />
-      <DrawerItem
-        style={styles.drawerMenu}
-        labelStyle={styles.drawerMenuItem}
-        label="Log Out"
-        onPress={() => dispatchData()}
-      />
     </DrawerContentScrollView>
   );
 }
@@ -86,6 +90,7 @@ export default function DrawerNavigator() {
 }
 
 const styles = StyleSheet.create({
+  drawerContainer: { paddingTop: 30 },
   profileImage: {
     height: 150,
     width: 150,
@@ -105,12 +110,17 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     // backgroundColor: 'red'
   },
+  usersName: {
+    fontSize: 30,
+    fontWeight: "bold",
+    paddingBottom: 20,
+  },
   drawerMenu: {
     backgroundColor: "#2123",
   },
   drawerMenuItem: {
     padding: 5,
-    alignItems: "center",
+    //alignItems: "center",
     //fontFamily: "Montserrat",
     textAlign: "center",
   },

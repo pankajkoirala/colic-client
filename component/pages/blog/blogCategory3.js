@@ -1,10 +1,14 @@
 import moment from "moment";
 import React, { useState } from "react";
+import HTML from "react-native-render-html";
 import { ScrollView } from "react-native";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, useWindowDimensions } from "react-native";
 
 export default Category3 = (props) => {
   const { blogs_data } = props;
+
+  const contentWidth = useWindowDimensions().width;
+
   return (
     <ScrollView bounces={false}>
       <View style={styles.Category1Container}>
@@ -25,7 +29,10 @@ export default Category3 = (props) => {
                 {arg.title}
               </Text>
               <Text style={styles.blogContant}>
-                {arg.content.slice(0, 250)}...
+                <HTML
+                  source={{ html: arg.content.slice(0, 200) }}
+                  contentWidth={contentWidth}
+                />
               </Text>
               <Text>
                 Author:

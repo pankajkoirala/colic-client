@@ -39,116 +39,122 @@ export default function Login(props) {
           </TouchableOpacity>
           <Text style={styles.loginIcon}>Login</Text>
         </View>
-        <View style={styles.loginFormView}>
-          <View style={styles.form_socialLogin_view}>
-            <View style={styles.input_item_view}>
-              <Text style={styles.input_item_Label}> Email</Text>
-              <Controller
-                control={control}
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <View>
-                    <TextInput
-                      style={styles.input_item_place}
-                      onBlur={onBlur}
-                      onChangeText={(value) => onChange(value)}
-                      value={value}
-                    />
-                    {errors.email && (
-                      <Text style={styles.errorMessage}>This is required.</Text>
-                    )}
-                  </View>
-                )}
-                name="email"
-                rules={{ required: true }}
-                defaultValue=""
-              />
-            </View>
-            <View style={styles.input_item_view}>
-              <Text style={styles.input_item_Label}> Password</Text>
-              <Controller
-                control={control}
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <View>
-                    <TextInput
-                      style={styles.input_item_place}
-                      onBlur={onBlur}
-                      onChangeText={(value) => onChange(value)}
-                      value={value}
-                      secureTextEntry={true}
-                    />
-                    {errors.password && (
-                      <Text style={styles.errorMessage}>This is required.</Text>
-                    )}
-                  </View>
-                )}
-                name="password"
-                rules={{ required: true }}
-                defaultValue=""
-              />
-            </View>
-            <TouchableOpacity onPress={() => console.log("forget password")}>
-              <Text style={styles.forgetPassword}>Forget Password ?</Text>
-            </TouchableOpacity>
-            <View style={styles.logIn_fingerPrint_view}>
-              <TouchableOpacity
-                onPress={handleSubmit(onSubmit)}
-                style={styles.loginButton}
-              >
-                <Text style={styles.loginButtonText}>LogIn</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.fingerPrintIcon}
-                onPress={() => scanFingerprint(dispatchData, setLoaderOff)}
-              >
-                <FontAwesome5 name={"fingerprint"} size={40} />
-              </TouchableOpacity>
-
-              <View style={styles.or_line_view}>
-                <View style={styles.orLine} />
-                <View>
-                  <Text style={styles.orText}>OR</Text>
-                </View>
-                <View style={styles.orLine} />
+        <KeyboardAvoidingView>
+          <View style={styles.loginFormView}>
+            <View style={styles.form_socialLogin_view}>
+              <View style={styles.input_item_view}>
+                <Text style={styles.input_item_Label}> Email</Text>
+                <Controller
+                  control={control}
+                  render={({ field: { onChange, onBlur, value } }) => (
+                    <View>
+                      <TextInput
+                        style={styles.input_item_place}
+                        onBlur={onBlur}
+                        onChangeText={(value) => onChange(value)}
+                        value={value}
+                      />
+                      {errors.email && (
+                        <Text style={styles.errorMessage}>
+                          This is required.
+                        </Text>
+                      )}
+                    </View>
+                  )}
+                  name="email"
+                  rules={{ required: true }}
+                  defaultValue=""
+                />
               </View>
-              <View style={styles.socialLogInView}>
+              <View style={styles.input_item_view}>
+                <Text style={styles.input_item_Label}> Password</Text>
+                <Controller
+                  control={control}
+                  render={({ field: { onChange, onBlur, value } }) => (
+                    <View>
+                      <TextInput
+                        style={styles.input_item_place}
+                        onBlur={onBlur}
+                        onChangeText={(value) => onChange(value)}
+                        value={value}
+                        secureTextEntry={true}
+                      />
+                      {errors.password && (
+                        <Text style={styles.errorMessage}>
+                          This is required.
+                        </Text>
+                      )}
+                    </View>
+                  )}
+                  name="password"
+                  rules={{ required: true }}
+                  defaultValue=""
+                />
+              </View>
+              <TouchableOpacity onPress={() => console.log("forget password")}>
+                <Text style={styles.forgetPassword}>Forget Password ?</Text>
+              </TouchableOpacity>
+              <View style={styles.logIn_fingerPrint_view}>
                 <TouchableOpacity
-                  onPress={() => console.log("login with google")}
-                  style={styles.loginWithGoogleFb}
+                  onPress={handleSubmit(onSubmit)}
+                  style={styles.loginButton}
                 >
-                  <Image
-                    style={styles.socialLoginImage}
-                    source={require("./../../../../assets/google.png")}
-                  />
-                  <Text style={styles.socialLoginText}>
-                    Contiue with Google
-                  </Text>
-                  <FontAwesome5
-                    name={"arrow-right"}
-                    size={20}
-                    style={styles.socialLoginArrowIcon}
-                  />
+                  <Text style={styles.loginButtonText}>LogIn</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => console.log("login with facebook")}
-                  style={styles.loginWithGoogleFb}
+                  style={styles.fingerPrintIcon}
+                  onPress={() => scanFingerprint(dispatchData, setLoaderOff)}
                 >
-                  <Image
-                    style={styles.socialLoginImage}
-                    source={require("./../../../../assets/facebook.png")}
-                  />
-                  <Text style={styles.socialLoginText}>
-                    Contiue with Google
-                  </Text>
-                  <FontAwesome5
-                    name={"arrow-right"}
-                    size={20}
-                    style={styles.socialLoginArrowIcon}
-                  />
+                  <FontAwesome5 name={"fingerprint"} size={40} />
                 </TouchableOpacity>
+
+                <View style={styles.or_line_view}>
+                  <View style={styles.orLine} />
+                  <View>
+                    <Text style={styles.orText}>OR</Text>
+                  </View>
+                  <View style={styles.orLine} />
+                </View>
+                <View style={styles.socialLogInView}>
+                  <TouchableOpacity
+                    onPress={() => console.log("login with google")}
+                    style={styles.loginWithGoogleFb}
+                  >
+                    <Image
+                      style={styles.socialLoginImage}
+                      source={require("./../../../../assets/google.png")}
+                    />
+                    <Text style={styles.socialLoginText}>
+                      Contiue with Google
+                    </Text>
+                    <FontAwesome5
+                      name={"arrow-right"}
+                      size={20}
+                      style={styles.socialLoginArrowIcon}
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => console.log("login with facebook")}
+                    style={styles.loginWithGoogleFb}
+                  >
+                    <Image
+                      style={styles.socialLoginImage}
+                      source={require("./../../../../assets/facebook.png")}
+                    />
+                    <Text style={styles.socialLoginText}>
+                      Contiue with Google
+                    </Text>
+                    <FontAwesome5
+                      name={"arrow-right"}
+                      size={20}
+                      style={styles.socialLoginArrowIcon}
+                    />
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
           </View>
-        </View>
+        </KeyboardAvoidingView>
       </View>
     </ScrollView>
   );

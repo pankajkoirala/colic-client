@@ -19,6 +19,7 @@ import {
 import DateInsert from "../../../common/dateInsert";
 import { base_URL } from "../../utils/const";
 import profileImageBG from "./../../../assets/profileBGimage.jpg";
+import DatePicker from "./../../../common/ModelDateInsert/datePicker";
 
 function Profile(props) {
   const {
@@ -35,6 +36,7 @@ function Profile(props) {
     setProfileImage,
   } = props;
   const [genderOpen, setGenderOpen] = useState(false);
+  const [dateOfBirth, setDateOfBirth] = useState(false);
   return (
     <ScrollView style={styles.profileContainer} bounces={false}>
       <View style={styles.fullPageView}>
@@ -157,20 +159,46 @@ function Profile(props) {
             />
           </View>
           <View style={styles.inputView}>
-            <Text>date of birth</Text>
+            <Text
+              style={{
+                paddingBottom: 6,
+              }}
+            >
+              Date Of Birth
+            </Text>
             <Controller
               control={control}
               render={({ field: { onChange, onBlur, value } }) => (
-                <View style={styles.inputInnerView}>
-                  <DateInsert
+                <TouchableOpacity
+                  onPress={() => {
+                    if (editState) {
+                      setDateOfBirth(true);
+                    }
+                  }}
+                  style={styles.inputInnerViewDateOfBirth}
+                >
+                  <DatePicker
+                    openTimePicker={dateOfBirth}
+                    setOpenTimePicker={setDateOfBirth}
+                    setHours={onChange}
+                    mode={"date"}
+                    oldValue={profileDetail.dateofbirth}
+                    editState={editState}
+                  />
+                  <Text>
+                    {moment(value || profileDetail.dateofbirth).format(
+                      " MMM DD , YYYY"
+                    )}
+                  </Text>
+                  {/* <DateInsert
                     editable={editState}
                     onChange={onChange}
                     value={profileDetail.dateofbirth}
-                  />
+                  /> */}
                   {errors.dateofbirth && (
                     <Text style={styles.errorMessage}>This is required.</Text>
                   )}
-                </View>
+                </TouchableOpacity>
               )}
               name="dateofbirth"
               rules={
@@ -270,10 +298,16 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     backgroundColor: "white",
   },
-  inputInnerView: {
+  inputInnerViewDateOfBirth: {
     borderColor: "black",
     borderBottomWidth: 2,
     height: 30,
+  },
+  inputInnerView: {
+    borderColor: "black",
+    borderBottomWidth: 2,
+    paddingBottom: 20,
+    height: 35,
   },
   genderPickerIOS: {
     borderColor: "black",

@@ -62,7 +62,9 @@ const ProfileUploader = (props) => {
               }}
             >
               <View>
-                <Text style={{ textAlign: "center" }}>starting Time</Text>
+                <Text style={{ textAlign: "center", fontWeight: "bold" }}>
+                  Starting Time
+                </Text>
                 <TouchableOpacity
                   onPress={() => setOpenTimePicker1(true)}
                   style={{
@@ -92,7 +94,9 @@ const ProfileUploader = (props) => {
                 </TouchableOpacity>
               </View>
               <View>
-                <Text style={{ textAlign: "center" }}>end Time</Text>
+                <Text style={{ textAlign: "center", fontWeight: "bold" }}>
+                  End Time
+                </Text>
                 <TouchableOpacity
                   onPress={() => setOpenTimePicker2(true)}
                   style={{
@@ -123,6 +127,16 @@ const ProfileUploader = (props) => {
               </View>
             </View>
             <View style={{ width: "100%" }}>
+              <Text
+                style={{
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  fontSize: 20,
+                  marginBottom: -12,
+                }}
+              >
+                Intensity
+              </Text>
               <Slider
                 minimumValue={0}
                 maximumValue={5}

@@ -3,7 +3,7 @@ import { Button, View } from "react-native";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 
 const Example = (props) => {
-  const { setModelOpen, openTimePicker, setOpenTimePicker, setHours, mode } =
+  const { openTimePicker, setOpenTimePicker, setHours, mode, editState } =
     props;
 
   const hideDatePicker = () => {
