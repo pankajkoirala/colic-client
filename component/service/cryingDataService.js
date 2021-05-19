@@ -20,6 +20,7 @@ export const weeCryingData = (id, token, date, dispatch, setLoaderOff) => {
     )
     .then((res) => {
       dispatch(res.data.message);
+      setLoaderOff();
     })
     .catch((err) => {
       errorAlert("Try Again", setLoaderOff);
@@ -43,6 +44,7 @@ export const dayCryingData = (id, token, date, dispatch, setLoaderOff) => {
     )
     .then((res) => {
       dispatch(res.data.message);
+      setLoaderOff();
     })
     .catch((err) => {
       errorAlert("Try Again", setLoaderOff);
@@ -62,6 +64,7 @@ export const postCryingData = (id, token, date, dispatch, setLoaderOff) => {
       if (!executed) {
         successAlert("Data Send Successfully");
         dispatch();
+        setLoaderOff();
         executed = true;
       }
     })

@@ -14,11 +14,20 @@ export const AuthLogin = (data, dispatch, setLoaderOff) => {
     data: data,
   })
     .then((res) => {
-      dispatch(`Bearer ${res.data.token}`);
-      fingerPrintSaveAlert(`Bearer ${res.data.token}`, data);
+      var executed = false;
+      if (!executed) {
+        dispatch(`Bearer ${res.data.token}`);
+        fingerPrintSaveAlert(`Bearer ${res.data.token}`, data);
+        setLoaderOff();
+        executed = true;
+      }
     })
     .catch((err) => {
-      errorAlert(LOGIN_FAILED, setLoaderOff);
+      var executed = false;
+      if (!executed) {
+        errorAlert(LOGIN_FAILED, setLoaderOff);
+        executed = true;
+      }
     });
 };
 
@@ -29,10 +38,19 @@ export const fingerPrintLogin = (data, dispatch, setLoaderOff) => {
     data: data,
   })
     .then((res) => {
-      dispatch(`Bearer ${res.data.token}`);
+      var executed = false;
+      if (!executed) {
+        dispatch(`Bearer ${res.data.token}`);
+        setLoaderOff();
+        executed = true;
+      }
     })
     .catch((err) => {
-      errorAlert(LOGIN_FAILED, setLoaderOff);
+      var executed = false;
+      if (!executed) {
+        errorAlert(LOGIN_FAILED, setLoaderOff);
+        executed = true;
+      }
     });
 };
 
@@ -48,10 +66,18 @@ export const activateUser = (data, props, setLoaderOff) => {
     data: { OTP: OTP },
   })
     .then((res) => {
-      AlertWithNavigator(res?.data?.message, props, "login");
+      var executed = false;
+      if (!executed) {
+        AlertWithNavigator(res?.data?.message, props, "login", setLoaderOff);
+        executed = true;
+      }
     })
     .catch((err) => {
-      errorAlert(err?.response?.data?.message, setLoaderOff);
+      var executed = false;
+      if (!executed) {
+        errorAlert(err?.response?.data?.message, setLoaderOff);
+        executed = true;
+      }
     });
 };
 
@@ -63,15 +89,20 @@ export const signup = (data, props, setLoaderOff) => {
     data: data,
   })
     .then((res) => {
-      console.log(
-        "🚀 ~ file: authService.js ~ line 67 ~ .then ~ res",
-        res.data
-      );
+      var executed = false;
       props.navigation.navigate("VerifyUser");
+      setLoaderOff();
+      if (!executed) {
+        executed = true;
+      }
     })
     .catch((err) => {
-      console.log(err);
-      errorAlert(err?.response?.data?.message, setLoaderOff);
+      var executed = false;
+      if (!executed) {
+        console.log(err.response.data);
+        errorAlert(err?.response?.data?.message, setLoaderOff);
+        executed = true;
+      }
     });
 };
 

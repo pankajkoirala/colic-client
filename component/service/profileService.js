@@ -21,6 +21,7 @@ export const patientProfileUpdate = (
       if (!executed) {
         dispatch();
         successAlert(res.data.message);
+        setLoaderOff();
         executed = true;
       }
     })
@@ -50,6 +51,7 @@ export const ProfileImageUpdate = (id, data, token, dispatch, setLoaderOff) => {
       if (!executed) {
         dispatch();
         successAlert(res.data.message);
+        setLoaderOff();
         executed = true;
       }
     })

@@ -53,7 +53,12 @@ export const successAlert = (msg) => {
     cancelable: true,
   });
 };
-export const AlertWithNavigator = async (message, props, screen) => {
+export const AlertWithNavigator = async (
+  message,
+  props,
+  screen,
+  setLoaderOff
+) => {
   await Alert.alert(
     "Success",
     message,
@@ -63,7 +68,10 @@ export const AlertWithNavigator = async (message, props, screen) => {
       },
       {
         text: "OK",
-        onPress: () => props.navigation.navigate(screen),
+        onPress: () => {
+          setLoaderOff();
+          props.navigation.navigate(screen);
+        },
       },
     ],
     {
