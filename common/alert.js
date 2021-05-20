@@ -42,23 +42,18 @@ export const fingerPrintSaveAlert = async (token, data) => {
   }
 };
 
-export const errorAlert = (msg, loaderOff) => {
-  Alert.alert("Error", msg, [{ text: "OK", onPress: () => loaderOff() }], {
+export const errorAlert = (msg) => {
+  Alert.alert("Error", msg, [{ text: "OK" }], {
     cancelable: true,
   });
 };
-
 export const successAlert = (msg) => {
   Alert.alert("Success", msg, [{ text: "OK" }], {
     cancelable: true,
   });
 };
-export const AlertWithNavigator = async (
-  message,
-  props,
-  screen,
-  setLoaderOff
-) => {
+
+export const AlertWithNavigator = async (message, props, screen) => {
   await Alert.alert(
     "Success",
     message,
@@ -69,7 +64,6 @@ export const AlertWithNavigator = async (
       {
         text: "OK",
         onPress: () => {
-          setLoaderOff();
           props.navigation.navigate(screen);
         },
       },

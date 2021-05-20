@@ -13,7 +13,7 @@ import {
   postCryingData,
 } from "../../service/cryingDataService";
 import DataSendingModel from "./dataSendingModel";
-import { View } from "react-native";
+import { ActivityIndicator, View } from "react-native";
 
 export default HomepageContainer = (props) => {
   const dispatch = useDispatch();
@@ -64,13 +64,13 @@ export default HomepageContainer = (props) => {
   const [day, setDay] = useState("3");
   const [gettingDataDate, setGettingDataDate] = useState(new Date());
   const [dataShow, setDataShow] = useState(false);
-  const [modelOpen, setModelOpen] = useState(false);
   const [fromHours, setFromHours] = useState(moment());
   const [toHours, setToHours] = useState(moment());
   const [intensity, setIntensity] = useState(0);
   const [openTimePicker1, setOpenTimePicker1] = useState(false);
   const [openTimePicker2, setOpenTimePicker2] = useState(false);
   const [cryingData, setCryingData] = useState([]);
+  const [modelOpen, setModelOpen] = useState(false);
   const [loaderIsOpen, setLoaderIsOpen] = useState(false);
 
   //-----------------------------------------------------------------------------------------------------------------------------------
@@ -80,10 +80,13 @@ export default HomepageContainer = (props) => {
   const reloadFetchData = () => {
     reload.setReload(!reload.reload);
     setLoaderIsOpen(false);
+    console.log("reloader ");
   };
   const setLoaderOff = () => {
     setLoaderIsOpen(false);
+    console.log("loader");
   };
+
   useEffect(() => {
     if (profileDetail.id) {
       if (dataShow === false) {
@@ -207,10 +210,6 @@ export default HomepageContainer = (props) => {
     ],
     data: babyCryingData,
   };
-  // console.log(
-  //   "🚀 ~ file: homepageContainer.js ~ line 21 ~ serverData",
-  //   serverData
-  // );
 
   const labelByDay = (today) => {
     switch (today) {
@@ -252,10 +251,12 @@ export default HomepageContainer = (props) => {
       return styles.valueLabel;
     }
   };
+  console.log("yp paskjdadhasdhj");
 
   return (
     <View>
       <Loader loaderIsOpen={loaderIsOpen} />
+
       <DataSendingModel
         fromHours={fromHours}
         setFromHours={setFromHours}
@@ -270,6 +271,7 @@ export default HomepageContainer = (props) => {
         setModelOpen={setModelOpen}
         modelOpen={modelOpen}
         sendingData_Crying={sendingData_Crying}
+        loaderIsOpen={loaderIsOpen}
       />
       <HomePage
         day={day}

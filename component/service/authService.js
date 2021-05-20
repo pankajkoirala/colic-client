@@ -25,7 +25,8 @@ export const AuthLogin = (data, dispatch, setLoaderOff) => {
     .catch((err) => {
       var executed = false;
       if (!executed) {
-        errorAlert(LOGIN_FAILED, setLoaderOff);
+        setLoaderOff();
+        errorAlert(LOGIN_FAILED);
         executed = true;
       }
     });
@@ -48,7 +49,8 @@ export const fingerPrintLogin = (data, dispatch, setLoaderOff) => {
     .catch((err) => {
       var executed = false;
       if (!executed) {
-        errorAlert(LOGIN_FAILED, setLoaderOff);
+        setLoaderOff();
+        errorAlert(LOGIN_FAILED);
         executed = true;
       }
     });
@@ -68,14 +70,16 @@ export const activateUser = (data, props, setLoaderOff) => {
     .then((res) => {
       var executed = false;
       if (!executed) {
-        AlertWithNavigator(res?.data?.message, props, "login", setLoaderOff);
+        setLoaderOff();
+        AlertWithNavigator(res?.data?.message, props, "login");
         executed = true;
       }
     })
     .catch((err) => {
       var executed = false;
       if (!executed) {
-        errorAlert(err?.response?.data?.message, setLoaderOff);
+        setLoaderOff();
+        errorAlert(err?.response?.data?.message);
         executed = true;
       }
     });
@@ -100,47 +104,9 @@ export const signup = (data, props, setLoaderOff) => {
       var executed = false;
       if (!executed) {
         console.log(err.response.data);
-        errorAlert(err?.response?.data?.message, setLoaderOff);
+        setLoaderOff();
+        errorAlert(err?.response?.data?.message);
         executed = true;
       }
     });
-};
-
-export const patientProflieUpdate = (id, data, token, dispatch) => {
-  // axios({
-  //   url: `${base_URL}/api/patient/profileUpdate/${id}`,
-  //   method: "put",
-  //   data: data,
-  //   headers: { token: token },
-  // })
-  //   .then((res) => {
-  //     dispatch();
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
-};
-
-export const ProflieImageUpdate = (id, data, token, dispatch) => {
-  // const fileData = new FormData();
-  // fileData.append("photos", data);
-  // console.log(
-  //   "🚀 ~ file: authService.js ~ line 37 ~ ProflieImageUpdate ~ data",
-  //   fileData
-  // );
-  // axios({
-  //   url: `${base_URL}/api/user/profileimage/${id}`,
-  //   method: "post",
-  //   dataType: "multipart/form-data",
-  //   data: fileData,
-  //   headers: { token: token },
-  // })
-  //   .then((res) => {
-  //     console.log("🚀 ~ file: authService.js ~ line 47 ~ .then ~ res", res);
-  //     dispatch();
-  //     // dispatch('chalo')
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   });
 };

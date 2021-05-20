@@ -20,15 +20,17 @@ export const patientProfileUpdate = (
 
       if (!executed) {
         dispatch();
-        successAlert(res.data.message);
         setLoaderOff();
+        successAlert(res.data.message);
+
         executed = true;
       }
     })
     .catch((err) => {
       var executed = false;
       if (!executed) {
-        errorAlert(" Error  try Again", setLoaderOff);
+        setLoaderOff();
+        errorAlert(" Error  try Again");
         console.log(err);
         executed = true;
       }
@@ -38,6 +40,10 @@ export const patientProfileUpdate = (
 export const ProfileImageUpdate = (id, data, token, dispatch, setLoaderOff) => {
   const fileData = new FormData();
   fileData.append("profileimage", data);
+  console.log(
+    "🚀 ~ file: profileService.js ~ line 52 ~ ProfileImageUpdate ~ fileData",
+    fileData
+  );
 
   axios({
     url: `${base_URL}/auth/update_profileImage/${id}`,
@@ -50,16 +56,18 @@ export const ProfileImageUpdate = (id, data, token, dispatch, setLoaderOff) => {
       var executed = false;
       if (!executed) {
         dispatch();
-        successAlert(res.data.message);
         setLoaderOff();
+        successAlert(res.data.message);
         executed = true;
       }
     })
     .catch((err) => {
       var executed = false;
       if (!executed) {
-        errorAlert(" Error  try Again", setLoaderOff);
+        setLoaderOff();
+        errorAlert(" Error  try Again");
         executed = true;
+        console.log(err);
       }
     });
 };

@@ -11,7 +11,6 @@ import {
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import Slider from "@react-native-community/slider";
 import moment from "moment";
-import { postCryingData } from "../../service/cryingDataService";
 const ProfileUploader = (props) => {
   const {
     setModelOpen,
@@ -27,6 +26,7 @@ const ProfileUploader = (props) => {
     openTimePicker2,
     setOpenTimePicker2,
     sendingData_Crying,
+    loaderIsOpen,
   } = props;
 
   return (

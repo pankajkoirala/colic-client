@@ -1,20 +1,33 @@
 import * as React from "react";
-import { Text, View, StyleSheet } from "react-native";
-import ProgressLoader from "rn-progress-loader";
+import { ActivityIndicator, View } from "react-native";
 
-export default function App(props) {
-  const { setModelOpen, loaderIsOpen, setHours, mode } = props;
+export default function App({ loaderIsOpen }) {
   return (
-    <View>
-      <View>
-        <ProgressLoader
-          visible={loaderIsOpen}
-          isModal={true}
-          isHUD={true}
-          hudColor={"#000000"}
-          color={"#FFFFFF"}
-        />
-      </View>
+    <View style={loaderIsOpen ? styles.loaderOpen : styles.loaderClose}>
+      <ActivityIndicator animating={loaderIsOpen} size="large" color="black" />
     </View>
   );
 }
+const styles = StyleSheet.create({
+  loaderOpen: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
+    zIndex: 999,
+  },
+  loaderClose: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    right: 0,
+    left: 0,
+  },
+});
