@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "colic-new",
-    "slug": "colic-new",
+    "name": "Colic",
+    "slug": "Colic",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

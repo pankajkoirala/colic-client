@@ -9,7 +9,7 @@ import CategoryScreen3 from "./blogCategory3";
 
 export default Blog = (props) => {
   const [category, setCategory] = useState("category1");
-  const { profileDetail, blogs_data } = props;
+  const { blogs_data } = props;
 
   return (
     <View style={styles.blogContainer}>
@@ -21,14 +21,6 @@ export default Blog = (props) => {
             size={25}
           />
         </View>
-        <TouchableOpacity onPress={() => props.navigation.navigate("Profile")}>
-          <Image
-            source={{
-              uri: `${base_URL}/${profileDetail.profileimage}`,
-            }}
-            style={styles.profileImg}
-          />
-        </TouchableOpacity>
       </View>
       <View style={styles.categoryView}>
         <TouchableOpacity

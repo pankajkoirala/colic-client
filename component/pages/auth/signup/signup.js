@@ -87,7 +87,6 @@ function Login(props) {
               name="email"
               rules={{
                 required: true,
-                pattern: /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
               }}
               defaultValue=""
             />
@@ -134,7 +133,9 @@ function Login(props) {
                 </View>
               )}
               name="confirmPassword"
-              rules={{ required: true }}
+              rules={{
+                required: true,
+              }}
               defaultValue=""
             />
           </View>

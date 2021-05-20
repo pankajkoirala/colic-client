@@ -38,12 +38,14 @@ export const patientProfileUpdate = (
 };
 
 export const ProfileImageUpdate = (id, data, token, dispatch, setLoaderOff) => {
+  console.log(
+    "🚀 ~ file: profileService.js ~ line 41 ~ ProfileImageUpdate ~ data",
+    data
+  );
+  data = { ...data, type: "image/jpeg" };
+
   const fileData = new FormData();
   fileData.append("profileimage", data);
-  console.log(
-    "🚀 ~ file: profileService.js ~ line 52 ~ ProfileImageUpdate ~ fileData",
-    fileData
-  );
 
   axios({
     url: `${base_URL}/auth/update_profileImage/${id}`,

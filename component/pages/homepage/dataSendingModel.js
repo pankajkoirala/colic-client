@@ -27,6 +27,7 @@ const ProfileUploader = (props) => {
     setOpenTimePicker2,
     sendingData_Crying,
     loaderIsOpen,
+    setDataShow,
   } = props;
 
   return (
@@ -161,6 +162,7 @@ const ProfileUploader = (props) => {
                 setModelOpen(false);
                 //  setOpenTimePicker(false);
                 sendingData_Crying();
+                setDataShow(false);
               }}
             >
               <View>

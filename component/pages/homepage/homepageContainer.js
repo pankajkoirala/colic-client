@@ -145,22 +145,57 @@ export default HomepageContainer = (props) => {
   //--------------------------------------------------------------------------------------------------------
 
   //lebel according to date
-  const dayLabel = (day) => {
+  const dayLabel = (day, date) => {
     switch (day) {
       case 0:
-        return <Text style={{ fontWeight: "bold" }}>S</Text>;
+        return (
+          <View>
+            <Text style={{ fontWeight: "bold" }}>S </Text>
+            <Text>{date} </Text>
+          </View>
+        );
       case 1:
-        return <Text style={{ fontWeight: "bold" }}>M</Text>;
+        return (
+          <View>
+            <Text style={{ fontWeight: "bold" }}>M</Text>
+            <Text>{date} </Text>
+          </View>
+        );
       case 2:
-        return <Text style={{ fontWeight: "bold" }}>T</Text>;
+        return (
+          <View>
+            <Text style={{ fontWeight: "bold" }}>T </Text>
+            <Text>{date} </Text>
+          </View>
+        );
       case 3:
-        return <Text style={{ fontWeight: "bold" }}>W</Text>;
+        return (
+          <View>
+            <Text style={{ fontWeight: "bold" }}>W </Text>
+            <Text>{date} </Text>
+          </View>
+        );
       case 4:
-        return <Text style={{ fontWeight: "bold" }}>T</Text>;
+        return (
+          <View>
+            <Text style={{ fontWeight: "bold" }}>T</Text>
+            <Text>{date} </Text>
+          </View>
+        );
       case 5:
-        return <Text style={{ fontWeight: "bold" }}>F</Text>;
+        return (
+          <View>
+            <Text style={{ fontWeight: "bold" }}>F</Text>
+            <Text>{date} </Text>
+          </View>
+        );
       case 6:
-        return <Text style={{ fontWeight: "bold" }}>S</Text>;
+        return (
+          <View>
+            <Text style={{ fontWeight: "bold" }}>S </Text>
+            <Text>{date} </Text>
+          </View>
+        );
     }
   };
   //--------------------------------------------------------------------------------------------------------------------------------
@@ -217,13 +252,34 @@ export default HomepageContainer = (props) => {
         return {
           label: [
             <Text style={{ fontWeight: "bold" }}>LABEL</Text>,
-            dayLabel(new Date(crying_data[0]?.date).getDay()),
-            dayLabel(new Date(crying_data[1]?.date).getDay()),
-            dayLabel(new Date(crying_data[2]?.date).getDay()),
-            dayLabel(new Date(crying_data[3]?.date).getDay()),
-            dayLabel(new Date(crying_data[4]?.date).getDay()),
-            dayLabel(new Date(crying_data[5]?.date).getDay()),
-            dayLabel(new Date(crying_data[6]?.date).getDay()),
+            dayLabel(
+              new Date(crying_data[0]?.date).getDay(),
+              moment(crying_data[0]?.date).format("DD")
+            ),
+            dayLabel(
+              new Date(crying_data[1]?.date).getDay(),
+              moment(crying_data[1]?.date).format("DD")
+            ),
+            dayLabel(
+              new Date(crying_data[2]?.date).getDay(),
+              moment(crying_data[2]?.date).format("DD")
+            ),
+            dayLabel(
+              new Date(crying_data[3]?.date).getDay(),
+              moment(crying_data[3]?.date).format("DD")
+            ),
+            dayLabel(
+              new Date(crying_data[4]?.date).getDay(),
+              moment(crying_data[4]?.date).format("DD")
+            ),
+            dayLabel(
+              new Date(crying_data[5]?.date).getDay(),
+              moment(crying_data[5]?.date).format("DD")
+            ),
+            dayLabel(
+              new Date(crying_data[6]?.date).getDay(),
+              moment(crying_data[6]?.date).format("DD")
+            ),
           ],
           data: babyCryingData[1] ? babyCryingData : SampleJson,
         };
@@ -251,7 +307,6 @@ export default HomepageContainer = (props) => {
       return styles.valueLabel;
     }
   };
-  console.log("yp paskjdadhasdhj");
 
   return (
     <View>
@@ -272,6 +327,7 @@ export default HomepageContainer = (props) => {
         modelOpen={modelOpen}
         sendingData_Crying={sendingData_Crying}
         loaderIsOpen={loaderIsOpen}
+        setDataShow={setDataShow}
       />
       <HomePage
         day={day}
