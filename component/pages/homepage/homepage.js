@@ -265,7 +265,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: "black",
     // backgroundColor: "grey",
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: "bold",
   },
   editBack: {
@@ -335,8 +335,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   indexNotEqualToZero: {
-    width: "10.5%",
     textAlign: "center",
+    marginHorizontal: 11,
     marginVertical: 6,
     fontSize: 20,
   },

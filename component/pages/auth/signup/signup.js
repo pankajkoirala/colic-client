@@ -255,9 +255,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   backIcon: {
-    paddingLeft: 10,
+    paddingLeft: 20,
     position: "absolute",
-    paddingTop: 80,
+    paddingTop: 60,
+    zIndex: 999,
   },
   signUpIcon: {
     fontSize: 20,

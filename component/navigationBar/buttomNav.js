@@ -193,7 +193,6 @@ function MyTabs({ descriptors, state, route, navigation, index }) {
           borderRadius: 50,
           backgroundColor: bgColor,
           height: 50,
-          width: 53,
         }}
       >
         <Animated.View
@@ -229,7 +228,6 @@ function MyTabBar({ state, descriptors, navigation }) {
     <View
       style={{
         flexDirection: "row",
-        paddingTop: 5,
         paddingHorizontal: 20,
         backgroundColor: "#f7f7f7",
       }}

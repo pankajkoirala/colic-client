@@ -10,7 +10,6 @@ import {
   StyleSheet,
 } from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import { AuthLogin } from "../../../service/authService";
 import { scanFingerprint } from "../../../../common/fingerprintUnlock";
 import { ScrollView } from "react-native-gesture-handler";
 
@@ -170,9 +169,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   backIcon: {
-    paddingLeft: 10,
+    paddingLeft: 20,
     position: "absolute",
     paddingTop: 90,
+    zIndex: 999,
   },
   loginIcon: {
     fontSize: 20,

@@ -28,21 +28,24 @@ export default SignupContainer = (props) => {
       is_subscribe: data.is_subscribe,
     };
     console.log(
-      typeof /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-        signupData.email
-      )
+      "🚀 ~ file: signupContainer.js ~ line 30 ~ onSubmit ~ signupData",
+      signupData
     );
-    if (signupData.password !== signupData.confirmPassword) {
-      errorAlert("Password Does not match");
+
+    if (signupData.username.length <= 3) {
+      errorAlert("Username Must Contain More Than 3 Character");
     } else if (signupData.password.length < 8) {
       errorAlert("password must contain 8 character");
+    } else if (signupData.password !== signupData.confirmPassword) {
+      errorAlert("Password Does Not match");
     } else if (
-      /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-        signupData.email === false
+      !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
+        signupData.email
       )
     ) {
       errorAlert("invalid email");
     } else {
+      console.log("asdadasda");
       setLoaderIsOpen(true);
       signup(signupData, props, setLoaderOff);
     }
