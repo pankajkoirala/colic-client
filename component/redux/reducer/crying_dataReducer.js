@@ -6,6 +6,6 @@ export const baby_cryingReducer = (state = initialState, action) => {
     case CRYING_DATA:
       return { ...state, crying_data: action.payload };
     default:
-      return { ...state };
+      return state;
   }
 };

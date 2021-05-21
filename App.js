@@ -2,7 +2,7 @@ import "react-native-gesture-handler";
 import React from "react";
 import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
-import { rootReducer } from "./component/redux/root-reducer/root-reducer";
+import { allReducer } from "./component/redux/root-reducer/root-reducer";
 import RootNavigator from "./component/navigationBar/rootNavigation";
 //import { useFonts } from "expo-font";
 import { persistStore, persistReducer } from "redux-persist";
@@ -16,7 +16,7 @@ const persistConfig = {
   key: "root",
   storage: AsyncStorage,
 };
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, allReducer);
 
 const middleware = applyMiddleware(thunk);
 const store = createStore(persistedReducer, middleware);

@@ -12,6 +12,9 @@ import SignUp from "../pages/auth/signup/signupContainer";
 import Profile from "../pages/profile/profileContainer";
 import verifyUser from "../pages/auth/signup/verifyUser";
 import SingleBlogView from "./../pages/blog/detailView";
+import ForgetPassword from "./../pages/auth/forgetPassword/forgetPW";
+import ForgetPasswordVerifyingUser from "./../pages/auth/forgetPassword/forgetPWVarifyngUser";
+import ChangePassword from "./../pages/auth/forgetPassword/forgetPWchangePW";
 
 const Stack = createStackNavigator();
 
@@ -39,6 +42,9 @@ const AuthScreen = {
   signupPage: SignUp,
   login: Login,
   VerifyUser: verifyUser,
+  ForgetPassword: ForgetPassword,
+  ForgetPasswordVerifyingUser: ForgetPasswordVerifyingUser,
+  ChangePassword: ChangePassword,
 };
 
 const AppScreen = {

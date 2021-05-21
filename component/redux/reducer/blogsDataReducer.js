@@ -6,6 +6,6 @@ export const blogsReducer = (state = initialState, action) => {
     case BLOGS_DATA:
       return { ...state, blogs_data: action.payload };
     default:
-      return { ...state };
+      return state;
   }
 };

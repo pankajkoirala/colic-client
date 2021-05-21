@@ -90,7 +90,9 @@ export default function Login(props) {
                   defaultValue=""
                 />
               </View>
-              <TouchableOpacity onPress={() => console.log("forget password")}>
+              <TouchableOpacity
+                onPress={() => props.navigation.navigate("ForgetPassword")}
+              >
                 <Text style={styles.forgetPassword}>Forget Password ?</Text>
               </TouchableOpacity>
               <View style={styles.logIn_fingerPrint_view}>

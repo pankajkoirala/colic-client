@@ -4,6 +4,7 @@ import { base_URL } from "../utils/const";
 import { LOGIN_FAILED } from "../../common/const";
 import {
   AlertWithNavigator,
+  AlertWithNavigatorForgetPW,
   errorAlert,
   fingerPrintSaveAlert,
 } from "../../common/alert";
@@ -51,7 +52,6 @@ export const fingerPrintLogin = (data, dispatch, setLoaderOff) => {
       var executed = false;
       if (!executed) {
         dispatch(`Bearer ${res.data.token}`);
-        setLoaderOff();
         executed = true;
       }
     })
@@ -70,7 +70,6 @@ export const activateUser = (data, props, setLoaderOff) => {
   Object.values(data).forEach((arg) => {
     OTP = OTP + arg;
   });
-  console.log(parseInt(OTP));
   axios({
     url: `${base_URL}/auth/activateUser`,
     method: "post",
@@ -114,6 +113,90 @@ export const signup = (data, props, setLoaderOff) => {
       if (!executed) {
         console.log(err.response.data);
         setLoaderOff();
+        errorAlert(err?.response?.data?.message);
+        executed = true;
+      }
+    });
+};
+
+export const forgetPWCheckUsername = (data, props) => {
+  axios({
+    url: `${base_URL}/auth/forget_Password`,
+    method: "post",
+    data: data,
+  })
+    .then((res) => {
+      var executed = false;
+      if (!executed) {
+        AlertWithNavigatorForgetPW(
+          res?.data?.message,
+          props,
+          "ForgetPasswordVerifyingUser",
+          data
+        );
+
+        //  setLoaderOff();
+        executed = true;
+      }
+    })
+    .catch((err) => {
+      var executed = false;
+      if (!executed) {
+        console.log(err.response);
+        // setLoaderOff();
+        errorAlert(err?.response?.data?.message);
+        executed = true;
+      }
+    });
+};
+
+export const forgetPWVerifyUser = (data, props) => {
+  axios({
+    url: `${base_URL}/auth/forget_Password_send_OTP`,
+    method: "post",
+    data: { OTP: data.OTP },
+  })
+    .then((res) => {
+      var executed = false;
+      if (!executed) {
+        props.navigation.navigate("ChangePassword", {
+          data: data,
+        });
+
+        //  setLoaderOff();
+        executed = true;
+      }
+    })
+    .catch((err) => {
+      var executed = false;
+      if (!executed) {
+        console.log(err.response.data);
+        // setLoaderOff();
+        errorAlert(err?.response?.data?.message);
+        executed = true;
+      }
+    });
+};
+
+export const forgetPWchangePW = (data, props) => {
+  axios({
+    url: `${base_URL}/auth/forget_Password_change_password`,
+    method: "post",
+    data: data,
+  })
+    .then((res) => {
+      var executed = false;
+      if (!executed) {
+        AlertWithNavigator(res?.data?.message, props, "login");
+        //  setLoaderOff();
+        executed = true;
+      }
+    })
+    .catch((err) => {
+      var executed = false;
+      if (!executed) {
+        console.log(err.response.data);
+        // setLoaderOff();
         errorAlert(err?.response?.data?.message);
         executed = true;
       }

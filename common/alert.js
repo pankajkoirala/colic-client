@@ -60,11 +60,43 @@ export const AlertWithNavigator = async (message, props, screen) => {
     [
       {
         text: "Cancel",
+        onPress: () => {
+          props.navigation.navigate(screen);
+        },
       },
       {
         text: "OK",
         onPress: () => {
           props.navigation.navigate(screen);
+        },
+      },
+    ],
+    {
+      cancelable: true,
+    }
+  );
+};
+
+export const AlertWithNavigatorForgetPW = async (
+  message,
+  props,
+  screen,
+  data
+) => {
+  await Alert.alert(
+    "Success",
+    message,
+    [
+      {
+        text: "Cancel",
+        onPress: () => {
+          props.navigation.navigate(screen, { data: data });
+        },
+      },
+      {
+        text: "OK",
+        onPress: () => {
+          props.navigation.navigate(screen, { data: data });
         },
       },
     ],

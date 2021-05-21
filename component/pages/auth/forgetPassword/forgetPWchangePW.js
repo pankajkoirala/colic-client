@@ -7,14 +7,33 @@ import {
   StyleSheet,
   TextInput,
 } from "react-native";
-import { forgetPWCheckUsername } from "../../../service/authService";
+import { errorAlert } from "../../../../common/alert";
+import { forgetPWchangePW } from "../../../service/authService";
 
 export default function ForgetPW(props) {
-  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   console.log(
-    "🚀 ~ file: forgetPW.js ~ line 14 ~ ForgetPW ~ username",
-    username
+    "🚀 ~ file: forgetPWVarifyngUser.js ~ line 10 ~ props",
+    props?.route?.params?.data
   );
+
+  const onSubmit = () => {
+    if (password.length < 8) {
+      errorAlert("Password Must Contain 8 Character");
+    } else if (password !== confirmPassword) {
+      errorAlert("Password Does Not Match");
+    } else {
+      forgetPWchangePW(
+        {
+          password: password,
+          usernameEmail: props?.route?.params?.data.usernameEmail,
+        },
+        props
+      );
+    }
+  };
+
   return (
     <View style={styles.pageContainer}>
       <View style={styles.colicIcon}>
@@ -33,29 +52,53 @@ export default function ForgetPW(props) {
           marginTop: -20,
         }}
       >
-        <Text
+        <View
           style={{
-            textAlign: "center",
-            paddingBottom: 20,
-            fontSize: 20,
+            marginVertical: 4,
           }}
         >
-          Username
-        </Text>
-        <TextInput
-          textAlign="center"
-          style={styles.input_item_place}
-          onChangeText={(value) => setUsername(value)}
-          value={username}
-        />
+          <Text
+            style={{
+              textAlign: "center",
+              paddingBottom: 20,
+              fontSize: 18,
+            }}
+          >
+            Password
+          </Text>
+          <TextInput
+            textAlign="center"
+            style={styles.input_item_place}
+            onChangeText={(value) => setPassword(value)}
+            value={password}
+            secureTextEntry={true}
+          />
+        </View>
+        <View
+          style={{
+            marginVertical: 4,
+          }}
+        >
+          <Text
+            style={{
+              textAlign: "center",
+              paddingBottom: 20,
+              fontSize: 18,
+            }}
+          >
+            Confirm Password
+          </Text>
+          <TextInput
+            secureTextEntry={true}
+            textAlign="center"
+            style={styles.input_item_place}
+            onChangeText={(value) => setConfirmPassword(value)}
+            value={confirmPassword}
+          />
+        </View>
       </View>
       <View style={styles.loginBottomView}>
-        <TouchableOpacity
-          onPress={() =>
-            forgetPWCheckUsername({ usernameEmail: username }, props)
-          }
-          style={styles.loginBottom}
-        >
+        <TouchableOpacity onPress={() => onSubmit()} style={styles.loginBottom}>
           <Text style={styles.loginBottomText}>Submit</Text>
         </TouchableOpacity>
         <View style={styles.doNotHaveAcc}>

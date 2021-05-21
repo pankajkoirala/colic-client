@@ -5,6 +5,7 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 const Pegination = (props) => {
   const { currentPage, maxPage, setCurrentPage } = props;
+
   const MaxThanFivePage = (arg) => {
     switch (arg) {
       case 1:
@@ -312,13 +313,13 @@ const Pegination = (props) => {
           >
             <TouchableOpacity
               onPress={() => setCurrentPage(arg - 1)}
-              style={styles.paginationNumViewSelected}
+              style={styles.paginationNumView}
             >
               <Text style={styles.peginationNumberText}>{arg - 1}</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => setCurrentPage(arg)}
-              style={styles.paginationNumView}
+              style={styles.paginationNumViewSelected}
             >
               <Text style={styles.peginationNumberTextSelected}>{arg}</Text>
             </TouchableOpacity>

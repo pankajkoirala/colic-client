@@ -41,6 +41,13 @@ export default Category1 = (props) => {
           }}
         >
           {currentPost.map((arg, i) => {
+            console.log(
+              "-----------------------------------------------------------------------------------------------------",
+              <HTML
+                source={{ html: arg.content.slice(0, 200) }}
+                contentWidth={contentWidth}
+              />
+            );
             return (
               <View key={i}>
                 {i === 0 ? (
