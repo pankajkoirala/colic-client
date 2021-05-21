@@ -118,9 +118,12 @@ function MyTabs({ descriptors, state, route, navigation, index }) {
         //   target: route.key,
         //   canPreventDefault: true,
         // });
-        if (!isFocused) {
+
+        //not to render same page
+        /*if (!isFocused) {
           navigation.navigate(route.name);
-        }
+        }*/
+        navigation.navigate(route.name);
       });
     });
   }

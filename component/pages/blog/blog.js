@@ -18,7 +18,7 @@ export default Blog = (props) => {
           <FontAwesome5Icon
             onPress={() => props.navigation.goBack()}
             name={"arrow-left"}
-            size={25}
+            size={20}
           />
         </View>
       </View>

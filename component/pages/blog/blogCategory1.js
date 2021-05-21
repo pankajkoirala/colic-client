@@ -28,7 +28,7 @@ export default Category1 = (props) => {
     <View
       style={{
         paddingTop: 2,
-        height: height - 90,
+        height: height - 86,
       }}
       bounces={false}
     >
@@ -42,7 +42,7 @@ export default Category1 = (props) => {
         >
           {currentPost.map((arg, i) => {
             return (
-              <View>
+              <View key={i}>
                 {i === 0 ? (
                   <View>
                     <Image

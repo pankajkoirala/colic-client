@@ -4,10 +4,7 @@ import { getDefaultUser } from "./fingerPrintStorage";
 
 async function checkCompatible(dispatch, setLoaderOff) {
   let hasBiometric = await LocalAuthentication.hasHardwareAsync();
-  console.log(
-    "🚀 ~ file: fingerprintUnlock.js ~ line 9 ~ checkCompatible ~ hasBiometric",
-    hasBiometric
-  );
+
   let hasSetup = await LocalAuthentication.isEnrolledAsync();
   let hasUser = await getDefaultUser();
 

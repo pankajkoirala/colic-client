@@ -16,11 +16,15 @@ export default LoginContainer = (props) => {
     token: state.token.token,
   }));
 
+  if (token) {
+    setLoaderIsOpen(false);
+    console.log(loaderIsOpen);
+    console.log(token);
+  }
   //data dispatcher function
   const dispatch = useDispatch();
 
   const dispatchData = (data) => {
-    setLoaderIsOpen(false);
     dispatch({ type: AUTH_TOKEN, payload: data });
   };
 
@@ -35,6 +39,7 @@ export default LoginContainer = (props) => {
   } = useForm();
 
   const onSubmit = (data) => {
+    setLoaderIsOpen(true);
     const loginData = {
       email: data?.email?.toLowerCase().split(" ")[0],
       password: data?.password,

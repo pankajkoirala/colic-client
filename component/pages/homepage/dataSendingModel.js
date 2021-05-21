@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import DatePicker from "./../../../common/ModelDateInsert/datePicker";
 import {
   Alert,
@@ -147,6 +147,21 @@ const ProfileUploader = (props) => {
                 style={styles.slider}
                 thumbTintColor="#00000099"
               />
+              <View
+                style={{
+                  flexDirection: "row",
+                  justifyContent: "space-around",
+                  marginTop: -10,
+                  marginBottom: 10,
+                }}
+              >
+                <Text style={styles.sliderNumber}>0</Text>
+                <Text style={styles.sliderNumber}>1</Text>
+                <Text style={styles.sliderNumber}>2</Text>
+                <Text style={styles.sliderNumber}>3</Text>
+                <Text style={styles.sliderNumber}>4</Text>
+                <Text style={styles.sliderNumber}>5</Text>
+              </View>
             </View>
             <TouchableOpacity
               style={{
@@ -199,7 +214,7 @@ const styles = StyleSheet.create({
   modalView: {
     margin: 150,
     backgroundColor: "white",
-    borderRadius: 20,
+    borderRadius: 2,
     padding: 15,
     alignItems: "center",
     shadowColor: "#000",
@@ -235,6 +250,10 @@ const styles = StyleSheet.create({
     marginVertical: 10,
     color: "red",
     width: "100%",
+  },
+  sliderNumber: {
+    fontSize: 18,
+    fontWeight: "bold",
   },
 });
 

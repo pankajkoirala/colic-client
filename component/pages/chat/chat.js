@@ -1,10 +1,11 @@
 import React, { Component, useState } from "react";
-import { View } from "react-native";
-import { Text } from "react-native-elements";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import Pegination from "./../../../common/pegination";
+import { View, Text, StyleSheet } from "react-native";
+import PaginationDot from "react-native-animated-pagination-dot";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
-export default Chat = () => {
+export default Chat = (props) => {
   return (
     <View
       style={{
@@ -14,7 +15,7 @@ export default Chat = () => {
         alignItems: "center",
       }}
     >
-      <Pegination />
+      <Text>chat page</Text>
     </View>
   );
 };

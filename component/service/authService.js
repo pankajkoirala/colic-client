@@ -1,4 +1,5 @@
 import axios from "axios";
+import * as LocalAuthentication from "expo-local-authentication";
 import { base_URL } from "../utils/const";
 import { LOGIN_FAILED } from "../../common/const";
 import {
@@ -6,6 +7,15 @@ import {
   errorAlert,
   fingerPrintSaveAlert,
 } from "../../common/alert";
+
+//capibality checking whether device has fingureprint scaner of not
+async function checkCompatibleSaveLoginInData(token, Data) {
+  let hasBiometric = await LocalAuthentication.hasHardwareAsync();
+  let hasSetup = await LocalAuthentication.isEnrolledAsync();
+  if (hasBiometric && hasSetup) {
+    fingerPrintSaveAlert(token, Data);
+  }
+}
 
 export const AuthLogin = (data, dispatch, setLoaderOff) => {
   axios({
@@ -17,8 +27,7 @@ export const AuthLogin = (data, dispatch, setLoaderOff) => {
       var executed = false;
       if (!executed) {
         dispatch(`Bearer ${res.data.token}`);
-        fingerPrintSaveAlert(`Bearer ${res.data.token}`, data);
-        setLoaderOff();
+        checkCompatibleSaveLoginInData(`Bearer ${res.data.token}`, data);
         executed = true;
       }
     })
