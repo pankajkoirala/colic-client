@@ -119,7 +119,7 @@ export const signup = (data, props, setLoaderOff) => {
     });
 };
 
-export const forgetPWCheckUsername = (data, props) => {
+export const forgetPWCheckUsername = (data, props, setLoaderOff) => {
   axios({
     url: `${base_URL}/auth/forget_Password`,
     method: "post",
@@ -135,7 +135,7 @@ export const forgetPWCheckUsername = (data, props) => {
           data
         );
 
-        //  setLoaderOff();
+        setLoaderOff();
         executed = true;
       }
     })
@@ -143,14 +143,14 @@ export const forgetPWCheckUsername = (data, props) => {
       var executed = false;
       if (!executed) {
         console.log(err.response);
-        // setLoaderOff();
+        setLoaderOff();
         errorAlert(err?.response?.data?.message);
         executed = true;
       }
     });
 };
 
-export const forgetPWVerifyUser = (data, props) => {
+export const forgetPWVerifyUser = (data, props, setLoaderOff) => {
   axios({
     url: `${base_URL}/auth/forget_Password_send_OTP`,
     method: "post",
@@ -163,7 +163,7 @@ export const forgetPWVerifyUser = (data, props) => {
           data: data,
         });
 
-        //  setLoaderOff();
+        setLoaderOff();
         executed = true;
       }
     })
@@ -171,14 +171,14 @@ export const forgetPWVerifyUser = (data, props) => {
       var executed = false;
       if (!executed) {
         console.log(err.response.data);
-        // setLoaderOff();
+        setLoaderOff();
         errorAlert(err?.response?.data?.message);
         executed = true;
       }
     });
 };
 
-export const forgetPWchangePW = (data, props) => {
+export const forgetPWchangePW = (data, props, setLoaderOff) => {
   axios({
     url: `${base_URL}/auth/forget_Password_change_password`,
     method: "post",
@@ -188,7 +188,7 @@ export const forgetPWchangePW = (data, props) => {
       var executed = false;
       if (!executed) {
         AlertWithNavigator(res?.data?.message, props, "login");
-        //  setLoaderOff();
+        setLoaderOff();
         executed = true;
       }
     })
@@ -196,7 +196,7 @@ export const forgetPWchangePW = (data, props) => {
       var executed = false;
       if (!executed) {
         console.log(err.response.data);
-        // setLoaderOff();
+        setLoaderOff();
         errorAlert(err?.response?.data?.message);
         executed = true;
       }

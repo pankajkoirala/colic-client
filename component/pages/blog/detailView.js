@@ -4,10 +4,12 @@ import { TouchableOpacity } from "react-native";
 import { ScrollView, useWindowDimensions } from "react-native";
 import { Image } from "react-native";
 import { View, Text, StyleSheet } from "react-native";
+import { WebView } from "react-native-webview";
 import HTML from "react-native-render-html";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import { useSelector } from "react-redux";
 import { base_URL } from "../../utils/const";
+
 export default SingleBlogView = (props) => {
   const { id } = props.route.params;
   const { blogs_data, profileDetail } = useSelector((state) => ({
@@ -54,6 +56,20 @@ export default SingleBlogView = (props) => {
               contentWidth={contentWidth}
             />
           </Text>
+          {selectedBlog.category === "video" && (
+            <WebView
+              scrollEnabled={false}
+              source={{
+                //uri: "https://youtu.be/dx4Teh-nv3A?t=9",
+                html: selectedBlog.videolink ? selectedBlog.videolink : "",
+              }}
+              style={{
+                width: "100%",
+                height: 240,
+                alignSelf: "center",
+              }}
+            />
+          )}
           <View style={styles.sourceView}>
             <Text style={styles.sourceText}>
               {"Source : "}

@@ -1,4 +1,5 @@
 import moment from "moment";
+import { WebView } from "react-native-webview";
 import React, { useState } from "react";
 import {
   View,
@@ -11,17 +12,18 @@ import {
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import HTML from "react-native-render-html";
-import Pegination from "./../../../common/pegination";
+import Pegination from "../../../common/pegination";
+import { base_URL } from "../../utils/const";
 
-export default Category2 = (props) => {
-  const { blogs_data } = props;
+export default Blogs_video = (props) => {
+  const { blogs_video } = props;
   const contentWidth = useWindowDimensions().width;
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage] = useState(4);
 
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
-  const currentPost = blogs_data?.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPost = blogs_video?.slice(indexOfFirstPost, indexOfLastPost);
   var { width, height } = Dimensions.get("window");
 
   return (
@@ -41,70 +43,37 @@ export default Category2 = (props) => {
           }}
         >
           {currentPost.map((arg, i) => {
+            console.log(arg.videolink);
             return (
-              <View>
-                {i === 0 ? (
+              <View key={i}>
+                <View key={i} style={styles.allBlogViewEven}>
                   <View>
-                    <Image
-                      style={styles.blogImg}
+                    <Text style={styles.blogPostedDate}>
+                      {moment(arg.posteddate).format("DD MMM YYYY")}
+                    </Text>
+                    <TouchableOpacity
+                      onPress={() =>
+                        props.navigation.navigate("SingleBlogView", {
+                          id: arg.id,
+                        })
+                      }
+                    >
+                      <Text style={styles.blogTitle}> {arg.title}</Text>
+                    </TouchableOpacity>
+                    <WebView
+                      scrollEnabled={false}
                       source={{
-                        uri: "https://coopervision.com/sites/coopervision.com/files/styles/cv_blog_large/public/blog-post-images/cv_blogs_cry.jpg?itok=BPd0HsZf&timestamp=1446052149",
+                        //uri: "https://youtu.be/dx4Teh-nv3A?t=9",
+                        html: arg.videolink ? arg.videolink : "",
+                      }}
+                      style={{
+                        width: "100%",
+                        height: 240,
+                        alignSelf: "center",
                       }}
                     />
-                    <View style={styles.firstBlogBox}>
-                      <TouchableOpacity
-                        onPress={() =>
-                          props.navigation.navigate("SingleBlogView", {
-                            id: arg.id,
-                          })
-                        }
-                      >
-                        <Text style={styles.blogTitle}> {arg.title}</Text>
-                      </TouchableOpacity>
-                      <HTML
-                        source={{ html: arg.content.slice(0, 200) }}
-                        contentWidth={contentWidth}
-                      />
-                    </View>
                   </View>
-                ) : (
-                  <View
-                    key={i}
-                    style={
-                      i % 2 !== 0
-                        ? styles.allBlogViewEven
-                        : styles.allBlogViewOdd
-                    }
-                  >
-                    <Image
-                      style={styles.otherBlogImg}
-                      source={{
-                        uri: "https://coopervision.com/sites/coopervision.com/files/styles/cv_blog_large/public/blog-post-images/cv_blogs_cry.jpg?itok=BPd0HsZf&timestamp=1446052149",
-                      }}
-                    />
-                    <View style={styles.otherBlogText}>
-                      <Text style={styles.blogPostedDate}>
-                        {moment(arg.posteddate).format("DD MMM YYYY")}
-                      </Text>
-                      <Text
-                        onPress={() =>
-                          props.navigation.navigate("SingleBlogView", {
-                            id: arg.id,
-                          })
-                        }
-                        style={styles.blogTitle}
-                      >
-                        {arg.title}
-                      </Text>
-                      <Text style={styles.blogContant}>
-                        <HTML
-                          source={{ html: arg.content.slice(0, 200) }}
-                          contentWidth={contentWidth}
-                        />
-                      </Text>
-                    </View>
-                  </View>
-                )}
+                </View>
               </View>
             );
           })}
@@ -113,7 +82,11 @@ export default Category2 = (props) => {
           <Pegination
             setCurrentPage={setCurrentPage}
             currentPage={currentPage}
-            maxPage={Math.ceil(blogs_data.length / postPerPage)}
+            maxPage={
+              Math.ceil(blogs_video.length / postPerPage) === 0
+                ? 1
+                : Math.ceil(blogs_video.length / postPerPage)
+            }
           />
         </View>
       </View>
@@ -128,7 +101,7 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   allBlogViewEven: {
-    flexDirection: "row",
+    flexDirection: "column",
     paddingHorizontal: 12,
     paddingVertical: 18,
     backgroundColor: "#e6e6e6",

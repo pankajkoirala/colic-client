@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
-import { base_URL } from "../../utils/const";
-import CategoryScreen1 from "./blogCategory1";
-import CategoryScreen2 from "./blogCategory2";
-import CategoryScreen3 from "./blogCategory3";
+import Blogs_blogs from "./blogs_blogs";
+import Blogs_reaearch from "./blogs_research";
+import Blogs_video from "./blogs_video";
 
 export default Blog = (props) => {
-  const [category, setCategory] = useState("category1");
+  const [category, setCategory] = useState("blogs");
   const { blogs_data } = props;
 
   return (
@@ -24,9 +23,9 @@ export default Blog = (props) => {
       </View>
       <View style={styles.categoryView}>
         <TouchableOpacity
-          onPress={() => setCategory("category1")}
+          onPress={() => setCategory("blogs")}
           style={
-            category === "category1"
+            category === "blogs"
               ? styles.selectCategory
               : styles.nonSelectCategory
           }
@@ -34,9 +33,9 @@ export default Blog = (props) => {
           <Text style={{ paddingBottom: 4, textAlign: "center" }}>Blog </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => setCategory("category2")}
+          onPress={() => setCategory("research")}
           style={
-            category === "category2"
+            category === "research"
               ? styles.selectCategory
               : styles.nonSelectCategory
           }
@@ -46,9 +45,9 @@ export default Blog = (props) => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => setCategory("category3")}
+          onPress={() => setCategory("video")}
           style={
-            category === "category3"
+            category === "video"
               ? styles.selectCategory
               : styles.nonSelectCategory
           }
@@ -57,14 +56,25 @@ export default Blog = (props) => {
         </TouchableOpacity>
       </View>
       <View>
-        {category === "category1" ? (
-          <CategoryScreen1 blogs_data={blogs_data} {...props} />
+        {category === "blogs" ? (
+          <Blogs_blogs
+            blogs_blogs={blogs_data?.filter((arg) => arg.category === "blogs")}
+            {...props}
+          />
         ) : null}
-        {category === "category2" ? (
-          <CategoryScreen2 blogs_data={blogs_data} {...props} />
+        {category === "research" ? (
+          <Blogs_reaearch
+            blogs_research={blogs_data?.filter(
+              (arg) => arg.category === "research"
+            )}
+            {...props}
+          />
         ) : null}
-        {category === "category3" ? (
-          <CategoryScreen3 blogs_data={blogs_data} {...props} />
+        {category === "video" ? (
+          <Blogs_video
+            blogs_video={blogs_data?.filter((arg) => arg.category === "video")}
+            {...props}
+          />
         ) : null}
       </View>
     </View>

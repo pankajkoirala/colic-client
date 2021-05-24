@@ -8,66 +8,76 @@ import {
   TextInput,
 } from "react-native";
 import { forgetPWCheckUsername } from "../../../service/authService";
+import Loader from "./../../../../common/loader";
 
 export default function ForgetPW(props) {
   const [username, setUsername] = useState("");
-  console.log(
-    "🚀 ~ file: forgetPW.js ~ line 14 ~ ForgetPW ~ username",
-    username
-  );
+  const [loaderIsOpen, setLoaderIsOpen] = useState(false);
+  const setLoaderOff = () => {
+    setLoaderIsOpen(false);
+  };
+
   return (
-    <View style={styles.pageContainer}>
-      <View style={styles.colicIcon}>
-        <Text
-          onPress={() => props.navigation.navigate("signupPage")}
-          style={styles.colicIconText}
-        >
-          COLIC
-        </Text>
-      </View>
-      <View
-        style={{
-          height: "20%",
-          width: "80%",
-          alignSelf: "center",
-          marginTop: -20,
-        }}
-      >
-        <Text
+    <>
+      <Loader loaderIsOpen={loaderIsOpen} />
+      <View style={styles.pageContainer}>
+        <View style={styles.colicIcon}>
+          <Text
+            onPress={() => props.navigation.navigate("signupPage")}
+            style={styles.colicIconText}
+          >
+            COLIC
+          </Text>
+        </View>
+        <View
           style={{
-            textAlign: "center",
-            paddingBottom: 20,
-            fontSize: 20,
+            height: "20%",
+            width: "80%",
+            alignSelf: "center",
+            marginTop: -20,
           }}
         >
-          Username
-        </Text>
-        <TextInput
-          textAlign="center"
-          style={styles.input_item_place}
-          onChangeText={(value) => setUsername(value)}
-          value={username}
-        />
-      </View>
-      <View style={styles.loginBottomView}>
-        <TouchableOpacity
-          onPress={() =>
-            forgetPWCheckUsername({ usernameEmail: username }, props)
-          }
-          style={styles.loginBottom}
-        >
-          <Text style={styles.loginBottomText}>Submit</Text>
-        </TouchableOpacity>
-        <View style={styles.doNotHaveAcc}>
-          <Text style={styles.doNotHaveAccText}>Don't have an account?</Text>
-          <TouchableOpacity
-            onPress={() => props.navigation.navigate("signupPage")}
+          <Text
+            style={{
+              textAlign: "center",
+              paddingBottom: 20,
+              fontSize: 20,
+            }}
           >
-            <Text style={styles.registerText}>Register</Text>
+            Username
+          </Text>
+          <TextInput
+            textAlign="center"
+            style={styles.input_item_place}
+            onChangeText={(value) => setUsername(value)}
+            value={username}
+          />
+        </View>
+        <View style={styles.loginBottomView}>
+          <TouchableOpacity
+            onPress={() => {
+              forgetPWCheckUsername(
+                { usernameEmail: username },
+                props,
+                setLoaderOff
+              );
+              setLoaderIsOpen(true);
+            }}
+            style={styles.loginBottom}
+          >
+            <Text style={styles.loginBottomText}>Submit</Text>
           </TouchableOpacity>
+          <View style={styles.doNotHaveAcc}>
+            <Text style={styles.doNotHaveAccText}>Don't have an account?</Text>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate("signupPage")}
+            >
+              <Text style={styles.registerText}>Register</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-    </View>
+    </>
   );
 }
 

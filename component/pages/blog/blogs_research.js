@@ -11,19 +11,23 @@ import {
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import HTML from "react-native-render-html";
-import Pegination from "./../../../common/pegination";
+import { base_URL } from "../../utils/const";
+import Pegination from "../../../common/pegination";
 
-export default Category3 = (props) => {
-  const { blogs_data } = props;
+export default Blogs_research = (props) => {
+  const { blogs_research } = props;
   const contentWidth = useWindowDimensions().width;
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage] = useState(4);
 
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
-  const currentPost = blogs_data?.slice(indexOfFirstPost, indexOfLastPost);
+  const currentPost = blogs_research?.slice(indexOfFirstPost, indexOfLastPost);
   var { width, height } = Dimensions.get("window");
-
+  console.log(
+    "🚀 ~ file: blogCategory2.js ~ line 19 ~ blogs_data",
+    blogs_research.length
+  );
   return (
     <View
       style={{
@@ -42,13 +46,13 @@ export default Category3 = (props) => {
         >
           {currentPost.map((arg, i) => {
             return (
-              <View>
+              <View key={i}>
                 {i === 0 ? (
                   <View>
                     <Image
                       style={styles.blogImg}
                       source={{
-                        uri: "https://coopervision.com/sites/coopervision.com/files/styles/cv_blog_large/public/blog-post-images/cv_blogs_cry.jpg?itok=BPd0HsZf&timestamp=1446052149",
+                        uri: `${base_URL}/${arg.photos[0]}`,
                       }}
                     />
                     <View style={styles.firstBlogBox}>
@@ -79,7 +83,7 @@ export default Category3 = (props) => {
                     <Image
                       style={styles.otherBlogImg}
                       source={{
-                        uri: "https://coopervision.com/sites/coopervision.com/files/styles/cv_blog_large/public/blog-post-images/cv_blogs_cry.jpg?itok=BPd0HsZf&timestamp=1446052149",
+                        uri: `${base_URL}/${arg.photos[0]}`,
                       }}
                     />
                     <View style={styles.otherBlogText}>
@@ -113,7 +117,11 @@ export default Category3 = (props) => {
           <Pegination
             setCurrentPage={setCurrentPage}
             currentPage={currentPage}
-            maxPage={Math.ceil(blogs_data.length / postPerPage)}
+            maxPage={
+              Math.ceil(blogs_research.length / postPerPage) === 0
+                ? 1
+                : Math.ceil(blogs_research.length / postPerPage)
+            }
           />
         </View>
       </View>

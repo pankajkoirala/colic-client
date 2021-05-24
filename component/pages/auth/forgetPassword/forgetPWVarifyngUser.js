@@ -1,9 +1,9 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { View, StyleSheet, Pressable } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Text } from "react-native-elements";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
-import { activateUser, forgetPWVerifyUser } from "../../../service/authService";
+import { forgetPWVerifyUser } from "../../../service/authService";
 import Loader from "./../../../../common/loader";
 
 export default VerifyUser = (props) => {
@@ -27,6 +27,7 @@ export default VerifyUser = (props) => {
   } = useForm();
 
   const onSubmit = (data) => {
+    setLoaderIsOpen(true);
     let OTP = "";
     Object.values(data).forEach((arg) => {
       OTP = OTP + arg;
@@ -35,203 +36,205 @@ export default VerifyUser = (props) => {
       OTP: OTP,
       usernameEmail: props.route.params.data.usernameEmail,
     };
-    forgetPWVerifyUser(sendingData, props);
+    forgetPWVerifyUser(sendingData, props, setLoaderOff);
   };
 
   return (
-    <View style={styles.verifyUserContainer}>
-      <Loader loaderIsOpen={loaderIsOpen} />
+    <>
+      <View style={styles.verifyUserContainer}>
+        <Loader loaderIsOpen={loaderIsOpen} />
 
-      <View style={styles.colicIcon}>
-        <Text style={styles.colicIconText}>COLIC</Text>
-      </View>
-      <View style={styles.OTPInnerContainer}>
-        <Text style={styles.enterOTP}>Enter OTP</Text>
-        <View style={styles.OTPInputView}>
-          <Controller
-            control={control}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <View>
-                <TextInput
-                  style={styles.inputField}
-                  onBlur={onBlur}
-                  maxLength={1}
-                  keyboardType="number-pad"
-                  numberOfLines={1}
-                  onChangeText={(value) => {
-                    onChange(value);
-                    if (value.length === 1) {
-                      ref_OTP2.current.focus();
-                    }
-                  }}
-                  value={value}
-                  returnKeyType="next"
-                  ref={ref_OTP1}
-                />
-                {errors.confirmPassword && (
-                  <Text style={styles.errorMessage}>This is required.</Text>
-                )}
-              </View>
-            )}
-            name="firstOTP"
-            rules={{ required: true }}
-            defaultValue=""
-          />
-          <Controller
-            control={control}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <View>
-                <TextInput
-                  style={styles.inputField}
-                  onBlur={onBlur}
-                  maxLength={1}
-                  keyboardType="number-pad"
-                  onChangeText={(value) => {
-                    onChange(value);
-                    if (value.length === 1) {
-                      ref_OTP3.current.focus();
-                    } else {
-                      ref_OTP1.current.focus();
-                    }
-                  }}
-                  value={value}
-                  returnKeyType="next"
-                  ref={ref_OTP2}
-                />
-                {errors.confirmPassword && (
-                  <Text style={styles.errorMessage}>This is required.</Text>
-                )}
-              </View>
-            )}
-            name="secondOTP"
-            rules={{ required: true }}
-            defaultValue=""
-          />
-          <Controller
-            control={control}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <View>
-                <TextInput
-                  style={styles.inputField}
-                  onBlur={onBlur}
-                  maxLength={1}
-                  keyboardType="number-pad"
-                  onChangeText={(value) => {
-                    onChange(value);
-                    if (value.length === 1) {
-                      ref_OTP4.current.focus();
-                    } else {
-                      ref_OTP2.current.focus();
-                    }
-                  }}
-                  value={value}
-                  ref={ref_OTP3}
-                />
-                {errors.confirmPassword && (
-                  <Text style={styles.errorMessage}>This is required.</Text>
-                )}
-              </View>
-            )}
-            name="thirdOTP"
-            rules={{ required: true }}
-            defaultValue=""
-          />
-          <Controller
-            control={control}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <View>
-                <TextInput
-                  style={styles.inputField}
-                  onBlur={onBlur}
-                  maxLength={1}
-                  keyboardType="number-pad"
-                  onChangeText={(value) => {
-                    onChange(value);
-                    if (value.length === 1) {
-                      ref_OTP5.current.focus();
-                    } else {
-                      ref_OTP3.current.focus();
-                    }
-                  }}
-                  value={value}
-                  ref={ref_OTP4}
-                />
-                {errors.confirmPassword && (
-                  <Text style={styles.errorMessage}>This is required.</Text>
-                )}
-              </View>
-            )}
-            name="forthOTP"
-            rules={{ required: true }}
-            defaultValue=""
-          />
-          <Controller
-            control={control}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <View>
-                <TextInput
-                  style={styles.inputField}
-                  onBlur={onBlur}
-                  maxLength={1}
-                  keyboardType="number-pad"
-                  onChangeText={(value) => {
-                    onChange(value);
-                    if (value.length === 1) {
-                      ref_OTP6.current.focus();
-                    } else {
-                      ref_OTP4.current.focus();
-                    }
-                  }}
-                  value={value}
-                  ref={ref_OTP5}
-                />
-                {errors.confirmPassword && (
-                  <Text style={styles.errorMessage}>This is required.</Text>
-                )}
-              </View>
-            )}
-            name="fifthOTP"
-            rules={{ required: true }}
-            defaultValue=""
-          />
-          <Controller
-            control={control}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <View>
-                <TextInput
-                  style={styles.inputField}
-                  onBlur={onBlur}
-                  maxLength={1}
-                  keyboardType="number-pad"
-                  onChangeText={(value) => {
-                    onChange(value);
-                    if (value.length !== 1) {
-                      ref_OTP5.current.focus();
-                    }
-                  }}
-                  value={value}
-                  ref={ref_OTP6}
-                />
-                {errors.confirmPassword && (
-                  <Text style={styles.errorMessage}>This is required.</Text>
-                )}
-              </View>
-            )}
-            name="sixthOTP"
-            rules={{ required: true }}
-            defaultValue=""
-          />
+        <View style={styles.colicIcon}>
+          <Text style={styles.colicIconText}>COLIC</Text>
         </View>
-        <View style={styles.sendButtonWrapper}>
-          <TouchableOpacity
-            onPress={handleSubmit(onSubmit)}
-            style={styles.sendButtonView}
-          >
-            <Text style={styles.sendButton}>Send</Text>
-          </TouchableOpacity>
+        <View style={styles.OTPInnerContainer}>
+          <Text style={styles.enterOTP}>Enter OTP</Text>
+          <View style={styles.OTPInputView}>
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <View>
+                  <TextInput
+                    style={styles.inputField}
+                    onBlur={onBlur}
+                    maxLength={1}
+                    keyboardType="number-pad"
+                    numberOfLines={1}
+                    onChangeText={(value) => {
+                      onChange(value);
+                      if (value.length === 1) {
+                        ref_OTP2.current.focus();
+                      }
+                    }}
+                    value={value}
+                    returnKeyType="next"
+                    ref={ref_OTP1}
+                  />
+                  {errors.confirmPassword && (
+                    <Text style={styles.errorMessage}>This is required.</Text>
+                  )}
+                </View>
+              )}
+              name="firstOTP"
+              rules={{ required: true }}
+              defaultValue=""
+            />
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <View>
+                  <TextInput
+                    style={styles.inputField}
+                    onBlur={onBlur}
+                    maxLength={1}
+                    keyboardType="number-pad"
+                    onChangeText={(value) => {
+                      onChange(value);
+                      if (value.length === 1) {
+                        ref_OTP3.current.focus();
+                      } else {
+                        ref_OTP1.current.focus();
+                      }
+                    }}
+                    value={value}
+                    returnKeyType="next"
+                    ref={ref_OTP2}
+                  />
+                  {errors.confirmPassword && (
+                    <Text style={styles.errorMessage}>This is required.</Text>
+                  )}
+                </View>
+              )}
+              name="secondOTP"
+              rules={{ required: true }}
+              defaultValue=""
+            />
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <View>
+                  <TextInput
+                    style={styles.inputField}
+                    onBlur={onBlur}
+                    maxLength={1}
+                    keyboardType="number-pad"
+                    onChangeText={(value) => {
+                      onChange(value);
+                      if (value.length === 1) {
+                        ref_OTP4.current.focus();
+                      } else {
+                        ref_OTP2.current.focus();
+                      }
+                    }}
+                    value={value}
+                    ref={ref_OTP3}
+                  />
+                  {errors.confirmPassword && (
+                    <Text style={styles.errorMessage}>This is required.</Text>
+                  )}
+                </View>
+              )}
+              name="thirdOTP"
+              rules={{ required: true }}
+              defaultValue=""
+            />
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <View>
+                  <TextInput
+                    style={styles.inputField}
+                    onBlur={onBlur}
+                    maxLength={1}
+                    keyboardType="number-pad"
+                    onChangeText={(value) => {
+                      onChange(value);
+                      if (value.length === 1) {
+                        ref_OTP5.current.focus();
+                      } else {
+                        ref_OTP3.current.focus();
+                      }
+                    }}
+                    value={value}
+                    ref={ref_OTP4}
+                  />
+                  {errors.confirmPassword && (
+                    <Text style={styles.errorMessage}>This is required.</Text>
+                  )}
+                </View>
+              )}
+              name="forthOTP"
+              rules={{ required: true }}
+              defaultValue=""
+            />
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <View>
+                  <TextInput
+                    style={styles.inputField}
+                    onBlur={onBlur}
+                    maxLength={1}
+                    keyboardType="number-pad"
+                    onChangeText={(value) => {
+                      onChange(value);
+                      if (value.length === 1) {
+                        ref_OTP6.current.focus();
+                      } else {
+                        ref_OTP4.current.focus();
+                      }
+                    }}
+                    value={value}
+                    ref={ref_OTP5}
+                  />
+                  {errors.confirmPassword && (
+                    <Text style={styles.errorMessage}>This is required.</Text>
+                  )}
+                </View>
+              )}
+              name="fifthOTP"
+              rules={{ required: true }}
+              defaultValue=""
+            />
+            <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <View>
+                  <TextInput
+                    style={styles.inputField}
+                    onBlur={onBlur}
+                    maxLength={1}
+                    keyboardType="number-pad"
+                    onChangeText={(value) => {
+                      onChange(value);
+                      if (value.length !== 1) {
+                        ref_OTP5.current.focus();
+                      }
+                    }}
+                    value={value}
+                    ref={ref_OTP6}
+                  />
+                  {errors.confirmPassword && (
+                    <Text style={styles.errorMessage}>This is required.</Text>
+                  )}
+                </View>
+              )}
+              name="sixthOTP"
+              rules={{ required: true }}
+              defaultValue=""
+            />
+          </View>
+          <View style={styles.sendButtonWrapper}>
+            <TouchableOpacity
+              onPress={handleSubmit(onSubmit)}
+              style={styles.sendButtonView}
+            >
+              <Text style={styles.sendButton}>Send</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-    </View>
+    </>
   );
 };
 const styles = StyleSheet.create({

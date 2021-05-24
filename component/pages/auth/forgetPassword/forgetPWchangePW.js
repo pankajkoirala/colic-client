@@ -7,16 +7,18 @@ import {
   StyleSheet,
   TextInput,
 } from "react-native";
+import Loader from "./../../../../common/loader";
 import { errorAlert } from "../../../../common/alert";
 import { forgetPWchangePW } from "../../../service/authService";
 
 export default function ForgetPW(props) {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  console.log(
-    "🚀 ~ file: forgetPWVarifyngUser.js ~ line 10 ~ props",
-    props?.route?.params?.data
-  );
+  const [loaderIsOpen, setLoaderIsOpen] = useState(false);
+
+  const setLoaderOff = () => {
+    setLoaderIsOpen(false);
+  };
 
   const onSubmit = () => {
     if (password.length < 8) {
@@ -24,93 +26,101 @@ export default function ForgetPW(props) {
     } else if (password !== confirmPassword) {
       errorAlert("Password Does Not Match");
     } else {
+      setLoaderIsOpen(true);
       forgetPWchangePW(
         {
           password: password,
           usernameEmail: props?.route?.params?.data.usernameEmail,
         },
-        props
+        props,
+        setLoaderOff
       );
     }
   };
 
   return (
-    <View style={styles.pageContainer}>
-      <View style={styles.colicIcon}>
-        <Text
-          onPress={() => props.navigation.navigate("signupPage")}
-          style={styles.colicIconText}
-        >
-          COLIC
-        </Text>
-      </View>
-      <View
-        style={{
-          height: "20%",
-          width: "80%",
-          alignSelf: "center",
-          marginTop: -20,
-        }}
-      >
-        <View
-          style={{
-            marginVertical: 4,
-          }}
-        >
+    <>
+      <Loader loaderIsOpen={loaderIsOpen} />
+      <View style={styles.pageContainer}>
+        <View style={styles.colicIcon}>
           <Text
-            style={{
-              textAlign: "center",
-              paddingBottom: 20,
-              fontSize: 18,
-            }}
-          >
-            Password
-          </Text>
-          <TextInput
-            textAlign="center"
-            style={styles.input_item_place}
-            onChangeText={(value) => setPassword(value)}
-            value={password}
-            secureTextEntry={true}
-          />
-        </View>
-        <View
-          style={{
-            marginVertical: 4,
-          }}
-        >
-          <Text
-            style={{
-              textAlign: "center",
-              paddingBottom: 20,
-              fontSize: 18,
-            }}
-          >
-            Confirm Password
-          </Text>
-          <TextInput
-            secureTextEntry={true}
-            textAlign="center"
-            style={styles.input_item_place}
-            onChangeText={(value) => setConfirmPassword(value)}
-            value={confirmPassword}
-          />
-        </View>
-      </View>
-      <View style={styles.loginBottomView}>
-        <TouchableOpacity onPress={() => onSubmit()} style={styles.loginBottom}>
-          <Text style={styles.loginBottomText}>Submit</Text>
-        </TouchableOpacity>
-        <View style={styles.doNotHaveAcc}>
-          <Text style={styles.doNotHaveAccText}>Don't have an account?</Text>
-          <TouchableOpacity
             onPress={() => props.navigation.navigate("signupPage")}
+            style={styles.colicIconText}
           >
-            <Text style={styles.registerText}>Register</Text>
+            COLIC
+          </Text>
+        </View>
+        <View
+          style={{
+            height: "20%",
+            width: "80%",
+            alignSelf: "center",
+            marginTop: -20,
+          }}
+        >
+          <View
+            style={{
+              marginVertical: 4,
+            }}
+          >
+            <Text
+              style={{
+                textAlign: "center",
+                paddingBottom: 20,
+                fontSize: 18,
+              }}
+            >
+              Password
+            </Text>
+            <TextInput
+              textAlign="center"
+              style={styles.input_item_place}
+              onChangeText={(value) => setPassword(value)}
+              value={password}
+              secureTextEntry={true}
+            />
+          </View>
+          <View
+            style={{
+              marginVertical: 4,
+            }}
+          >
+            <Text
+              style={{
+                textAlign: "center",
+                paddingBottom: 20,
+                fontSize: 18,
+              }}
+            >
+              Confirm Password
+            </Text>
+            <TextInput
+              secureTextEntry={true}
+              textAlign="center"
+              style={styles.input_item_place}
+              onChangeText={(value) => setConfirmPassword(value)}
+              value={confirmPassword}
+            />
+          </View>
+        </View>
+        <View style={styles.loginBottomView}>
+          <TouchableOpacity
+            onPress={() => onSubmit()}
+            style={styles.loginBottom}
+          >
+            <Text style={styles.loginBottomText}>Submit</Text>
           </TouchableOpacity>
+          <View style={styles.doNotHaveAcc}>
+            <Text style={styles.doNotHaveAccText}>Don't have an account?</Text>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate("signupPage")}
+            >
+              <Text style={styles.registerText}>Register</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
-    </View>
+    </>
   );
 }
 

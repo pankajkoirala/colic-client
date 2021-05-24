@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Controller } from "react-hook-form";
 import {
   View,
@@ -12,6 +12,8 @@ import {
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import { scanFingerprint } from "../../../../common/fingerprintUnlock";
 import { ScrollView } from "react-native-gesture-handler";
+import * as LocalAuthentication from "expo-local-authentication";
+import { getDefaultUser } from "../../../../common/fingerPrintStorage";
 
 export default function Login(props) {
   const {
@@ -25,6 +27,18 @@ export default function Login(props) {
     onSubmit,
     setLoaderOff,
   } = props;
+  const [showBiometric, setShowBiometric] = useState(false);
+  useState(() => {
+    console.log(checkBiometricDevice());
+  }, []);
+  async function checkBiometricDevice() {
+    let hasBiometric = await LocalAuthentication.hasHardwareAsync();
+    let hasSetup = await LocalAuthentication.isEnrolledAsync();
+    let hasUser = await getDefaultUser();
+    if (hasBiometric && hasSetup && hasUser) {
+      setShowBiometric(true);
+    }
+  }
 
   return (
     <ScrollView style={styles.loginContainer} bounces={false}>
@@ -102,12 +116,14 @@ export default function Login(props) {
                 >
                   <Text style={styles.loginButtonText}>LogIn</Text>
                 </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.fingerPrintIcon}
-                  onPress={() => scanFingerprint(dispatchData, setLoaderOff)}
-                >
-                  <FontAwesome5 name={"fingerprint"} size={40} />
-                </TouchableOpacity>
+                {showBiometric && (
+                  <TouchableOpacity
+                    style={styles.fingerPrintIcon}
+                    onPress={() => scanFingerprint(dispatchData, setLoaderOff)}
+                  >
+                    <FontAwesome5 name={"fingerprint"} size={40} />
+                  </TouchableOpacity>
+                )}
 
                 <View style={styles.or_line_view}>
                   <View style={styles.orLine} />
