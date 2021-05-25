@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { AUTH_TOKEN, RELOAD } from "../../../redux/action/action";
+import { AUTH_TOKEN } from "../../../redux/action/action";
 import Login from "./login";
 import { useForm } from "react-hook-form";
 import { AuthLogin } from "../../../service/authService";

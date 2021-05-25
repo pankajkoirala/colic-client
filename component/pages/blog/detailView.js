@@ -60,7 +60,6 @@ export default SingleBlogView = (props) => {
             <WebView
               scrollEnabled={false}
               source={{
-                //uri: "https://youtu.be/dx4Teh-nv3A?t=9",
                 html: selectedBlog.videolink ? selectedBlog.videolink : "",
               }}
               style={{

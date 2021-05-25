@@ -1,9 +1,10 @@
 import React, { useState } from "react";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+
 import {
   View,
   Text,
   TouchableOpacity,
-  Image,
   StyleSheet,
   TextInput,
 } from "react-native";
@@ -22,6 +23,12 @@ export default function ForgetPW(props) {
       <Loader loaderIsOpen={loaderIsOpen} />
       <View style={styles.pageContainer}>
         <View style={styles.colicIcon}>
+          <TouchableOpacity
+            onPress={() => props.navigation.navigate("loginFrontPage")}
+            style={styles.backIcon}
+          >
+            <FontAwesome5 name={"arrow-left"} size={20} />
+          </TouchableOpacity>
           <Text
             onPress={() => props.navigation.navigate("signupPage")}
             style={styles.colicIconText}
@@ -29,23 +36,8 @@ export default function ForgetPW(props) {
             COLIC
           </Text>
         </View>
-        <View
-          style={{
-            height: "20%",
-            width: "80%",
-            alignSelf: "center",
-            marginTop: -20,
-          }}
-        >
-          <Text
-            style={{
-              textAlign: "center",
-              paddingBottom: 20,
-              fontSize: 20,
-            }}
-          >
-            Username
-          </Text>
+        <View style={styles.usernameView}>
+          <Text style={styles.usernameLabel}>Username</Text>
           <TextInput
             textAlign="center"
             style={styles.input_item_place}
@@ -53,7 +45,7 @@ export default function ForgetPW(props) {
             value={username}
           />
         </View>
-        <View style={styles.loginBottomView}>
+        <View style={styles.submitBottomView}>
           <TouchableOpacity
             onPress={() => {
               forgetPWCheckUsername(
@@ -63,9 +55,9 @@ export default function ForgetPW(props) {
               );
               setLoaderIsOpen(true);
             }}
-            style={styles.loginBottom}
+            style={styles.forgetPWBottom}
           >
-            <Text style={styles.loginBottomText}>Submit</Text>
+            <Text style={styles.submitBottomText}>Submit</Text>
           </TouchableOpacity>
           <View style={styles.doNotHaveAcc}>
             <Text style={styles.doNotHaveAccText}>Don't have an account?</Text>
@@ -97,23 +89,22 @@ const styles = StyleSheet.create({
     //    fontFamily: "Montserrat",
     color: "white",
   },
-  loginBottomView: {
+  submitBottomView: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
     height: "40%",
   },
-  loginBottom: {
+  forgetPWBottom: {
     height: 50,
     width: "70%",
     backgroundColor: "black",
     borderRadius: 124,
     padding: 10,
   },
-  loginBottomText: {
+  submitBottomText: {
     fontSize: 20,
     color: "#ffff",
-    //fontFamily: "Montserrat",
     textAlign: "center",
   },
   doNotHaveAcc: {
@@ -123,13 +114,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     margin: 6,
     fontSize: 16,
-    //fontFamily: "Montserrat",
     color: "grey",
   },
   registerText: {
     textAlign: "center",
     fontSize: 16,
-    //fontFamily: "Montserrat",
     textDecorationLine: "underline",
     color: "grey",
   },
@@ -144,5 +133,22 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     height: 40,
     fontSize: 30,
+  },
+  usernameView: {
+    height: "20%",
+    width: "80%",
+    alignSelf: "center",
+    marginTop: -20,
+  },
+  usernameLabel: {
+    textAlign: "center",
+    paddingBottom: 20,
+    fontSize: 20,
+  },
+  backIcon: {
+    paddingLeft: 20,
+    position: "absolute",
+    paddingTop: 90,
+    zIndex: 999,
   },
 });

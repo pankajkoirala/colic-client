@@ -60,6 +60,10 @@ export default Blogs_video = (props) => {
                     >
                       <Text style={styles.blogTitle}> {arg.title}</Text>
                     </TouchableOpacity>
+                    <HTML
+                      source={{ html: arg.content.slice(0, 150) }}
+                      contentWidth={contentWidth}
+                    />
                     <WebView
                       scrollEnabled={false}
                       source={{

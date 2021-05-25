@@ -242,7 +242,6 @@ function Login(props) {
   );
 }
 export default Login;
-// secureTextEntry={true}
 
 const styles = StyleSheet.create({
   signupContainer: {
@@ -265,7 +264,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     alignSelf: "center",
     flex: 1,
-    //fontFamily: "Montserrat",
     fontWeight: "bold",
   },
   signUpFormView: {
@@ -293,7 +291,6 @@ const styles = StyleSheet.create({
   },
   errorMessage: {
     color: "red",
-    //  fontFamily: "Montserrat",
     textAlign: "center",
     marginTop: 2,
   },
@@ -324,7 +321,6 @@ const styles = StyleSheet.create({
   signUpButtonText: {
     fontSize: 20,
     color: "#ffff",
-    //fontFamily: "Montserrat",
   },
   or_line_view: {
     flexDirection: "row",
@@ -353,7 +349,6 @@ const styles = StyleSheet.create({
   socialLoginText: {
     margin: 6,
     fontSize: 15,
-    //  fontFamily: "Montserrat",
   },
 
   socialLoginArrowIcon: {

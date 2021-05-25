@@ -3,7 +3,6 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Image,
   StyleSheet,
   TextInput,
 } from "react-native";
@@ -156,7 +155,6 @@ const styles = StyleSheet.create({
   loginBottomText: {
     fontSize: 20,
     color: "#ffff",
-    //fontFamily: "Montserrat",
     textAlign: "center",
   },
   doNotHaveAcc: {
@@ -166,13 +164,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     margin: 6,
     fontSize: 16,
-    //fontFamily: "Montserrat",
     color: "grey",
   },
   registerText: {
     textAlign: "center",
     fontSize: 16,
-    //fontFamily: "Montserrat",
     textDecorationLine: "underline",
     color: "grey",
   },

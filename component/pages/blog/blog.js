@@ -30,7 +30,15 @@ export default Blog = (props) => {
               : styles.nonSelectCategory
           }
         >
-          <Text style={{ paddingBottom: 4, textAlign: "center" }}>Blog </Text>
+          <Text
+            style={
+              category === "blogs"
+                ? styles.selectedCategoryText
+                : styles.nonselectedCategoryText
+            }
+          >
+            Blog
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => setCategory("research")}
@@ -40,8 +48,14 @@ export default Blog = (props) => {
               : styles.nonSelectCategory
           }
         >
-          <Text style={{ paddingBottom: 4, textAlign: "center" }}>
-            Research{" "}
+          <Text
+            style={
+              category === "research"
+                ? styles.selectedCategoryText
+                : styles.nonselectedCategoryText
+            }
+          >
+            Research
           </Text>
         </TouchableOpacity>
         <TouchableOpacity
@@ -52,7 +66,15 @@ export default Blog = (props) => {
               : styles.nonSelectCategory
           }
         >
-          <Text style={{ paddingBottom: 4, textAlign: "center" }}>Video </Text>
+          <Text
+            style={
+              category === "video"
+                ? styles.selectedCategoryText
+                : styles.nonselectedCategoryText
+            }
+          >
+            Video
+          </Text>
         </TouchableOpacity>
       </View>
       <View>
@@ -100,6 +122,17 @@ const styles = StyleSheet.create({
     width: 100,
     borderBottomColor: "#ffd11a",
     borderBottomWidth: 0,
+  },
+  nonselectedCategoryText: {
+    paddingBottom: 4,
+    textAlign: "center",
+    fontSize: 18,
+  },
+  selectedCategoryText: {
+    paddingBottom: 4,
+    textAlign: "center",
+    fontSize: 18,
+    fontWeight: "bold",
   },
   editBack: {
     flexDirection: "row",

@@ -197,7 +197,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
     alignSelf: "center",
     flex: 1,
-    //fontFamily: "Montserrat",
     fontWeight: "bold",
   },
   loginFormView: {
@@ -212,7 +211,6 @@ const styles = StyleSheet.create({
   },
   input_item_Label: {
     marginVertical: 4,
-    //fontFamily: "Montserrat",
     color: "grey",
   },
   input_item_place: {
@@ -230,7 +228,6 @@ const styles = StyleSheet.create({
   forgetPassword: {
     fontSize: 14,
     color: "grey",
-    // fontFamily: "Montserrat",
     textAlign: "right",
     marginTop: 4,
   },
@@ -253,7 +250,6 @@ const styles = StyleSheet.create({
   loginButtonText: {
     fontSize: 20,
     color: "#ffff",
-    //fontFamily: "Montserrat",
   },
   or_line_view: {
     flexDirection: "row",
@@ -281,7 +277,6 @@ const styles = StyleSheet.create({
   socialLoginText: {
     margin: 6,
     fontSize: 15,
-    // fontFamily: "Montserrat",
   },
   fingerPrintIcon: {
     margin: 10,
@@ -297,15 +292,3 @@ const styles = StyleSheet.create({
   },
   orText: { width: 50, textAlign: "center" },
 });
-
-{
-  /* <Text style={{ marginTop: 20 }}>
-              Don 't Have an Account?
-              <Text
-                style={{ margin: 2, color: "blue" }}
-                onPress={() => props.navigation.navigate("signUp")}
-              >
-                Click here
-              </Text>
-            </Text> */
-}
