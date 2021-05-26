@@ -16,10 +16,7 @@ import Pegination from "../../../common/pegination";
 
 export default Blogs_blogs = (props) => {
   const { blogs_blogs } = props;
-  console.log(
-    "🚀 ~ file: blogCategory1.js ~ line 19 ~ blogs_data",
-    blogs_blogs.length
-  );
+
   const contentWidth = useWindowDimensions().width;
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage] = useState(4);
@@ -27,6 +24,7 @@ export default Blogs_blogs = (props) => {
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
   const currentPost = blogs_blogs?.slice(indexOfFirstPost, indexOfLastPost);
+
   var { width, height } = Dimensions.get("window");
 
   return (
@@ -37,95 +35,109 @@ export default Blogs_blogs = (props) => {
       }}
       bounces={false}
     >
-      <View style={styles.Category1Container}>
-        <ScrollView
-          bounces={false}
-          style={{
-            flex: 1,
-            width: width,
-          }}
-        >
-          {currentPost.map((arg, i) => {
-            return (
-              <View key={i}>
-                {i === 0 ? (
-                  <View>
-                    <Image
-                      style={styles.blogImg}
-                      source={{
-                        uri: `${base_URL}/${arg.photos[0]}`,
-                      }}
-                    />
-                    <View style={styles.firstBlogBox}>
-                      <TouchableOpacity
-                        onPress={() =>
-                          props.navigation.navigate("SingleBlogView", {
-                            id: arg.id,
-                          })
-                        }
-                      >
-                        <Text style={styles.blogTitle}> {arg.title}</Text>
-                      </TouchableOpacity>
-                      <HTML
-                        source={{ html: arg.content.slice(0, 200) }}
-                        contentWidth={contentWidth}
+      {currentPost.length ? (
+        <View style={styles.Category1Container}>
+          <ScrollView
+            bounces={false}
+            style={{
+              flex: 1,
+              width: width,
+            }}
+          >
+            {currentPost.map((arg, i) => {
+              return (
+                <View key={i}>
+                  {i === 0 ? (
+                    <View>
+                      <Image
+                        style={styles.blogImg}
+                        source={{
+                          uri: `${base_URL}/${arg.photos[0]}`,
+                        }}
                       />
-                    </View>
-                  </View>
-                ) : (
-                  <View
-                    key={i}
-                    style={
-                      i % 2 !== 0
-                        ? styles.allBlogViewEven
-                        : styles.allBlogViewOdd
-                    }
-                  >
-                    <Image
-                      style={styles.otherBlogImg}
-                      source={{
-                        uri: `${base_URL}/${arg.photos[0]}`,
-                      }}
-                    />
-                    <View style={styles.otherBlogText}>
-                      <Text style={styles.blogPostedDate}>
-                        {moment(arg.posteddate).format("DD MMM YYYY")}
-                      </Text>
-                      <Text
-                        onPress={() =>
-                          props.navigation.navigate("SingleBlogView", {
-                            id: arg.id,
-                          })
-                        }
-                        style={styles.blogTitle}
-                      >
-                        {arg.title}
-                      </Text>
-                      <Text style={styles.blogContant}>
+                      <View style={styles.firstBlogBox}>
+                        <TouchableOpacity
+                          onPress={() =>
+                            props.navigation.navigate("SingleBlogView", {
+                              id: arg.id,
+                            })
+                          }
+                        >
+                          <Text style={styles.blogTitle}> {arg.title}</Text>
+                        </TouchableOpacity>
                         <HTML
                           source={{ html: arg.content.slice(0, 200) }}
                           contentWidth={contentWidth}
                         />
-                      </Text>
+                      </View>
                     </View>
-                  </View>
-                )}
-              </View>
-            );
-          })}
-        </ScrollView>
-        <View style={{ width: width, height: 50 }}>
-          <Pegination
-            setCurrentPage={setCurrentPage}
-            currentPage={currentPage}
-            maxPage={
-              Math.ceil(blogs_blogs.length / postPerPage) === 0
-                ? 1
-                : Math.ceil(blogs_blogs.length / postPerPage)
-            }
-          />
+                  ) : (
+                    <View
+                      key={i}
+                      style={
+                        i % 2 !== 0
+                          ? styles.allBlogViewEven
+                          : styles.allBlogViewOdd
+                      }
+                    >
+                      <Image
+                        style={styles.otherBlogImg}
+                        source={{
+                          uri: `${base_URL}/${arg.photos[0]}`,
+                        }}
+                      />
+                      <View style={styles.otherBlogText}>
+                        <Text style={styles.blogPostedDate}>
+                          {moment(arg.posteddate).format("DD MMM YYYY")}
+                        </Text>
+                        <Text
+                          onPress={() =>
+                            props.navigation.navigate("SingleBlogView", {
+                              id: arg.id,
+                            })
+                          }
+                          style={styles.blogTitle}
+                        >
+                          {arg.title}
+                        </Text>
+                        <Text style={styles.blogContant}>
+                          <HTML
+                            source={{ html: arg.content.slice(0, 200) }}
+                            contentWidth={contentWidth}
+                          />
+                        </Text>
+                      </View>
+                    </View>
+                  )}
+                </View>
+              );
+            })}
+          </ScrollView>
+
+          <View style={{ width: width, height: 50 }}>
+            <Pegination
+              setCurrentPage={setCurrentPage}
+              currentPage={currentPage}
+              maxPage={
+                Math.ceil(blogs_blogs.length / postPerPage) === 0
+                  ? 1
+                  : Math.ceil(blogs_blogs.length / postPerPage)
+              }
+            />
+          </View>
         </View>
-      </View>
+      ) : (
+        <Text
+          style={{
+            fontSize: 20,
+            fontWeight: "bold",
+            paddingTop: 30,
+            textAlign: "center",
+          }}
+        >
+          No Blogs Found
+        </Text>
+      )}
     </View>
   );
 };

@@ -25,7 +25,6 @@ export default Blogs_video = (props) => {
   const indexOfFirstPost = indexOfLastPost - postPerPage;
   const currentPost = blogs_video?.slice(indexOfFirstPost, indexOfLastPost);
   var { width, height } = Dimensions.get("window");
-
   return (
     <View
       style={{
@@ -34,66 +33,78 @@ export default Blogs_video = (props) => {
       }}
       bounces={false}
     >
-      <View style={styles.Category1Container}>
-        <ScrollView
-          bounces={false}
-          style={{
-            flex: 1,
-            width: width,
-          }}
-        >
-          {currentPost.map((arg, i) => {
-            console.log(arg.videolink);
-            return (
-              <View key={i}>
-                <View key={i} style={styles.allBlogViewEven}>
-                  <View>
-                    <Text style={styles.blogPostedDate}>
-                      {moment(arg.posteddate).format("DD MMM YYYY")}
-                    </Text>
-                    <TouchableOpacity
-                      onPress={() =>
-                        props.navigation.navigate("SingleBlogView", {
-                          id: arg.id,
-                        })
-                      }
-                    >
-                      <Text style={styles.blogTitle}> {arg.title}</Text>
-                    </TouchableOpacity>
-                    <HTML
-                      source={{ html: arg.content.slice(0, 150) }}
-                      contentWidth={contentWidth}
-                    />
-                    <WebView
-                      scrollEnabled={false}
-                      source={{
-                        //uri: "https://youtu.be/dx4Teh-nv3A?t=9",
-                        html: arg.videolink ? arg.videolink : "",
-                      }}
-                      style={{
-                        width: "100%",
-                        height: 240,
-                        alignSelf: "center",
-                      }}
-                    />
+      {currentPost.length ? (
+        <View style={styles.Category1Container}>
+          <ScrollView
+            bounces={false}
+            style={{
+              flex: 1,
+              width: width,
+            }}
+          >
+            {currentPost.map((arg, i) => {
+              return (
+                <View key={i}>
+                  <View key={i} style={styles.allBlogViewEven}>
+                    <View>
+                      <Text style={styles.blogPostedDate}>
+                        {moment(arg.posteddate).format("DD MMM YYYY")}
+                      </Text>
+                      <TouchableOpacity
+                        onPress={() =>
+                          props.navigation.navigate("SingleBlogView", {
+                            id: arg.id,
+                          })
+                        }
+                      >
+                        <Text style={styles.blogTitle}> {arg.title}</Text>
+                      </TouchableOpacity>
+                      <HTML
+                        source={{ html: arg.content.slice(0, 150) }}
+                        contentWidth={contentWidth}
+                      />
+                      <WebView
+                        scrollEnabled={false}
+                        source={{
+                          //uri: "https://youtu.be/dx4Teh-nv3A?t=9",
+                          html: arg.videolink ? arg.videolink : "",
+                        }}
+                        style={{
+                          width: "100%",
+                          height: 240,
+                          alignSelf: "center",
+                        }}
+                      />
+                    </View>
                   </View>
                 </View>
-              </View>
-            );
-          })}
-        </ScrollView>
-        <View style={{ width: width, height: 50 }}>
-          <Pegination
-            setCurrentPage={setCurrentPage}
-            currentPage={currentPage}
-            maxPage={
-              Math.ceil(blogs_video.length / postPerPage) === 0
-                ? 1
-                : Math.ceil(blogs_video.length / postPerPage)
-            }
-          />
+              );
+            })}
+          </ScrollView>
+          <View style={{ width: width, height: 50 }}>
+            <Pegination
+              setCurrentPage={setCurrentPage}
+              currentPage={currentPage}
+              maxPage={
+                Math.ceil(blogs_video.length / postPerPage) === 0
+                  ? 1
+                  : Math.ceil(blogs_video.length / postPerPage)
+              }
+            />
+          </View>
         </View>
-      </View>
+      ) : (
+        <Text
+          style={{
+            fontSize: 20,
+            fontWeight: "bold",
+            paddingTop: 30,
+            textAlign: "center",
+          }}
+        >
+          No Blogs Found
+        </Text>
+      )}
     </View>
   );
 };
