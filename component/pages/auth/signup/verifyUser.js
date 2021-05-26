@@ -3,7 +3,7 @@ import { Controller, useForm } from "react-hook-form";
 import { View, StyleSheet, Pressable } from "react-native";
 import { Text } from "react-native-elements";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
-import { activateUser } from "../../../service/authService";
+import { activateUser, resendOTP } from "../../../service/authService";
 import Loader from "./../../../../common/loader";
 
 export default VerifyUser = (props) => {
@@ -215,6 +215,16 @@ export default VerifyUser = (props) => {
             defaultValue=""
           />
         </View>
+        <TouchableOpacity
+          style={{ marginTop: 20 }}
+          onPress={() =>
+            resendOTP({
+              usernameEmail: props.route.params.data.usernameEmail,
+            })
+          }
+        >
+          <Text style={{ fontSize: 18 }}>Resend OTP? </Text>
+        </TouchableOpacity>
         <View style={styles.sendButtonWrapper}>
           <TouchableOpacity
             onPress={handleSubmit(onSubmit)}

@@ -29,7 +29,7 @@ export default function Login(props) {
   } = props;
   const [showBiometric, setShowBiometric] = useState(false);
   useState(() => {
-    console.log(checkBiometricDevice());
+    checkBiometricDevice();
   }, []);
   async function checkBiometricDevice() {
     let hasBiometric = await LocalAuthentication.hasHardwareAsync();
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   loginFormView: {
-    paddingTop: 80,
+    paddingTop: 100,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
@@ -208,6 +208,7 @@ const styles = StyleSheet.create({
   },
   input_item_view: {
     margin: 5,
+    paddingTop: 20,
   },
   input_item_Label: {
     marginVertical: 4,
@@ -236,6 +237,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     margin: 20,
+    paddingTop: 30,
   },
   loginButton: {
     height: 50,
@@ -280,6 +282,7 @@ const styles = StyleSheet.create({
   },
   fingerPrintIcon: {
     margin: 10,
+    paddingTop: 20,
   },
   socialLoginArrowIcon: {
     margin: 8,

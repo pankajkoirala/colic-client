@@ -7,6 +7,7 @@ import {
   AlertWithNavigatorForgetPW,
   errorAlert,
   fingerPrintSaveAlert,
+  successAlert,
 } from "../../common/alert";
 
 //capibality checking whether device has fingureprint scaner of not
@@ -17,7 +18,7 @@ async function checkCompatibleSaveLoginInData(token, Data) {
     fingerPrintSaveAlert(token, Data);
   }
 }
-
+//login request sending
 export const AuthLogin = (data, dispatch, setLoaderOff) => {
   axios({
     url: `${base_URL}/auth/login`,
@@ -41,7 +42,7 @@ export const AuthLogin = (data, dispatch, setLoaderOff) => {
       }
     });
 };
-
+//fingureprint login request sending
 export const fingerPrintLogin = (data, dispatch, setLoaderOff) => {
   axios({
     url: `${base_URL}/auth/login`,
@@ -64,7 +65,7 @@ export const fingerPrintLogin = (data, dispatch, setLoaderOff) => {
       }
     });
 };
-
+//active user after signup
 export const activateUser = (data, props, setLoaderOff) => {
   let OTP = "";
   Object.values(data).forEach((arg) => {
@@ -92,7 +93,7 @@ export const activateUser = (data, props, setLoaderOff) => {
       }
     });
 };
-
+//signup submit function
 export const signup = (data, props, setLoaderOff) => {
   console.log(data);
   axios({
@@ -118,7 +119,7 @@ export const signup = (data, props, setLoaderOff) => {
       }
     });
 };
-
+//forgetPassword function to check username is valid or not
 export const forgetPWCheckUsername = (data, props, setLoaderOff) => {
   axios({
     url: `${base_URL}/auth/forget_Password`,
@@ -149,7 +150,7 @@ export const forgetPWCheckUsername = (data, props, setLoaderOff) => {
       }
     });
 };
-
+//after  email valid ,OTP validation
 export const forgetPWVerifyUser = (data, props, setLoaderOff) => {
   axios({
     url: `${base_URL}/auth/forget_Password_send_OTP`,
@@ -177,7 +178,7 @@ export const forgetPWVerifyUser = (data, props, setLoaderOff) => {
       }
     });
 };
-
+//new password changing function
 export const forgetPWchangePW = (data, props, setLoaderOff) => {
   axios({
     url: `${base_URL}/auth/forget_Password_change_password`,
@@ -197,6 +198,30 @@ export const forgetPWchangePW = (data, props, setLoaderOff) => {
       if (!executed) {
         console.log(err.response.data);
         setLoaderOff();
+        errorAlert(err?.response?.data?.message);
+        executed = true;
+      }
+    });
+};
+
+//new password changing function
+export const resendOTP = (data) => {
+  axios({
+    url: `${base_URL}/auth/resendOTP`,
+    method: "post",
+    data: data,
+  })
+    .then((res) => {
+      var executed = false;
+      if (!executed) {
+        successAlert(res?.data?.message);
+        executed = true;
+      }
+    })
+    .catch((err) => {
+      var executed = false;
+      if (!executed) {
+        console.log(err.response.data);
         errorAlert(err?.response?.data?.message);
         executed = true;
       }
