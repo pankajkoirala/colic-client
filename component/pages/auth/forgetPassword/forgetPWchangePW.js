@@ -9,6 +9,7 @@ import {
 import Loader from "./../../../../common/loader";
 import { errorAlert } from "../../../../common/alert";
 import { forgetPWchangePW } from "../../../service/authService";
+import { ScrollView } from "react-native-gesture-handler";
 
 export default function ForgetPW(props) {
   const [password, setPassword] = useState("");
@@ -39,98 +40,103 @@ export default function ForgetPW(props) {
 
   return (
     <>
-      <Loader loaderIsOpen={loaderIsOpen} />
-      <View style={styles.pageContainer}>
-        <View style={styles.colicIcon}>
-          <Text
-            onPress={() => props.navigation.navigate("signupPage")}
-            style={styles.colicIconText}
-          >
-            COLIC
-          </Text>
-        </View>
-        <View
-          style={{
-            height: "20%",
-            width: "80%",
-            alignSelf: "center",
-            marginTop: -20,
-          }}
-        >
-          <View
-            style={{
-              marginVertical: 4,
-            }}
-          >
+      <ScrollView bounces={false} style={styles.pageContainer}>
+        <Loader loaderIsOpen={loaderIsOpen} />
+        <View>
+          <View style={styles.colicIcon}>
             <Text
-              style={{
-                textAlign: "center",
-                paddingBottom: 20,
-                fontSize: 18,
-              }}
-            >
-              Password
-            </Text>
-            <TextInput
-              textAlign="center"
-              style={styles.input_item_place}
-              onChangeText={(value) => setPassword(value)}
-              value={password}
-              secureTextEntry={true}
-            />
-          </View>
-          <View
-            style={{
-              marginVertical: 4,
-            }}
-          >
-            <Text
-              style={{
-                textAlign: "center",
-                paddingBottom: 20,
-                fontSize: 18,
-              }}
-            >
-              Confirm Password
-            </Text>
-            <TextInput
-              secureTextEntry={true}
-              textAlign="center"
-              style={styles.input_item_place}
-              onChangeText={(value) => setConfirmPassword(value)}
-              value={confirmPassword}
-            />
-          </View>
-        </View>
-        <View style={styles.loginBottomView}>
-          <TouchableOpacity
-            onPress={() => onSubmit()}
-            style={styles.loginBottom}
-          >
-            <Text style={styles.loginBottomText}>Submit</Text>
-          </TouchableOpacity>
-          <View style={styles.doNotHaveAcc}>
-            <Text style={styles.doNotHaveAccText}>Don't have an account?</Text>
-            <TouchableOpacity
               onPress={() => props.navigation.navigate("signupPage")}
+              style={styles.colicIconText}
             >
-              <Text style={styles.registerText}>Register</Text>
+              COLIC
+            </Text>
+          </View>
+          <View
+            style={{
+              height: 100,
+              width: "80%",
+              alignSelf: "center",
+              marginTop: -20,
+            }}
+          >
+            <View
+              style={{
+                marginVertical: 4,
+              }}
+            >
+              <Text
+                style={{
+                  textAlign: "center",
+                  paddingBottom: 20,
+                  fontSize: 18,
+                }}
+              >
+                Password
+              </Text>
+              <TextInput
+                textAlign="center"
+                style={styles.input_item_place}
+                onChangeText={(value) => setPassword(value)}
+                value={password}
+                secureTextEntry={true}
+              />
+            </View>
+            <View
+              style={{
+                marginVertical: 4,
+              }}
+            >
+              <Text
+                style={{
+                  textAlign: "center",
+                  paddingBottom: 20,
+                  fontSize: 18,
+                }}
+              >
+                Confirm Password
+              </Text>
+              <TextInput
+                secureTextEntry={true}
+                textAlign="center"
+                style={styles.input_item_place}
+                onChangeText={(value) => setConfirmPassword(value)}
+                value={confirmPassword}
+              />
+            </View>
+          </View>
+          <View style={styles.loginBottomView}>
+            <TouchableOpacity
+              onPress={() => onSubmit()}
+              style={styles.loginBottom}
+            >
+              <Text style={styles.loginBottomText}>Submit</Text>
             </TouchableOpacity>
+            <View style={styles.doNotHaveAcc}>
+              <Text style={styles.doNotHaveAccText}>
+                Don't have an account?
+              </Text>
+              <TouchableOpacity
+                onPress={() => props.navigation.navigate("signupPage")}
+              >
+                <Text style={styles.registerText}>Register</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
-      </View>
+      </ScrollView>
     </>
   );
 }
 
 const styles = StyleSheet.create({
   pageContainer: {
+    flex: 1,
     height: "100%",
     backgroundColor: "#ffad33",
   },
   colicIcon: {
     paddingTop: 100,
-    height: "40%",
+    height: 200,
     // flex: 1,
   },
   colicIconText: {
@@ -143,7 +149,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    height: "40%",
+    height: 450,
   },
   loginBottom: {
     height: 50,

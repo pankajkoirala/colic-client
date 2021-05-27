@@ -44,14 +44,15 @@ function ProfileContainer(props) {
 
   const ImageUploadFunction = () => {
     if (profileImage != null) {
-      setLoaderIsOpen(true);
+      console.log(profileImage.type);
+      /*  setLoaderIsOpen(true);
       ProfileImageUpdate(
         profileDetail?.id,
         profileImage,
         token,
         reloadFetchData,
         setLoaderOff
-      );
+      );*/
     } else {
       alert("Please Select Photo first");
     }

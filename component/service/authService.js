@@ -67,14 +67,10 @@ export const fingerPrintLogin = (data, dispatch, setLoaderOff) => {
 };
 //active user after signup
 export const activateUser = (data, props, setLoaderOff) => {
-  let OTP = "";
-  Object.values(data).forEach((arg) => {
-    OTP = OTP + arg;
-  });
   axios({
     url: `${base_URL}/auth/activateUser`,
     method: "post",
-    data: { OTP: OTP },
+    data: data,
   })
     .then((res) => {
       var executed = false;

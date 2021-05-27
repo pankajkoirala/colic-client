@@ -164,7 +164,7 @@ function Profile(props) {
                 paddingBottom: 6,
               }}
             >
-              Date Of Birth
+              Week Of Birth
             </Text>
             <Controller
               control={control}
@@ -213,29 +213,33 @@ function Profile(props) {
             <Controller
               control={control}
               render={({ field: { onChange, value } }) => (
-                <View
-                  style={
-                    Platform.OS === "ios"
-                      ? styles.genderPickerIOS
-                      : styles.genderPicker
-                  }
-                >
-                  {Platform.OS === "ios" && (
-                    <TouchableOpacity
-                      disabled={!editState}
-                      onPress={() => setGenderOpen(true)}
-                    >
-                      <Text>{value || profileDetail.gender}</Text>
-                    </TouchableOpacity>
-                  )}
-                  <GenderPicker
-                    setGenderOpen={setGenderOpen}
-                    genderOpen={genderOpen}
-                    onChange={onChange}
-                    oldValue={profileDetail.gender}
-                    editable={editState}
-                  />
-                </View>
+                <>
+                  <Text style={{ paddingBottom: 4 }}>Gender</Text>
+
+                  <View
+                    style={
+                      Platform.OS === "ios"
+                        ? styles.genderPickerIOS
+                        : styles.genderPicker
+                    }
+                  >
+                    {Platform.OS === "ios" && (
+                      <TouchableOpacity
+                        disabled={!editState}
+                        onPress={() => setGenderOpen(true)}
+                      >
+                        <Text>{value || profileDetail.gender}</Text>
+                      </TouchableOpacity>
+                    )}
+                    <GenderPicker
+                      setGenderOpen={setGenderOpen}
+                      genderOpen={genderOpen}
+                      onChange={onChange}
+                      oldValue={profileDetail.gender}
+                      editable={editState}
+                    />
+                  </View>
+                </>
               )}
               name="gender"
               rules={{

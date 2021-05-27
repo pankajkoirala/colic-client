@@ -9,6 +9,7 @@ import { AUTH_TOKEN } from "../redux/action/action";
 import BottomNavigator from "./buttomNav";
 import { View, Image, StyleSheet, Text } from "react-native";
 import { base_URL } from "../utils/const";
+import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 
 //import * as Screens from "../components/Screens";
 const Drawer = createDrawerNavigator();
@@ -25,7 +26,14 @@ function CustomDrawerContent(props) {
   }));
 
   return (
-    <DrawerContentScrollView bounces={false} {...props}>
+    <DrawerContentScrollView
+      style={{ backgroundColor: "#ffad33" }}
+      bounces={false}
+      {...props}
+    >
+      <Text style={{ textAlign: "center", fontSize: 60, fontWeight: "bold" }}>
+        Colic
+      </Text>
       <View style={styles.drawerContainer}>
         <View style={styles.profileImageView}>
           <Image
@@ -38,6 +46,12 @@ function CustomDrawerContent(props) {
             }}
           />
           <Text style={styles.usersName}>{profileDetail.name}</Text>
+          <View style={{ flexDirection: "row" }}>
+            <FontAwesome5Icon name={"paper-plane"} size={20} />
+            <Text style={{ paddingHorizontal: 4, fontWeight: "bold" }}>
+              {profileDetail.email}
+            </Text>
+          </View>
         </View>
 
         <DrawerItem
@@ -90,10 +104,10 @@ export default function DrawerNavigator() {
 }
 
 const styles = StyleSheet.create({
-  drawerContainer: { paddingTop: 30 },
+  drawerContainer: { paddingTop: 10 },
   profileImage: {
-    height: 150,
-    width: 150,
+    height: 100,
+    width: 100,
     borderRadius: 100,
     borderColor: "black",
     borderWidth: 2,
@@ -102,7 +116,7 @@ const styles = StyleSheet.create({
     margin: 12,
   },
   profileImageView: {
-    height: 150,
+    height: 180,
     width: "100%",
     display: "flex",
     justifyContent: "center",
@@ -111,17 +125,20 @@ const styles = StyleSheet.create({
     // backgroundColor: 'red'
   },
   usersName: {
-    fontSize: 30,
+    fontSize: 25,
     fontWeight: "bold",
-    paddingBottom: 20,
+    paddingBottom: 4,
   },
   drawerMenu: {
-    backgroundColor: "#2123",
+    width: "80%",
+    backgroundColor: "#ff9900",
+    alignSelf: "center",
+    borderTopEndRadius: 30,
+    borderBottomLeftRadius: 30,
   },
   drawerMenuItem: {
     padding: 5,
-    //alignItems: "center",
-    //fontFamily: "Montserrat",
     textAlign: "center",
+    fontSize: 20,
   },
 });

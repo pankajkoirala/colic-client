@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   TextInput,
+  ScrollView,
 } from "react-native";
 import { forgetPWCheckUsername } from "../../../service/authService";
 import Loader from "./../../../../common/loader";
@@ -20,67 +21,72 @@ export default function ForgetPW(props) {
 
   return (
     <>
-      <Loader loaderIsOpen={loaderIsOpen} />
-      <View style={styles.pageContainer}>
-        <View style={styles.colicIcon}>
-          <TouchableOpacity
-            onPress={() => props.navigation.navigate("loginFrontPage")}
-            style={styles.backIcon}
-          >
-            <FontAwesome5 name={"arrow-left"} size={20} />
-          </TouchableOpacity>
-          <Text
-            onPress={() => props.navigation.navigate("signupPage")}
-            style={styles.colicIconText}
-          >
-            COLIC
-          </Text>
-        </View>
-        <View style={styles.usernameView}>
-          <Text style={styles.usernameLabel}>Username</Text>
-          <TextInput
-            textAlign="center"
-            style={styles.input_item_place}
-            onChangeText={(value) => setUsername(value)}
-            value={username}
-          />
-        </View>
-        <View style={styles.submitBottomView}>
-          <TouchableOpacity
-            onPress={() => {
-              forgetPWCheckUsername(
-                { usernameEmail: username },
-                props,
-                setLoaderOff
-              );
-              setLoaderIsOpen(true);
-            }}
-            style={styles.forgetPWBottom}
-          >
-            <Text style={styles.submitBottomText}>Submit</Text>
-          </TouchableOpacity>
-          <View style={styles.doNotHaveAcc}>
-            <Text style={styles.doNotHaveAccText}>Don't have an account?</Text>
+      <ScrollView style={styles.pageContainer}>
+        <Loader loaderIsOpen={loaderIsOpen} />
+        <View>
+          <View style={styles.colicIcon}>
             <TouchableOpacity
-              onPress={() => props.navigation.navigate("signupPage")}
+              onPress={() => props.navigation.navigate("loginFrontPage")}
+              style={styles.backIcon}
             >
-              <Text style={styles.registerText}>Register</Text>
+              <FontAwesome5 name={"arrow-left"} size={20} />
             </TouchableOpacity>
+            <Text
+              onPress={() => props.navigation.navigate("signupPage")}
+              style={styles.colicIconText}
+            >
+              COLIC
+            </Text>
+          </View>
+          <View style={styles.usernameView}>
+            <Text style={styles.usernameLabel}>Username</Text>
+            <TextInput
+              textAlign="center"
+              style={styles.input_item_place}
+              onChangeText={(value) => setUsername(value)}
+              value={username}
+            />
+          </View>
+          <View style={styles.submitBottomView}>
+            <TouchableOpacity
+              onPress={() => {
+                forgetPWCheckUsername(
+                  { usernameEmail: username },
+                  props,
+                  setLoaderOff
+                );
+                setLoaderIsOpen(true);
+              }}
+              style={styles.forgetPWBottom}
+            >
+              <Text style={styles.submitBottomText}>Submit</Text>
+            </TouchableOpacity>
+            <View style={styles.doNotHaveAcc}>
+              <Text style={styles.doNotHaveAccText}>
+                Don't have an account?
+              </Text>
+              <TouchableOpacity
+                onPress={() => props.navigation.navigate("signupPage")}
+              >
+                <Text style={styles.registerText}>Register</Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
-      </View>
+      </ScrollView>
     </>
   );
 }
 
 const styles = StyleSheet.create({
   pageContainer: {
-    height: "100%",
+    flex: 1,
     backgroundColor: "#ffad33",
+    flexDirection: "column",
   },
   colicIcon: {
     paddingTop: 100,
-    height: "40%",
+    height: 250,
     // flex: 1,
   },
   colicIconText: {
@@ -90,10 +96,9 @@ const styles = StyleSheet.create({
     color: "white",
   },
   submitBottomView: {
-    flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    height: "40%",
+    height: 250,
   },
   forgetPWBottom: {
     height: 50,

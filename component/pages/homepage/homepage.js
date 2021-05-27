@@ -32,173 +32,179 @@ export default ExampleTwo = (props) => {
   } = props;
 
   return (
-    <ScrollView bounces={false}>
-      <View style={styles.container}>
-        <ImageBackground
-          source={BgImage}
-          imageStyle={{
-            resizeMode: "cover",
-          }}
-          style={{
-            width: "100%",
-          }}
-        >
-          <View style={styles.editBack}>
-            <View style={styles.menuNameView}>
-              <FontAwesome5
-                onPress={() => props.navigation.openDrawer()}
-                name={"bars"}
-                size={35}
-              />
-              <Text style={styles.userName}>{profileDetail.name}</Text>
+    <View>
+      <ScrollView bounces={false}>
+        <View style={styles.container}>
+          <ImageBackground
+            source={BgImage}
+            imageStyle={{
+              resizeMode: "cover",
+            }}
+            style={{
+              width: "100%",
+            }}
+          >
+            <View style={styles.editBack}>
+              <View style={styles.menuNameView}>
+                <FontAwesome5
+                  onPress={() => props.navigation.openDrawer()}
+                  name={"bars"}
+                  size={35}
+                />
+                <Text style={styles.userName}>{profileDetail.name}</Text>
+              </View>
+              <TouchableOpacity
+                onPress={() => props.navigation.navigate("Profile")}
+              >
+                <Image
+                  source={{
+                    uri: `${base_URL}/${profileDetail.profileimage}`,
+                  }}
+                  style={styles.profileImg}
+                />
+              </TouchableOpacity>
+            </View>
+
+            <View>
+              <Text style={styles.babyReading}>
+                here is your baby's reading
+              </Text>
+            </View>
+            <View style={styles.averageCryingView}>
+              <View>
+                <Text style={styles.averageCryingLabel}>Average Crying</Text>
+
+                <Text style={styles.averageCryingValue}>
+                  {averageCryingInFraction}
+                </Text>
+              </View>
+              <View>
+                <Text style={styles.averageCryingLabel}>Average Volume</Text>
+                <Text style={styles.averageCryingValue}>
+                  {averageVolumeInFraction}
+                </Text>
+              </View>
+            </View>
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+                marginBottom: 40,
+              }}
+            >
+              <TouchableOpacity onPress={() => setDataShow(true)}>
+                <Text
+                  style={
+                    !dataShow
+                      ? styles.todayWeeklyCall
+                      : styles.todayWeeklyCallSelected
+                  }
+                >
+                  today
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => setDataShow(false)}>
+                <Text
+                  style={
+                    dataShow
+                      ? styles.todayWeeklyCall
+                      : styles.todayWeeklyCallSelected
+                  }
+                >
+                  weekly
+                </Text>
+              </TouchableOpacity>
             </View>
             <TouchableOpacity
-              onPress={() => props.navigation.navigate("Profile")}
+              style={{
+                marginBottom: 10,
+                alignItems: "center",
+              }}
             >
-              <Image
-                source={{
-                  uri: `${base_URL}/${profileDetail.profileimage}`,
-                }}
-                style={styles.profileImg}
+              <FontAwesome5
+                name="calendar"
+                size={30}
+                onPress={() => setShowDateMode(!showDateMode)}
               />
             </TouchableOpacity>
-          </View>
+          </ImageBackground>
 
-          <View>
-            <Text style={styles.babyReading}>here is your baby's reading</Text>
-          </View>
-          <View style={styles.averageCryingView}>
-            <View>
-              <Text style={styles.averageCryingLabel}>Average Crying</Text>
-
-              <Text style={styles.averageCryingValue}>
-                {averageCryingInFraction}
-              </Text>
-            </View>
-            <View>
-              <Text style={styles.averageCryingLabel}>Average Volume</Text>
-              <Text style={styles.averageCryingValue}>
-                {averageVolumeInFraction}
-              </Text>
-            </View>
-          </View>
-          <View
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
-              marginBottom: 40,
-            }}
-          >
-            <TouchableOpacity onPress={() => setDataShow(true)}>
-              <Text
-                style={
-                  !dataShow
-                    ? styles.todayWeeklyCall
-                    : styles.todayWeeklyCallSelected
-                }
-              >
-                today
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => setDataShow(false)}>
-              <Text
-                style={
-                  dataShow
-                    ? styles.todayWeeklyCall
-                    : styles.todayWeeklyCallSelected
-                }
-              >
-                weekly
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <TouchableOpacity
-            style={{
-              marginBottom: 10,
-              alignItems: "center",
-            }}
-          >
-            <FontAwesome5
-              name="calendar"
-              size={30}
-              onPress={() => setShowDateMode(!showDateMode)}
-            />
-          </TouchableOpacity>
-        </ImageBackground>
-
-        <View
-          style={{
-            flexDirection: "row",
-            justifyContent: "space-evenly",
-          }}
-        >
-          {labelByDay(day)?.label.map((arg, i) => {
-            return (
-              <Text
-                style={
-                  i === 0 ? styles.indexEqualToZero : styles.indexNotEqualToZero
-                }
-                key={i}
-              >
-                {arg}
-              </Text>
-            );
-          })}
-        </View>
-        <ScrollView
-          scrollEnabled={true}
-          horizontal={false}
-          style={{
-            width: "100%",
-            height: "100%",
-          }}
-          //bounces={true}
-        >
           <View
             style={{
               flexDirection: "row",
-              justifyContent: "space-around",
-              marginLeft: -16,
+              justifyContent: "space-evenly",
             }}
           >
-            {labelByDay(day)?.data.map((arg, i) => {
+            {labelByDay(day)?.label.map((arg, i) => {
               return (
-                <View key={i}>
-                  {labelByDay(day)?.data[0].map((arg1, ind) => {
-                    return (
-                      <Text key={ind} style={styleValue(arg, i, ind, styles)}>
-                        {i === 0 ? arg[ind].startTime : arg[ind].intensity}
-                      </Text>
-                    );
-                  })}
-                </View>
+                <Text
+                  style={
+                    i === 0
+                      ? styles.indexEqualToZero
+                      : styles.indexNotEqualToZero
+                  }
+                  key={i}
+                >
+                  {arg}
+                </Text>
               );
             })}
           </View>
-        </ScrollView>
+          <ScrollView
+            scrollEnabled={true}
+            horizontal={false}
+            style={{
+              width: "100%",
+              height: "100%",
+            }}
+            //bounces={true}
+          >
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-around",
+                marginLeft: -16,
+              }}
+            >
+              {labelByDay(day)?.data.map((arg, i) => {
+                return (
+                  <View key={i}>
+                    {labelByDay(day)?.data[0].map((arg1, ind) => {
+                      return (
+                        <Text key={ind} style={styleValue(arg, i, ind, styles)}>
+                          {i === 0 ? arg[ind].startTime : arg[ind].intensity}
+                        </Text>
+                      );
+                    })}
+                  </View>
+                );
+              })}
+            </View>
+          </ScrollView>
 
-        <View style={styles.addCryingDataIconView}>
-          <DateModel
-            setOpenTimePicker={() => setShowDateMode()}
-            openTimePicker={showDateMode}
-            mode={"date"}
-            setHours={setGettingDataDate}
-          />
+          <View style={styles.addCryingDataIconView}>
+            <DateModel
+              setOpenTimePicker={() => setShowDateMode()}
+              openTimePicker={showDateMode}
+              mode={"date"}
+              setHours={setGettingDataDate}
+            />
+          </View>
         </View>
-        <TouchableOpacity
-          onPress={() => setModelOpen(true)}
-          style={styles.addCryingDataIcon}
-        >
-          <FontAwesome5
-            style={styles.plusInto}
-            name={modelOpen ? "times" : "plus"}
-            size={30}
-            color="#ffff"
-          />
-        </TouchableOpacity>
-      </View>
-    </ScrollView>
+      </ScrollView>
+      <TouchableOpacity
+        onPress={() => setModelOpen(true)}
+        style={styles.addCryingDataIcon}
+      >
+        <FontAwesome5
+          style={styles.plusInto}
+          name={modelOpen ? "times" : "plus"}
+          size={30}
+          color="#ffff"
+        />
+      </TouchableOpacity>
+    </View>
   );
 };
 
@@ -208,6 +214,7 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#fff",
     paddingBottom: 20,
+    flex: 1,
   },
 
   valueOne: {
@@ -341,7 +348,6 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   addCryingDataIcon: {
-    flex: 1,
     justifyContent: "center",
     height: 50,
     width: 50,
