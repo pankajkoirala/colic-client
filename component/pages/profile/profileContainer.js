@@ -38,9 +38,11 @@ function ProfileContainer(props) {
   const reloadFetchData = () => {
     reload.setReload(!reload.reload);
     setLoaderIsOpen(false);
+    setProfileImage(null);
   };
   const setLoaderOff = () => {
     setLoaderIsOpen(false);
+    setProfileImage(null);
   };
 
   const ImageUploadFunction = () => {
@@ -48,8 +50,16 @@ function ProfileContainer(props) {
       let rn = profileImage.name;
       let bn = rn?.split(".");
       bn = bn[bn?.length - 1];
-      if (bn === "jpg" || bn === "jpeg" || bn === "png") {
-        if (result.size > 1048576) {
+      console.log(bn);
+      if (
+        bn === "jpg" ||
+        bn === "jpeg" ||
+        bn === "png" ||
+        bn === "JPG" ||
+        bn === "JPEG" ||
+        bn === "PNG"
+      ) {
+        if (profileImage.size > 1048576) {
           errorAlert("File Size Shouldn't exceed 1.5 MB");
         } else {
           setLoaderIsOpen(true);
