@@ -8,6 +8,7 @@ import {
   patientProfileUpdate,
   ProfileImageUpdate,
 } from "../../service/profileService";
+import { errorAlert } from "../../../common/alert";
 
 function ProfileContainer(props) {
   const dispatch = useDispatch();
@@ -21,7 +22,7 @@ function ProfileContainer(props) {
   );
 
   const [loaderIsOpen, setLoaderIsOpen] = useState(false);
-  const [profileImage, setProfileImage] = useState({});
+  const [profileImage, setProfileImage] = useState(null);
   const [editState, setEditState] = useState(false);
 
   //existing profile value set
@@ -44,19 +45,34 @@ function ProfileContainer(props) {
 
   const ImageUploadFunction = () => {
     if (profileImage != null) {
-      console.log(profileImage.type);
-      /*  setLoaderIsOpen(true);
-      ProfileImageUpdate(
-        profileDetail?.id,
-        profileImage,
-        token,
-        reloadFetchData,
-        setLoaderOff
-      );*/
+      let rn = profileImage.name;
+      let bn = rn?.split(".");
+      bn = bn[bn?.length - 1];
+      if (bn === "jpg" || bn === "jpeg" || bn === "png") {
+        if (result.size > 1048576) {
+          errorAlert("File Size Shouldn't exceed 1.5 MB");
+        } else {
+          setLoaderIsOpen(true);
+          ProfileImageUpdate(
+            profileDetail?.id,
+            profileImage,
+            token,
+            reloadFetchData,
+            setLoaderOff
+          );
+        }
+      } else {
+        errorAlert("Please Select JPG, JPEG or PNG Format Only");
+      }
     } else {
-      alert("Please Select Photo first");
+      errorAlert("Please Select Photo first");
     }
   };
+  //---------------------------------------------------------------------------------
+
+  // alert(result.type);
+  // console.log(result);
+  //----------------------------------------------------------------------------------
 
   const {
     control,

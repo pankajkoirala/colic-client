@@ -11,10 +11,12 @@ function LoginFrontPage(props) {
         >
           COLIC
         </Text>
-        <Image
-          style={styles.babyImage}
-          source={require("./../../../assets/baby.png")}
-        />
+        <View style={{}}>
+          <Image
+            style={styles.babyImage}
+            source={require("./../../../assets/baby.png")}
+          />
+        </View>
       </View>
       <View style={styles.loginBottomView}>
         <TouchableOpacity
@@ -84,8 +86,8 @@ const styles = StyleSheet.create({
     color: "grey",
   },
   babyImage: {
-    height: 290,
-    width: 300,
+    height: "110%",
+    width: "110%",
     marginLeft: -100,
   },
 });

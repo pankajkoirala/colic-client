@@ -6,8 +6,6 @@ import {
   Image,
   ImageBackground,
 } from "react-native";
-import { Button } from "react-native-elements";
-import homeImage from "./../../../assets/About3.png";
 
 function ContactUs() {
   return (

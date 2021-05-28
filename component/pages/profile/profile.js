@@ -69,7 +69,7 @@ function Profile(props) {
             <View style={styles.profileImgView}>
               <Image
                 source={{
-                  uri: `${base_URL}/${profileDetail.profileimage}`,
+                  uri: `${base_URL}/${profileDetail?.profileimage}`,
                 }}
                 style={styles.profileImg}
               />

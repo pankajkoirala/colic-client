@@ -58,9 +58,12 @@ export default ExampleTwo = (props) => {
               >
                 <Image
                   source={{
-                    uri: `${base_URL}/${profileDetail.profileimage}`,
+                    uri: base_URL + "/" + profileDetail.profileimage,
                   }}
-                  style={styles.profileImg}
+                  style={styles.profileImage}
+                  imageStyle={{
+                    resizeMode: "cover",
+                  }}
                 />
               </TouchableOpacity>
             </View>
@@ -288,6 +291,16 @@ const styles = StyleSheet.create({
     height: 50,
     width: 50,
     borderRadius: 25,
+  },
+  profileImage: {
+    height: 50,
+    width: 50,
+    borderRadius: 100,
+    borderColor: "black",
+    borderWidth: 1,
+    shadowColor: "black",
+    shadowOpacity: 0.5,
+    margin: 4,
   },
   menuNameView: {
     flexDirection: "row",
