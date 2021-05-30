@@ -50,12 +50,44 @@ export default SingleBlogView = (props) => {
               "DD MMM YYYY"
             )}`}
           </Text>
-          <Text style={styles.blogContent}>
-            <HTML
-              source={{ html: selectedBlog.content }}
-              contentWidth={contentWidth}
-            />
-          </Text>
+          <HTML
+            tagsStyles={{
+              h1: {
+                textAlign: "justify",
+                width: "100%",
+              },
+              h2: {
+                textAlign: "justify",
+                width: "100%",
+              },
+              h3: {
+                textAlign: "justify",
+                width: "100%",
+              },
+              h4: {
+                textAlign: "justify",
+                width: "100%",
+              },
+              h5: {
+                textAlign: "justify",
+                width: "100%",
+              },
+              h6: {
+                textAlign: "justify",
+                width: "100%",
+              },
+              b: {
+                textAlign: "justify",
+                width: "100%",
+              },
+              p: {
+                textAlign: "justify",
+                width: "100%",
+              },
+            }}
+            source={{ html: selectedBlog.content }}
+            contentWidth={contentWidth}
+          />
           {selectedBlog.category === "video" && (
             <WebView
               scrollEnabled={false}
@@ -123,7 +155,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textTransform: "capitalize",
   },
-  blogContent: { textAlign: "justify" },
   sourceView: { paddingTop: 10 },
   sourceText: {
     fontSize: 16,

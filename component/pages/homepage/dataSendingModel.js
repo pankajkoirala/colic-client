@@ -63,7 +63,13 @@ const ProfileUploader = (props) => {
               }}
             >
               <View>
-                <Text style={{ textAlign: "center", fontWeight: "bold" }}>
+                <Text
+                  style={{
+                    textAlign: "center",
+                    fontSize: 18,
+                    fontWeight: "bold",
+                  }}
+                >
                   Starting Time
                 </Text>
                 <TouchableOpacity
@@ -72,7 +78,7 @@ const ProfileUploader = (props) => {
                     height: 40,
                     width: 100,
                     borderColor: "black",
-                    borderWidth: 2,
+                    borderWidth: 1,
                     justifyContent: "center",
                     alignItems: "center",
                     marginVertical: 6,
@@ -80,7 +86,7 @@ const ProfileUploader = (props) => {
                 >
                   <Text
                     style={{
-                      fontWeight: "bold",
+                      //fontWeight: "bold",
                       fontSize: 20,
                     }}
                   >
@@ -95,7 +101,13 @@ const ProfileUploader = (props) => {
                 </TouchableOpacity>
               </View>
               <View>
-                <Text style={{ textAlign: "center", fontWeight: "bold" }}>
+                <Text
+                  style={{
+                    textAlign: "center",
+                    fontSize: 18,
+                    fontWeight: "bold",
+                  }}
+                >
                   End Time
                 </Text>
                 <TouchableOpacity
@@ -104,7 +116,7 @@ const ProfileUploader = (props) => {
                     height: 40,
                     width: 100,
                     borderColor: "black",
-                    borderWidth: 2,
+                    borderWidth: 1,
                     justifyContent: "center",
                     alignItems: "center",
                     marginVertical: 6,
@@ -112,7 +124,7 @@ const ProfileUploader = (props) => {
                 >
                   <Text
                     style={{
-                      fontWeight: "bold",
+                      // fontWeight: "bold",
                       fontSize: 20,
                     }}
                   >

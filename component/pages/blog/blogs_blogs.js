@@ -65,8 +65,43 @@ export default Blogs_blogs = (props) => {
                         >
                           <Text style={styles.blogTitle}> {arg.title}</Text>
                         </TouchableOpacity>
+
                         <HTML
-                          source={{ html: arg.content.slice(0, 200) }}
+                          tagsStyles={{
+                            h1: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            h2: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            h3: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            h4: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            h5: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            h6: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            b: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            p: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                          }}
+                          source={{ html: arg.content.slice(0, 150) }}
                           contentWidth={contentWidth}
                         />
                       </View>
@@ -100,12 +135,43 @@ export default Blogs_blogs = (props) => {
                         >
                           {arg.title}
                         </Text>
-                        <Text style={styles.blogContant}>
-                          <HTML
-                            source={{ html: arg.content.slice(0, 200) }}
-                            contentWidth={contentWidth}
-                          />
-                        </Text>
+                        <HTML
+                          tagsStyles={{
+                            h1: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            h2: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            h3: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            h4: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            h5: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            h6: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            b: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            p: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                          }}
+                          source={{ html: arg.content.slice(0, 150) }}
+                        />
                       </View>
                     </View>
                   )}
@@ -199,6 +265,7 @@ const styles = StyleSheet.create({
     padding: 10,
     shadowColor: "#000",
     width: "80%",
+
     shadowOffset: {
       width: 0,
       height: 2,

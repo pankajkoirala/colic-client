@@ -80,7 +80,7 @@ export default Blog = (props) => {
       <View>
         {category === "blogs" ? (
           <Blogs_blogs
-            blogs_blogs={blogs_data?.filter((arg) => arg.category === "blogs")}
+            blogs_blogs={blogs_data?.filter((arg) => arg.category === "blog")}
             {...props}
           />
         ) : null}

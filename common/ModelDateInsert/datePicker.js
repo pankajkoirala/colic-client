@@ -23,6 +23,8 @@ const Example = (props) => {
         onConfirm={handleConfirm}
         onCancel={hideDatePicker}
         textColor="black"
+        display="spinner"
+        is24Hour={false}
       />
     </View>
   );

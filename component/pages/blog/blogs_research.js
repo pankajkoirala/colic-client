@@ -16,6 +16,7 @@ import Pegination from "../../../common/pegination";
 
 export default Blogs_research = (props) => {
   const { blogs_research } = props;
+
   const contentWidth = useWindowDimensions().width;
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage] = useState(4);
@@ -23,17 +24,18 @@ export default Blogs_research = (props) => {
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
   const currentPost = blogs_research?.slice(indexOfFirstPost, indexOfLastPost);
+
   var { width, height } = Dimensions.get("window");
 
   return (
     <View
       style={{
         paddingTop: 2,
-        height: height - 90,
+        height: height - 86,
       }}
       bounces={false}
     >
-      {currentPost.length ? (
+      {currentPost?.length ? (
         <View style={styles.Category1Container}>
           <ScrollView
             bounces={false}
@@ -63,8 +65,43 @@ export default Blogs_research = (props) => {
                         >
                           <Text style={styles.blogTitle}> {arg.title}</Text>
                         </TouchableOpacity>
+
                         <HTML
-                          source={{ html: arg.content.slice(0, 200) }}
+                          tagsStyles={{
+                            h1: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            h2: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            h3: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            h4: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            h5: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            h6: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            b: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            p: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                          }}
+                          source={{ html: arg.content.slice(0, 150) }}
                           contentWidth={contentWidth}
                         />
                       </View>
@@ -98,12 +135,43 @@ export default Blogs_research = (props) => {
                         >
                           {arg.title}
                         </Text>
-                        <Text style={styles.blogContant}>
-                          <HTML
-                            source={{ html: arg.content.slice(0, 200) }}
-                            contentWidth={contentWidth}
-                          />
-                        </Text>
+                        <HTML
+                          tagsStyles={{
+                            h1: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            h2: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            h3: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            h4: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            h5: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            h6: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            b: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                            p: {
+                              textAlign: "justify",
+                              width: "100%",
+                            },
+                          }}
+                          source={{ html: arg.content.slice(0, 150) }}
+                        />
                       </View>
                     </View>
                   )}
@@ -111,6 +179,7 @@ export default Blogs_research = (props) => {
               );
             })}
           </ScrollView>
+
           <View style={{ width: width, height: 50 }}>
             <Pegination
               setCurrentPage={setCurrentPage}
@@ -132,7 +201,7 @@ export default Blogs_research = (props) => {
             textAlign: "center",
           }}
         >
-          No research Found
+          No Blogs Found
         </Text>
       )}
     </View>
@@ -196,6 +265,7 @@ const styles = StyleSheet.create({
     padding: 10,
     shadowColor: "#000",
     width: "80%",
+
     shadowOffset: {
       width: 0,
       height: 2,
