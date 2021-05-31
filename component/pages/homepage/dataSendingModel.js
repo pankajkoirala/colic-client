@@ -36,10 +36,8 @@ const ProfileUploader = (props) => {
         animationType="slide"
         transparent={true}
         visible={modelOpen}
-        onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
-          setModalVisible(!modalVisible);
-        }}
+        onDismiss={() => setModelOpen(false)}
+        onTouchCancel={() => setModelOpen(false)}
       >
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
