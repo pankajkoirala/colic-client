@@ -11,7 +11,6 @@ import { View, Image, StyleSheet, Text } from "react-native";
 import { base_URL } from "../utils/const";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 
-//import * as Screens from "../components/Screens";
 const Drawer = createDrawerNavigator();
 
 function CustomDrawerContent(props) {

@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import DrawerNavigator from "./drawerNavigator";
 import Stake from "./stack";
 import FetchDataComponent from "./../service/fetchData";
-
 import { useSelector } from "react-redux";
-import { SafeAreaView } from "react-native";
-
 //redux
+import * as Analytics from "expo-firebase-analytics";
 
 export default function AppStack(props) {
-  const [acceptUser, setAcceptUser] = useState(null);
+  const routeNameRef = useRef();
+  const navigationRef = useRef();
 
   const { token } = useSelector((state) => ({
     token: state.token.token,
@@ -21,7 +20,22 @@ export default function AppStack(props) {
 
   //let token = "pankaj";
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      ref={navigationRef}
+      onReady={() =>
+        (routeNameRef.current = navigationRef.current.getCurrentRoute().name)
+      }
+      onStateChange={() => {
+        const previousRouteName = routeNameRef.current;
+        const currentRouteName = navigationRef.current.getCurrentRoute().name;
+
+        if (previousRouteName !== currentRouteName) {
+          //Analytics.setCurrentScreen(currentRouteName);
+        }
+
+        routeNameRef.current = currentRouteName;
+      }}
+    >
       {token ? (
         <>
           <DrawerNavigator />

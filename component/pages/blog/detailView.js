@@ -1,5 +1,5 @@
 import moment from "moment";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TouchableOpacity } from "react-native";
 import { ScrollView, useWindowDimensions } from "react-native";
 import { Image } from "react-native";
@@ -9,6 +9,7 @@ import HTML from "react-native-render-html";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import { useSelector } from "react-redux";
 import { base_URL } from "../../utils/const";
+import { blogViewAPI } from "../../service/blog";
 
 export default SingleBlogView = (props) => {
   const { id } = props.route.params;
@@ -16,20 +17,21 @@ export default SingleBlogView = (props) => {
     blogs_data: state.blogs_data.blogs_data,
     profileDetail: state.profileDetail.profileDetail,
   }));
-
+  useEffect(() => {
+    blogViewAPI(id);
+  }, []);
   const selectedBlog = blogs_data.filter((arg) => arg.id === id)[0];
   const contentWidth = useWindowDimensions().width;
   return (
     <View style={styles.blogDetailContainer}>
       <View style={styles.editBack}>
-        <View style={styles.menuNameView}>
+        <View>
           <FontAwesome5Icon
             onPress={() => props.navigation.navigate("Blog")}
             name={"arrow-left"}
             size={25}
           />
         </View>
-        <Text style={styles.blogTitle}>{selectedBlog.title}</Text>
         <TouchableOpacity onPress={() => props.navigation.navigate("Profile")}>
           <Image
             source={{
@@ -45,11 +47,17 @@ export default SingleBlogView = (props) => {
             paddingHorizontal: 6,
           }}
         >
-          <Text style={styles.blogPostedDate}>
-            {`${selectedBlog.author}, ${moment(selectedBlog.posteddate).format(
-              "DD MMM YYYY"
-            )}`}
-          </Text>
+          <Text style={styles.blogTitle}>{selectedBlog.title}</Text>
+          <View
+            style={{
+              marginTop: 4,
+              flexDirection: "row",
+              justifyContent: "space-between",
+            }}
+          >
+            <Text style={styles.blogPostedDate}>{selectedBlog.author}</Text>
+            <Text>{moment(selectedBlog.posteddate).format("DD MMM YYYY")}</Text>
+          </View>
           <HTML
             tagsStyles={{
               h1: {
@@ -121,7 +129,7 @@ export default SingleBlogView = (props) => {
 
 const styles = StyleSheet.create({
   blogDetailContainer: {
-    paddingTop: 50,
+    paddingTop: 20,
     paddingBottom: 70,
     paddingHorizontal: 10,
   },
@@ -138,11 +146,10 @@ const styles = StyleSheet.create({
     width: 50,
     borderRadius: 25,
   },
-  menuNameView: {
-    flexDirection: "row",
-  },
+
   blogTitle: {
     paddingHorizontal: 10,
+    paddingVertical: 10,
     fontSize: 20,
     fontWeight: "bold",
     color: "black",
