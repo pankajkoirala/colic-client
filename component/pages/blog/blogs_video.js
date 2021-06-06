@@ -33,7 +33,7 @@ export default Blogs_video = (props) => {
       }}
       bounces={false}
     >
-      {currentPost.length ? (
+      {currentPost?.length ? (
         <View style={styles.Category1Container}>
           <ScrollView
             bounces={false}
@@ -42,7 +42,7 @@ export default Blogs_video = (props) => {
               width: width,
             }}
           >
-            {currentPost.map((arg, i) => {
+            {currentPost?.map((arg, i) => {
               return (
                 <View key={i}>
                   <View key={i} style={styles.allBlogViewEven}>

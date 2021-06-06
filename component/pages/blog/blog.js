@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, Image, TextInput } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
 import Blogs_blogs from "./blogs_blogs";
@@ -8,8 +8,15 @@ import Blogs_video from "./blogs_video";
 
 export default Blog = (props) => {
   const [category, setCategory] = useState("blogs");
+  const [searchWord, setSearchWord] = useState(null);
+
   const { blogs_data } = props;
 
+  let blogs_datas = blogs_data.filter((arg) =>
+    searchWord
+      ? arg?.title?.toLowerCase()?.includes(searchWord?.toLowerCase())
+      : arg
+  );
   return (
     <View style={styles.blogContainer}>
       <View style={styles.editBack}>
@@ -18,6 +25,32 @@ export default Blog = (props) => {
             onPress={() => props.navigation.goBack()}
             name={"arrow-left"}
             size={20}
+          />
+        </View>
+        <View
+          style={{
+            height: 30,
+            width: 200,
+            borderWidth: 1,
+            borderColor: "balck",
+            borderRadius: 20,
+            paddingHorizontal: 4,
+            flexDirection: "row",
+          }}
+        >
+          <FontAwesome5Icon
+            name={"search"}
+            size={20}
+            color={"grey"}
+            style={{ marginTop: 4, marginRight: 4 }}
+          />
+          <TextInput
+            style={{
+              height: 30,
+              width: 200,
+            }}
+            onChangeText={(value) => setSearchWord(value)}
+            placeholder="Search"
           />
         </View>
       </View>
@@ -80,13 +113,13 @@ export default Blog = (props) => {
       <View>
         {category === "blogs" ? (
           <Blogs_blogs
-            blogs_blogs={blogs_data?.filter((arg) => arg.category === "blog")}
+            blogs_blogs={blogs_datas?.filter((arg) => arg.category === "blog")}
             {...props}
           />
         ) : null}
         {category === "research" ? (
           <Blogs_reaearch
-            blogs_research={blogs_data?.filter(
+            blogs_research={blogs_datas?.filter(
               (arg) => arg.category === "research"
             )}
             {...props}
@@ -94,7 +127,7 @@ export default Blog = (props) => {
         ) : null}
         {category === "video" ? (
           <Blogs_video
-            blogs_video={blogs_data?.filter((arg) => arg.category === "video")}
+            blogs_video={blogs_datas?.filter((arg) => arg.category === "video")}
             {...props}
           />
         ) : null}

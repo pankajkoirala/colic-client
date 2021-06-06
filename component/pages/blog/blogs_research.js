@@ -44,7 +44,7 @@ export default Blogs_research = (props) => {
               width: width,
             }}
           >
-            {currentPost.map((arg, i) => {
+            {currentPost?.map((arg, i) => {
               return (
                 <View key={i}>
                   {i === 0 ? (

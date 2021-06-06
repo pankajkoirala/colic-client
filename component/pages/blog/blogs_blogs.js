@@ -35,7 +35,7 @@ export default Blogs_blogs = (props) => {
       }}
       bounces={false}
     >
-      {currentPost.length ? (
+      {currentPost?.length ? (
         <View style={styles.Category1Container}>
           <ScrollView
             bounces={false}
@@ -44,7 +44,7 @@ export default Blogs_blogs = (props) => {
               width: width,
             }}
           >
-            {currentPost.map((arg, i) => {
+            {currentPost?.map((arg, i) => {
               return (
                 <View key={i}>
                   {i === 0 ? (

@@ -49,7 +49,7 @@ export default ExampleTwo = (props) => {
                 <FontAwesome5
                   onPress={() => props.navigation.openDrawer()}
                   name={"bars"}
-                  size={35}
+                  size={30}
                 />
                 <Text style={styles.userName}>{profileDetail.name}</Text>
               </View>
@@ -68,11 +68,11 @@ export default ExampleTwo = (props) => {
               </TouchableOpacity>
             </View>
 
-            <View>
+            {/*   <View>
               <Text style={styles.babyReading}>
                 here is your baby's reading
               </Text>
-            </View>
+         </View>*/}
             <View style={styles.averageCryingView}>
               <View>
                 <Text style={styles.averageCryingLabel}>Average Crying</Text>
@@ -81,6 +81,18 @@ export default ExampleTwo = (props) => {
                   {averageCryingInFraction}
                 </Text>
               </View>
+              <TouchableOpacity
+                style={{
+                  marginBottom: 10,
+                  alignItems: "center",
+                }}
+              >
+                <FontAwesome5
+                  name="calendar"
+                  size={30}
+                  onPress={() => setShowDateMode(!showDateMode)}
+                />
+              </TouchableOpacity>
               <View>
                 <Text style={styles.averageCryingLabel}>Average Volume</Text>
                 <Text style={styles.averageCryingValue}>
@@ -119,18 +131,6 @@ export default ExampleTwo = (props) => {
                 </Text>
               </TouchableOpacity>
             </View>
-            <TouchableOpacity
-              style={{
-                marginBottom: 10,
-                alignItems: "center",
-              }}
-            >
-              <FontAwesome5
-                name="calendar"
-                size={30}
-                onPress={() => setShowDateMode(!showDateMode)}
-              />
-            </TouchableOpacity>
           </ImageBackground>
 
           <View
@@ -159,7 +159,7 @@ export default ExampleTwo = (props) => {
             horizontal={false}
             style={{
               width: "100%",
-              height: "100%",
+              height: 600,
             }}
             //bounces={true}
           >
