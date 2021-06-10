@@ -75,7 +75,7 @@ const FetchDataComponent = () => {
     });
     //blogs data---------------------------------------------------------------------------------------------------------
     axios
-      .get(`${base_URL}/api/all_blog`, {
+      .post(`${base_URL}/api/pagination_page=1`, {
         headers: {
           "Content-Type": "application/json",
           authorization: token,

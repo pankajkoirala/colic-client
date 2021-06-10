@@ -12,14 +12,14 @@ import {
 import { TouchableOpacity } from "react-native-gesture-handler";
 import HTML from "react-native-render-html";
 import { base_URL } from "../../utils/const";
-import Pegination from "../../../common/pegination";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
-export default Blogs_research = (props) => {
-  const { blogs_research } = props;
+export default Blogs_blogs = (props) => {
+  const { blogs_research, pageNumber, callNextPage, callPrePage } = props;
 
   const contentWidth = useWindowDimensions().width;
   const [currentPage, setCurrentPage] = useState(1);
-  const [postPerPage] = useState(4);
+  const [postPerPage] = useState(9);
 
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
@@ -31,179 +31,209 @@ export default Blogs_research = (props) => {
     <View
       style={{
         paddingTop: 2,
-        height: height - 86,
+        height: "100%",
       }}
       bounces={false}
     >
-      {currentPost?.length ? (
-        <View style={styles.Category1Container}>
-          <ScrollView
-            bounces={false}
-            style={{
-              flex: 1,
-              width: width,
-            }}
-          >
-            {currentPost?.map((arg, i) => {
-              return (
-                <View key={i}>
-                  {i === 0 ? (
-                    <View>
-                      <Image
-                        style={styles.blogImg}
-                        source={{
-                          uri: `${base_URL}/${arg.photos[0]}`,
-                        }}
-                      />
-                      <View style={styles.firstBlogBox}>
-                        <TouchableOpacity
-                          onPress={() =>
-                            props.navigation.navigate("SingleBlogView", {
-                              id: arg.id,
-                            })
-                          }
-                        >
-                          <Text style={styles.blogTitle}> {arg.title}</Text>
-                        </TouchableOpacity>
-
-                        <HTML
-                          tagsStyles={{
-                            h1: {
-                              textAlign: "justify",
-                              width: "100%",
-                            },
-                            h2: {
-                              textAlign: "justify",
-                              width: "100%",
-                            },
-                            h3: {
-                              textAlign: "justify",
-                              width: "100%",
-                            },
-                            h4: {
-                              textAlign: "justify",
-                              width: "100%",
-                            },
-                            h5: {
-                              textAlign: "justify",
-                              width: "100%",
-                            },
-                            h6: {
-                              textAlign: "justify",
-                              width: "100%",
-                            },
-                            b: {
-                              textAlign: "justify",
-                              width: "100%",
-                            },
-                            p: {
-                              textAlign: "justify",
-                              width: "100%",
-                            },
-                          }}
-                          source={{ html: arg.content.slice(0, 150) }}
-                          contentWidth={contentWidth}
-                        />
-                      </View>
-                    </View>
-                  ) : (
-                    <View
-                      key={i}
-                      style={
-                        i % 2 !== 0
-                          ? styles.allBlogViewEven
-                          : styles.allBlogViewOdd
-                      }
-                    >
-                      <Image
-                        style={styles.otherBlogImg}
-                        source={{
-                          uri: `${base_URL}/${arg.photos[0]}`,
-                        }}
-                      />
-                      <View style={styles.otherBlogText}>
-                        <Text style={styles.blogPostedDate}>
-                          {moment(arg.posteddate).format("DD MMM YYYY")}
-                        </Text>
-                        <Text
-                          onPress={() =>
-                            props.navigation.navigate("SingleBlogView", {
-                              id: arg.id,
-                            })
-                          }
-                          style={styles.blogTitle}
-                        >
-                          {arg.title}
-                        </Text>
-                        <HTML
-                          tagsStyles={{
-                            h1: {
-                              textAlign: "justify",
-                              width: "100%",
-                            },
-                            h2: {
-                              textAlign: "justify",
-                              width: "100%",
-                            },
-                            h3: {
-                              textAlign: "justify",
-                              width: "100%",
-                            },
-                            h4: {
-                              textAlign: "justify",
-                              width: "100%",
-                            },
-                            h5: {
-                              textAlign: "justify",
-                              width: "100%",
-                            },
-                            h6: {
-                              textAlign: "justify",
-                              width: "100%",
-                            },
-                            b: {
-                              textAlign: "justify",
-                              width: "100%",
-                            },
-                            p: {
-                              textAlign: "justify",
-                              width: "100%",
-                            },
-                          }}
-                          source={{ html: arg.content.slice(0, 150) }}
-                        />
-                      </View>
-                    </View>
-                  )}
-                </View>
-              );
-            })}
-          </ScrollView>
-
-          <View style={{ width: width, height: 50 }}>
-            <Pegination
-              setCurrentPage={setCurrentPage}
-              currentPage={currentPage}
-              maxPage={
-                Math.ceil(blogs_research.length / postPerPage) === 0
-                  ? 1
-                  : Math.ceil(blogs_research.length / postPerPage)
-              }
-            />
-          </View>
-        </View>
-      ) : (
-        <Text
+      <View style={styles.Category1Container}>
+        <ScrollView
+          bounces={false}
           style={{
-            fontSize: 20,
-            fontWeight: "bold",
-            paddingTop: 30,
-            textAlign: "center",
+            flex: 1,
+            width: width,
           }}
         >
-          No Blogs Found
-        </Text>
-      )}
+          {currentPost?.length ? (
+            <View style={{ height: "95%", paddingBottom: 25 }}>
+              {currentPost?.map((arg, i) => {
+                return (
+                  <View key={i}>
+                    {i === 0 ? (
+                      <View>
+                        <Image
+                          style={styles.blogImg}
+                          source={{
+                            uri: `${base_URL}/${arg.photos[0]}`,
+                          }}
+                        />
+                        <View style={styles.firstBlogBox}>
+                          <TouchableOpacity
+                            onPress={() =>
+                              props.navigation.navigate("SingleBlogView", {
+                                id: arg.id,
+                              })
+                            }
+                          >
+                            <Text style={styles.blogTitle}> {arg.title}</Text>
+                          </TouchableOpacity>
+
+                          <HTML
+                            tagsStyles={{
+                              h1: {
+                                textAlign: "justify",
+                                width: "100%",
+                              },
+                              h2: {
+                                textAlign: "justify",
+                                width: "100%",
+                              },
+                              h3: {
+                                textAlign: "justify",
+                                width: "100%",
+                              },
+                              h4: {
+                                textAlign: "justify",
+                                width: "100%",
+                              },
+                              h5: {
+                                textAlign: "justify",
+                                width: "100%",
+                              },
+                              h6: {
+                                textAlign: "justify",
+                                width: "100%",
+                              },
+                              b: {
+                                textAlign: "justify",
+                                width: "100%",
+                              },
+                              p: {
+                                textAlign: "justify",
+                                width: "100%",
+                              },
+                            }}
+                            source={{ html: arg.content.slice(0, 150) }}
+                            contentWidth={contentWidth}
+                          />
+                        </View>
+                      </View>
+                    ) : (
+                      <View
+                        key={i}
+                        style={
+                          i % 2 !== 0
+                            ? styles.allBlogViewEven
+                            : styles.allBlogViewOdd
+                        }
+                      >
+                        <Image
+                          style={styles.otherBlogImg}
+                          source={{
+                            uri: `${base_URL}/${arg.photos[0]}`,
+                          }}
+                        />
+                        <View style={styles.otherBlogText}>
+                          <Text style={styles.blogPostedDate}>
+                            {moment(arg.posteddate).format("DD MMM YYYY")}
+                          </Text>
+                          <Text
+                            onPress={() =>
+                              props.navigation.navigate("SingleBlogView", {
+                                id: arg.id,
+                              })
+                            }
+                            style={styles.blogTitle}
+                          >
+                            {arg.title}
+                          </Text>
+                          <HTML
+                            tagsStyles={{
+                              h1: {
+                                textAlign: "justify",
+                                width: "100%",
+                              },
+                              h2: {
+                                textAlign: "justify",
+                                width: "100%",
+                              },
+                              h3: {
+                                textAlign: "justify",
+                                width: "100%",
+                              },
+                              h4: {
+                                textAlign: "justify",
+                                width: "100%",
+                              },
+                              h5: {
+                                textAlign: "justify",
+                                width: "100%",
+                              },
+                              h6: {
+                                textAlign: "justify",
+                                width: "100%",
+                              },
+                              b: {
+                                textAlign: "justify",
+                                width: "100%",
+                              },
+                              p: {
+                                textAlign: "justify",
+                                width: "100%",
+                              },
+                            }}
+                            source={{ html: arg.content.slice(0, 150) }}
+                          />
+                        </View>
+                      </View>
+                    )}
+                  </View>
+                );
+              })}
+            </View>
+          ) : (
+            <View style={{ height: 500 }}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontWeight: "bold",
+                  paddingTop: 30,
+                  textAlign: "center",
+                }}
+              >
+                No Blogs Found
+              </Text>
+            </View>
+          )}
+          <View style={{ height: "5%" }}>
+            <View style={{ flexDirection: "row", justifyContent: "center" }}>
+              <TouchableOpacity
+                onPress={() => callPrePage()}
+                style={styles.nextPre}
+              >
+                <FontAwesome5 name="chevron-left" size={25} />
+              </TouchableOpacity>
+              <View
+                style={{
+                  display: "flex",
+                  height: 32,
+                  width: 32,
+                  backgroundColor: "#ffb84d",
+
+                  marginHorizontal: 4,
+                  borderRadius: 4,
+                  justifyContent: "center",
+                }}
+              >
+                <Text
+                  style={{
+                    alignSelf: "center",
+                    fontSize: 30,
+                    fontWeight: "bold",
+                  }}
+                >
+                  {pageNumber}
+                </Text>
+              </View>
+              <TouchableOpacity
+                onPress={() => callNextPage()}
+                style={styles.nextPre}
+              >
+                <FontAwesome5 name="chevron-right" size={25} />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </ScrollView>
+      </View>
     </View>
   );
 };
@@ -212,7 +242,7 @@ const styles = StyleSheet.create({
   Category1Container: {
     flex: 1,
     paddingTop: 10,
-    paddingBottom: 40,
+    paddingBottom: 60,
   },
   allBlogViewEven: {
     flexDirection: "row",
@@ -284,5 +314,14 @@ const styles = StyleSheet.create({
     width: "50%",
     height: 200,
     marginLeft: 2,
+  },
+  nextPre: {
+    height: 32,
+    width: 32,
+    backgroundColor: "#ffe0b3",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 4,
+    marginHorizontal: 4,
   },
 });

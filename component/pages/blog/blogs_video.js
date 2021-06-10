@@ -12,14 +12,14 @@ import {
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import HTML from "react-native-render-html";
-import Pegination from "../../../common/pegination";
 import { base_URL } from "../../utils/const";
+import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
 export default Blogs_video = (props) => {
-  const { blogs_video } = props;
+  const { blogs_video, pageNumber, callNextPage, callPrePage } = props;
   const contentWidth = useWindowDimensions().width;
   const [currentPage, setCurrentPage] = useState(1);
-  const [postPerPage] = useState(4);
+  const [postPerPage] = useState(9);
 
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;
@@ -29,59 +29,113 @@ export default Blogs_video = (props) => {
     <View
       style={{
         paddingTop: 2,
-        height: height - 90,
+        height: "100%",
       }}
       bounces={false}
     >
-      {currentPost?.length ? (
-        <View style={styles.Category1Container}>
-          <ScrollView
-            bounces={false}
-            style={{
-              flex: 1,
-              width: width,
-            }}
-          >
-            {currentPost?.map((arg, i) => {
-              return (
-                <View key={i}>
-                  <View key={i} style={styles.allBlogViewEven}>
-                    <View>
-                      <Text style={styles.blogPostedDate}>
-                        {moment(arg.posteddate).format("DD MMM YYYY")}
-                      </Text>
-                      <TouchableOpacity
-                        onPress={() =>
-                          props.navigation.navigate("SingleBlogView", {
-                            id: arg.id,
-                          })
-                        }
-                      >
-                        <Text style={styles.blogTitle}> {arg.title}</Text>
-                      </TouchableOpacity>
-                      <HTML
-                        source={{ html: arg.content.slice(0, 150) }}
-                        contentWidth={contentWidth}
-                      />
-                      <WebView
-                        scrollEnabled={false}
-                        source={{
-                          //uri: "https://youtu.be/dx4Teh-nv3A?t=9",
-                          html: arg.videolink ? arg.videolink : "",
-                        }}
-                        style={{
-                          width: "100%",
-                          height: 240,
-                          alignSelf: "center",
-                        }}
-                      />
+      <View style={styles.Category1Container}>
+        <ScrollView
+          bounces={false}
+          style={{
+            width: width,
+            height: "100%",
+          }}
+        >
+          {currentPost?.length ? (
+            <View style={{ height: "95%", paddingBottom: 80 }}>
+              {currentPost?.map((arg, i) => {
+                return (
+                  <View key={i}>
+                    <View key={i} style={styles.allBlogViewEven}>
+                      <View>
+                        <Text style={styles.blogPostedDate}>
+                          {moment(arg.posteddate).format("DD MMM YYYY")}
+                        </Text>
+                        <TouchableOpacity
+                          onPress={() =>
+                            props.navigation.navigate("SingleBlogView", {
+                              id: arg.id,
+                            })
+                          }
+                        >
+                          <Text style={styles.blogTitle}> {arg.title}</Text>
+                        </TouchableOpacity>
+                        <HTML
+                          source={{ html: arg.content.slice(0, 150) }}
+                          contentWidth={contentWidth}
+                        />
+                        <WebView
+                          scrollEnabled={false}
+                          source={{
+                            //uri: "https://youtu.be/dx4Teh-nv3A?t=9",
+                            html: arg.videolink ? arg.videolink : "",
+                          }}
+                          style={{
+                            width: "100%",
+                            height: 240,
+                            alignSelf: "center",
+                          }}
+                        />
+                      </View>
                     </View>
                   </View>
-                </View>
-              );
-            })}
-          </ScrollView>
-          <View style={{ width: width, height: 50 }}>
+                );
+              })}
+            </View>
+          ) : (
+            <View style={{ height: 500 }}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontWeight: "bold",
+                  paddingTop: 30,
+                  textAlign: "center",
+                }}
+              >
+                No Blogs Found
+              </Text>
+            </View>
+          )}
+          <View style={{ height: "5%" }}>
+            <View style={{ flexDirection: "row", justifyContent: "center" }}>
+              <TouchableOpacity
+                onPress={() => callPrePage()}
+                style={styles.nextPre}
+              >
+                <FontAwesome5 name="chevron-left" size={25} />
+              </TouchableOpacity>
+              <View
+                style={{
+                  display: "flex",
+                  height: 32,
+                  width: 32,
+                  backgroundColor: "#ffb84d",
+
+                  marginHorizontal: 4,
+                  borderRadius: 4,
+                  justifyContent: "center",
+                }}
+              >
+                <Text
+                  style={{
+                    alignSelf: "center",
+                    fontSize: 30,
+                    fontWeight: "bold",
+                  }}
+                >
+                  {pageNumber}
+                </Text>
+              </View>
+              <TouchableOpacity
+                onPress={() => callNextPage()}
+                style={styles.nextPre}
+              >
+                <FontAwesome5 name="chevron-right" size={25} />
+              </TouchableOpacity>
+            </View>
+          </View>
+        </ScrollView>
+        {/* <View style={{ width: width, height: 50 }}>
             <Pegination
               setCurrentPage={setCurrentPage}
               currentPage={currentPage}
@@ -91,20 +145,8 @@ export default Blogs_video = (props) => {
                   : Math.ceil(blogs_video.length / postPerPage)
               }
             />
-          </View>
-        </View>
-      ) : (
-        <Text
-          style={{
-            fontSize: 20,
-            fontWeight: "bold",
-            paddingTop: 30,
-            textAlign: "center",
-          }}
-        >
-          No Blogs Found
-        </Text>
-      )}
+          </View> */}
+      </View>
     </View>
   );
 };
@@ -113,7 +155,7 @@ const styles = StyleSheet.create({
   Category1Container: {
     flex: 1,
     paddingTop: 10,
-    paddingBottom: 40,
+    paddingBottom: 10,
   },
   allBlogViewEven: {
     flexDirection: "column",
@@ -184,5 +226,14 @@ const styles = StyleSheet.create({
     width: "50%",
     height: 200,
     marginLeft: 2,
+  },
+  nextPre: {
+    height: 32,
+    width: 32,
+    backgroundColor: "#ffe0b3",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 4,
+    marginHorizontal: 4,
   },
 });

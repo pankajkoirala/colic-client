@@ -1,88 +1,45 @@
-import React from "react";
+import React, { useState } from "react";
 import Blog from "./blog";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import Loader from "./../../../common/loader";
+import { BLOGS_DATA } from "../../redux/action/action";
+import { blogPegination } from "../../service/blog";
 
 export default BlogContainer = (props) => {
+  const dispatch = useDispatch();
+
   const { blogs_data, profileDetail } = useSelector((state) => ({
     blogs_data: state.blogs_data.blogs_data,
     profileDetail: state.profileDetail.profileDetail,
   }));
+  const [loaderIsOpen, setLoaderIsOpen] = useState(false);
 
-  /*console.log("hjasdhjaddhj");
-  const starttime = "14:00";
-  const endtime = "20:00";
-
-  let i = 5;
-  let s = parseInt(starttime.split(":")[0]);
-  let e = parseInt(endtime.split(":")[0]);
-  let send = {};
-  for (let index = 0; index < e - s; index++) {
-    send = { ...send, start: s + index, int: i };
-  }
-
-  let old = [
-    {
-      intensity: 5,
-      startTime: 14,
-    },
-    {
-      intensity: 5,
-      startTime: 15,
-    },
-    {
-      intensity: 5,
-      startTime: 16,
-    },
-    {
-      intensity: 5,
-      startTime: 17,
-    },
-    {
-      intensity: 5,
-      startTime: 18,
-    },
-    {
-      intensity: 5,
-      startTime: 19,
-    },
-  ];
-  let newd = [
-    {
-      intensity: 5,
-      startTime: 17,
-    },
-    {
-      intensity: 5,
-      startTime: 18,
-    },
-    {
-      intensity: 5,
-      startTime: 13,
-    },
-    {
-      intensity: 5,
-      startTime: 12,
-    },
-    {
-      intensity: 5,
-      startTime: 21,
-    },
-    {
-      intensity: 5,
-      startTime: 19,
-    },
-  ];
-
-  const newID = newd.map((arg) => arg.startTime);
-
-  let notmatchdata = old.filter((arg) => !newID.includes(arg.startTime));
-
-  let allarray = notmatchdata.concat(newd);
-  console.log(
-    "🚀 ~ file: blogContainer.js ~ line 79 ~ allarray",
-    allarray.sort((a, b) => a.startTime - b.startTime)
-  );*/
+  const pageNumber = parseInt(blogs_data?.nextPage?.split("=")[1]) - 1;
+  const blogDataDespatch = (data) => {
+    dispatch({ type: BLOGS_DATA, payload: data });
+  };
+  const callNextPage = (id) => {
+    setLoaderIsOpen(true);
+    blogPegination(blogs_data?.nextPage, blogDataDespatch, setLoaderIsOpen);
+  };
+  const callPrePage = (id) => {
+    if (blogs_data?.currentPage !== "1") {
+      setLoaderIsOpen(true);
+      blogPegination(blogs_data?.prePage, blogDataDespatch, setLoaderIsOpen);
+    }
+  };
   return (
-    <Blog {...props} profileDetail={profileDetail} blogs_data={blogs_data} />
+    <>
+      <Loader loaderIsOpen={loaderIsOpen} />
+      <Blog
+        pageNumber={pageNumber}
+        {...props}
+        profileDetail={profileDetail}
+        blogs_data={blogs_data}
+        setLoaderIsOpen={setLoaderIsOpen}
+        callNextPage={callNextPage}
+        callPrePage={callPrePage}
+      />
+    </>
   );
 };

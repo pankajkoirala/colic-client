@@ -20,7 +20,10 @@ export default SingleBlogView = (props) => {
   useEffect(() => {
     blogViewAPI(id);
   }, []);
-  const selectedBlog = blogs_data.filter((arg) => arg.id === id)[0];
+  const allData = blogs_data?.blogs?.concat(
+    blogs_data?.video?.concat(blogs_data?.research)
+  );
+  const selectedBlog = allData.filter((arg) => arg.id === id)[0];
   const contentWidth = useWindowDimensions().width;
   return (
     <View style={styles.blogDetailContainer}>
