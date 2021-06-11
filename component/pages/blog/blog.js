@@ -57,20 +57,11 @@ export default Blog = (props) => {
               style={{
                 height: 30,
                 width: 200,
-                borderWidth: 1,
-                borderColor: "balck",
-                borderRadius: 20,
+                borderBottomWidth: 1,
+                borderBottomColor: "balck",
                 flexDirection: "row",
               }}
             >
-              <TouchableOpacity>
-                <FontAwesome5Icon
-                  name={"search"}
-                  size={20}
-                  color={"grey"}
-                  style={{ marginTop: 4, marginRight: 4 }}
-                />
-              </TouchableOpacity>
               <TextInput
                 style={{
                   height: 30,
@@ -79,25 +70,28 @@ export default Blog = (props) => {
                 onChangeText={(value) => setSearchWord(value)}
                 placeholder="Search"
               />
-              <TouchableOpacity
-                disabled={!searchWord}
-                onPress={() => {
-                  setLoaderIsOpen(true);
-                  blogSearch(searchWord, setSearchedData, setLoaderIsOpen);
-                }}
-                style={{
-                  height: 30,
-                  width: 100,
-                  borderRadius: 20,
-                  backgroundColor: "black",
-                  justifyContent: "center",
-                }}
-              >
-                <Text style={{ color: "white", textAlign: "center" }}>
-                  Search
-                </Text>
-              </TouchableOpacity>
             </View>
+            <TouchableOpacity
+              disabled={!searchWord}
+              onPress={() => {
+                setLoaderIsOpen(true);
+                blogSearch(searchWord, setSearchedData, setLoaderIsOpen);
+              }}
+              style={{
+                height: 30,
+                // backgroundColor: "red",
+                // zIndex: 999,
+                width: 30,
+                marginLeft: -20,
+              }}
+            >
+              <FontAwesome5Icon
+                name={"search"}
+                size={20}
+                color={"grey"}
+                style={{ marginTop: 4, marginRight: 4 }}
+              />
+            </TouchableOpacity>
           </View>
         </View>
 
@@ -192,7 +186,6 @@ export default Blog = (props) => {
             <View>
               {searchedData &&
                 searchedData.map((arg, i) => {
-                  console.log(arg);
                   return (
                     <View key={i}>
                       {arg.category === "video" ? (
@@ -235,143 +228,76 @@ export default Blog = (props) => {
                         </View>
                       ) : (
                         <View key={i}>
-                          {i === 0 ? (
-                            <View>
-                              <Image
-                                style={styles.blogImg}
-                                source={{
-                                  uri: `${base_URL}/${arg.photos[0]}`,
+                          <View
+                            key={i}
+                            style={
+                              i % 2 !== 0
+                                ? styles.allBlogViewEven
+                                : styles.allBlogViewOdd
+                            }
+                          >
+                            <Image
+                              style={styles.otherBlogImg}
+                              source={{
+                                uri: `${base_URL}/${arg.photos[0]}`,
+                              }}
+                            />
+                            <View style={styles.otherBlogText}>
+                              <Text style={styles.blogPostedDate}>
+                                {moment(arg.posteddate).format("DD MMM YYYY")}
+                              </Text>
+                              <Text
+                                onPress={() =>
+                                  props.navigation.navigate("SingleBlogView", {
+                                    id: arg.id,
+                                  })
+                                }
+                                style={styles.blogTitle}
+                              >
+                                {arg.title}
+                              </Text>
+                              <HTML
+                                tagsStyles={{
+                                  h1: {
+                                    textAlign: "justify",
+                                    width: "100%",
+                                  },
+                                  h2: {
+                                    textAlign: "justify",
+                                    width: "100%",
+                                  },
+                                  h3: {
+                                    textAlign: "justify",
+                                    width: "100%",
+                                  },
+                                  h4: {
+                                    textAlign: "justify",
+                                    width: "100%",
+                                  },
+                                  h5: {
+                                    textAlign: "justify",
+                                    width: "100%",
+                                  },
+                                  h6: {
+                                    textAlign: "justify",
+                                    width: "100%",
+                                  },
+                                  b: {
+                                    textAlign: "justify",
+                                    width: "100%",
+                                  },
+                                  p: {
+                                    textAlign: "justify",
+                                    width: "100%",
+                                  },
+                                  img: {
+                                    display: "none",
+                                  },
                                 }}
+                                source={{ html: arg.content.slice(0, 150) }}
                               />
-                              <View style={styles.firstBlogBox}>
-                                <TouchableOpacity
-                                  onPress={() =>
-                                    props.navigation.navigate(
-                                      "SingleBlogView",
-                                      {
-                                        id: arg.id,
-                                      }
-                                    )
-                                  }
-                                >
-                                  <Text style={styles.blogTitle}>
-                                    {" "}
-                                    {arg.title}
-                                  </Text>
-                                </TouchableOpacity>
-
-                                <HTML
-                                  tagsStyles={{
-                                    h1: {
-                                      textAlign: "justify",
-                                      width: "100%",
-                                    },
-                                    h2: {
-                                      textAlign: "justify",
-                                      width: "100%",
-                                    },
-                                    h3: {
-                                      textAlign: "justify",
-                                      width: "100%",
-                                    },
-                                    h4: {
-                                      textAlign: "justify",
-                                      width: "100%",
-                                    },
-                                    h5: {
-                                      textAlign: "justify",
-                                      width: "100%",
-                                    },
-                                    h6: {
-                                      textAlign: "justify",
-                                      width: "100%",
-                                    },
-                                    b: {
-                                      textAlign: "justify",
-                                      width: "100%",
-                                    },
-                                    p: {
-                                      textAlign: "justify",
-                                      width: "100%",
-                                    },
-                                  }}
-                                  source={{ html: arg.content.slice(0, 150) }}
-                                  contentWidth={contentWidth}
-                                />
-                              </View>
                             </View>
-                          ) : (
-                            <View
-                              key={i}
-                              style={
-                                i % 2 !== 0
-                                  ? styles.allBlogViewEven
-                                  : styles.allBlogViewOdd
-                              }
-                            >
-                              <Image
-                                style={styles.otherBlogImg}
-                                source={{
-                                  uri: `${base_URL}/${arg.photos[0]}`,
-                                }}
-                              />
-                              <View style={styles.otherBlogText}>
-                                <Text style={styles.blogPostedDate}>
-                                  {moment(arg.posteddate).format("DD MMM YYYY")}
-                                </Text>
-                                <Text
-                                  onPress={() =>
-                                    props.navigation.navigate(
-                                      "SingleBlogView",
-                                      {
-                                        id: arg.id,
-                                      }
-                                    )
-                                  }
-                                  style={styles.blogTitle}
-                                >
-                                  {arg.title}
-                                </Text>
-                                <HTML
-                                  tagsStyles={{
-                                    h1: {
-                                      textAlign: "justify",
-                                      width: "100%",
-                                    },
-                                    h2: {
-                                      textAlign: "justify",
-                                      width: "100%",
-                                    },
-                                    h3: {
-                                      textAlign: "justify",
-                                      width: "100%",
-                                    },
-                                    h4: {
-                                      textAlign: "justify",
-                                      width: "100%",
-                                    },
-                                    h5: {
-                                      textAlign: "justify",
-                                      width: "100%",
-                                    },
-                                    h6: {
-                                      textAlign: "justify",
-                                      width: "100%",
-                                    },
-                                    b: {
-                                      textAlign: "justify",
-                                      width: "100%",
-                                    },
-                                    p: {
-                                      textAlign: "justify",
-                                      width: "100%",
-                                    },
-                                  }}
-                                  source={{ html: arg.content.slice(0, 150) }}
-                                />
-                              </View>
-                            </View>
-                          )}
+                          </View>
                         </View>
                       )}
                     </View>
@@ -539,24 +465,7 @@ const styles = StyleSheet.create({
     height: 200,
     width: "100%",
   },
-  firstBlogBox: {
-    alignSelf: "center",
-    backgroundColor: "white",
-    marginTop: -30,
-    marginBottom: 16,
-    borderRadius: 8,
-    padding: 10,
-    shadowColor: "#000",
-    width: "80%",
 
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.5,
-    shadowRadius: 4,
-    elevation: 5,
-  },
   otherBlogImg: {
     height: 220,
     marginRight: 2,
