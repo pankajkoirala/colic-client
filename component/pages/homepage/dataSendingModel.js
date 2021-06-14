@@ -64,7 +64,7 @@ const ProfileUploader = (props) => {
                 <Text
                   style={{
                     textAlign: "center",
-                    fontSize: 18,
+                    fontSize: 14,
                     fontWeight: "bold",
                   }}
                 >
@@ -85,7 +85,7 @@ const ProfileUploader = (props) => {
                   <Text
                     style={{
                       //fontWeight: "bold",
-                      fontSize: 20,
+                      fontSize: 16,
                     }}
                   >
                     {moment(fromHours).format("hh:mm A")}
@@ -102,7 +102,7 @@ const ProfileUploader = (props) => {
                 <Text
                   style={{
                     textAlign: "center",
-                    fontSize: 18,
+                    fontSize: 14,
                     fontWeight: "bold",
                   }}
                 >
@@ -123,7 +123,7 @@ const ProfileUploader = (props) => {
                   <Text
                     style={{
                       // fontWeight: "bold",
-                      fontSize: 20,
+                      fontSize: 16,
                     }}
                   >
                     {moment(toHours).format("hh:mm A")}
@@ -142,7 +142,7 @@ const ProfileUploader = (props) => {
                 style={{
                   textAlign: "center",
                   fontWeight: "bold",
-                  fontSize: 20,
+                  fontSize: 16,
                   marginBottom: -12,
                 }}
               >
@@ -228,7 +228,7 @@ const styles = StyleSheet.create({
     padding: 15,
     alignItems: "center",
     shadowColor: "#000",
-    width: "70%",
+    width: "90%",
     opacity: 1,
     shadowOffset: {
       width: 0,

@@ -14,7 +14,7 @@ import HTML from "react-native-render-html";
 import { base_URL } from "../../utils/const";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 
-export default Blogs_blogs = (props) => {
+export default Blogs_research = (props) => {
   const { blogs_research, pageNumber, callNextPage, callPrePage } = props;
 
   const contentWidth = useWindowDimensions().width;
@@ -181,7 +181,7 @@ export default Blogs_blogs = (props) => {
             })}
           </View>
         ) : (
-          <View style={{ height: 500 }}>
+          <View style={{ height: height - height * 0.30 }}>
             <Text
               style={{
                 fontSize: 20,
@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
   Category1Container: {
     flex: 1,
     paddingTop: 10,
-    paddingBottom: 120,
+    // paddingBottom: 120,
   },
   allBlogViewEven: {
     flexDirection: "row",
@@ -310,8 +310,10 @@ const styles = StyleSheet.create({
   },
   otherBlogText: {
     width: "50%",
-    height: 200,
+    // height: 200,
     marginLeft: 2,
+    marginRight: 4,
+    overflow: 'hidden'
   },
   nextPre: {
     height: 32,

@@ -8,6 +8,7 @@ import {
   useWindowDimensions,
   Dimensions,
   Image,
+  Platform
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import HTML from "react-native-render-html";
@@ -36,7 +37,7 @@ export default Blogs_blogs = (props) => {
         height: "100%",
       }}
     >
-      <View style={styles.Category1Container}>
+      <View style={Platform.OS === 'ios' ? styles.Category1ContainerIOS : styles.Category1ContainerAndroid}>
         {currentPost?.length ? (
           <View>
             {currentPost?.map((arg, i) => {
@@ -181,7 +182,7 @@ export default Blogs_blogs = (props) => {
             })}
           </View>
         ) : (
-          <View style={{ height: 500 }}>
+          <View style={{ height: height - height * 0.30 }}>
             <Text
               style={{
                 fontSize: 20,
@@ -237,10 +238,15 @@ export default Blogs_blogs = (props) => {
 };
 
 const styles = StyleSheet.create({
-  Category1Container: {
-    flex: 1,
+  Category1ContainerIOS: {
+    // flex: 1,
     paddingTop: 10,
-    paddingBottom: 120,
+    // paddingBottom: 130,
+  },
+  Category1ContainerAndroid: {
+    // flex: 1,
+    paddingTop: 10,
+    // paddingBottom: 130,
   },
   allBlogViewEven: {
     flexDirection: "row",
@@ -310,7 +316,9 @@ const styles = StyleSheet.create({
   },
   otherBlogText: {
     width: "50%",
-    height: 200,
+    // height: 200,
+    overflow: 'hidden',
+    marginRight: 4,
     marginLeft: 2,
   },
   nextPre: {

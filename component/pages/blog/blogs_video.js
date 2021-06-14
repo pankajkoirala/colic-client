@@ -31,6 +31,7 @@ export default Blogs_video = (props) => {
         flex: 1,
         width: width,
         height: "100%",
+        // marginBottom: 50
       }}
     >
       <View style={styles.Category1Container}>
@@ -75,7 +76,7 @@ export default Blogs_video = (props) => {
             })}
           </View>
         ) : (
-          <View style={{ height: 500 }}>
+          <View style={{ height: height - height * 0.30 }}>
             <Text
               style={{
                 fontSize: 20,
@@ -84,7 +85,7 @@ export default Blogs_video = (props) => {
                 textAlign: "center",
               }}
             >
-              No Blogs Found
+              No Video Found
             </Text>
           </View>
         )}
@@ -155,7 +156,7 @@ const styles = StyleSheet.create({
   Category1Container: {
     flex: 1,
     paddingTop: 10,
-    paddingBottom: 120,
+    // paddingBottom: 120,
   },
 
   allBlogViewOdd: {
@@ -207,8 +208,9 @@ const styles = StyleSheet.create({
   },
   otherBlogText: {
     width: "50%",
-    height: 200,
+    // height: 200,
     marginLeft: 2,
+    marginRight: 4
   },
   nextPre: {
     height: 32,

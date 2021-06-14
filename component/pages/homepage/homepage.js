@@ -7,6 +7,8 @@ import {
   Image,
   ImageBackground,
   SafeAreaView,
+  Platform,
+  Dimensions
 } from "react-native";
 import { Text, FAB } from "react-native-elements";
 import DateModel from "./../../../common/ModelDateInsert/datePicker";
@@ -30,172 +32,176 @@ export default ExampleTwo = (props) => {
     averageVolumeInFraction,
     dataShow,
   } = props;
+  var { width, height } = Dimensions.get("window");
 
   return (
     <View>
-      <ScrollView bounces={false}>
-        <View style={styles.container}>
-          <ImageBackground
-            source={BgImage}
-            imageStyle={{
-              resizeMode: "cover",
-            }}
-            style={{
-              width: "100%",
-            }}
-          >
-            <View style={styles.editBack}>
-              <View style={styles.menuNameView}>
-                <FontAwesome5
-                  onPress={() => props.navigation.openDrawer()}
-                  name={"bars"}
-                  size={30}
-                />
-                <Text style={styles.userName}>{profileDetail.name}</Text>
-              </View>
-              <TouchableOpacity
-                onPress={() => props.navigation.navigate("Profile")}
-              >
-                <Image
-                  source={{
-                    uri: base_URL + "/" + profileDetail.profileimage,
-                  }}
-                  style={styles.profileImage}
-                  imageStyle={{
-                    resizeMode: "cover",
-                  }}
-                />
-              </TouchableOpacity>
+      {/* <ScrollView scrollEnabled={!false} bounces={false}> */}
+      <View style={{
+        height: height,
+        width: "100%",
+        backgroundColor: "#fff",
+        paddingBottom: 60,
+        // flex: 1,
+      }}>
+        <ImageBackground
+          source={BgImage}
+          imageStyle={{
+            resizeMode: "cover",
+          }}
+          style={{
+            width: "100%",
+          }}
+        >
+          <View style={Platform.OS === 'ios' ? styles.editBackIOS : styles.editBackAndroid}>
+            <View style={styles.menuNameView}>
+              <FontAwesome5
+                onPress={() => props.navigation.openDrawer()}
+                name={"bars"}
+                size={30}
+              />
+              <Text style={styles.userName}>{profileDetail.name}</Text>
             </View>
+            <TouchableOpacity
+              onPress={() => props.navigation.navigate("Profile")}
+            >
+              <Image
+                source={{
+                  uri: base_URL + "/" + profileDetail.profileimage,
+                }}
+                style={styles.profileImage}
+                imageStyle={{
+                  resizeMode: "cover",
+                }}
+              />
+            </TouchableOpacity>
+          </View>
 
-            {/*   <View>
+          {/*   <View>
               <Text style={styles.babyReading}>
                 here is your baby's reading
               </Text>
          </View>*/}
-            <View style={styles.averageCryingView}>
-              <View>
-                <Text style={styles.averageCryingLabel}>Average Crying</Text>
+          <View style={styles.averageCryingView}>
+            <View>
+              <Text style={styles.averageCryingLabel}>Average Crying</Text>
 
-                <Text style={styles.averageCryingValue}>
-                  {averageCryingInFraction}
-                </Text>
-              </View>
-              <TouchableOpacity
-                style={{
-                  marginBottom: 10,
-                  alignItems: "center",
-                }}
-              >
-                <FontAwesome5
-                  name="calendar"
-                  size={30}
-                  onPress={() => setShowDateMode(!showDateMode)}
-                />
-              </TouchableOpacity>
-              <View>
-                <Text style={styles.averageCryingLabel}>Average Volume</Text>
-                <Text style={styles.averageCryingValue}>
-                  {averageVolumeInFraction}
-                </Text>
-              </View>
+              <Text style={styles.averageCryingValue}>
+                {averageCryingInFraction}
+              </Text>
             </View>
-            <View
+            <TouchableOpacity
               style={{
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-                marginBottom: 40,
+                marginBottom: 10,
+                alignItems: "center",
               }}
             >
-              <TouchableOpacity onPress={() => setDataShow(true)}>
-                <Text
-                  style={
-                    !dataShow
-                      ? styles.todayWeeklyCall
-                      : styles.todayWeeklyCallSelected
-                  }
-                >
-                  today
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => setDataShow(false)}>
-                <Text
-                  style={
-                    dataShow
-                      ? styles.todayWeeklyCall
-                      : styles.todayWeeklyCallSelected
-                  }
-                >
-                  weekly
-                </Text>
-              </TouchableOpacity>
+              <FontAwesome5
+                name="calendar"
+                size={30}
+                onPress={() => setShowDateMode(!showDateMode)}
+              />
+            </TouchableOpacity>
+            <View>
+              <Text style={styles.averageCryingLabel}>Average Volume</Text>
+              <Text style={styles.averageCryingValue}>
+                {averageVolumeInFraction}
+              </Text>
             </View>
-          </ImageBackground>
+          </View>
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              marginBottom: 40,
+            }}
+          >
+            <TouchableOpacity onPress={() => setDataShow(true)}>
+              <Text
+                style={
+                  !dataShow
+                    ? styles.todayWeeklyCall
+                    : styles.todayWeeklyCallSelected
+                }
+              >
+                today
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => setDataShow(false)}>
+              <Text
+                style={
+                  dataShow
+                    ? styles.todayWeeklyCall
+                    : styles.todayWeeklyCallSelected
+                }
+              >
+                weekly
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </ImageBackground>
 
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-evenly",
+          }}
+        >
+          {labelByDay(day)?.label.map((arg, i) => {
+            return (
+              <Text
+                style={
+                  i === 0
+                    ? styles.indexEqualToZero
+                    : styles.indexNotEqualToZero
+                }
+                key={i}
+              >
+                {arg}
+              </Text>
+            );
+          })}
+        </View>
+        <ScrollView
+          scrollEnabled={true}
+
+          bounces={false}
+        >
           <View
             style={{
               flexDirection: "row",
-              justifyContent: "space-evenly",
+              justifyContent: "space-around",
+              height: '100%',
+              marginLeft: -16,
             }}
           >
-            {labelByDay(day)?.label.map((arg, i) => {
+            {labelByDay(day)?.data.map((arg, i) => {
               return (
-                <Text
-                  style={
-                    i === 0
-                      ? styles.indexEqualToZero
-                      : styles.indexNotEqualToZero
-                  }
-                  key={i}
-                >
-                  {arg}
-                </Text>
+                <View key={i}>
+                  {labelByDay(day)?.data[0].map((arg1, ind) => {
+                    return (
+                      <Text key={ind} style={styleValue(arg, i, ind, styles)}>
+                        {i === 0 ? arg[ind].startTime : arg[ind].intensity}
+                      </Text>
+                    );
+                  })}
+                </View>
               );
             })}
           </View>
-          <ScrollView
-            scrollEnabled={true}
-            horizontal={false}
-            style={{
-              width: "100%",
-              height: 600,
-            }}
-            //bounces={true}
-          >
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-around",
-                marginLeft: -16,
-              }}
-            >
-              {labelByDay(day)?.data.map((arg, i) => {
-                return (
-                  <View key={i}>
-                    {labelByDay(day)?.data[0].map((arg1, ind) => {
-                      return (
-                        <Text key={ind} style={styleValue(arg, i, ind, styles)}>
-                          {i === 0 ? arg[ind].startTime : arg[ind].intensity}
-                        </Text>
-                      );
-                    })}
-                  </View>
-                );
-              })}
-            </View>
-          </ScrollView>
+        </ScrollView>
 
-          <View style={styles.addCryingDataIconView}>
-            <DateModel
-              setOpenTimePicker={() => setShowDateMode()}
-              openTimePicker={showDateMode}
-              mode={"date"}
-              setHours={setGettingDataDate}
-            />
-          </View>
+        <View style={styles.addCryingDataIconView}>
+          <DateModel
+            setOpenTimePicker={() => setShowDateMode()}
+            openTimePicker={showDateMode}
+            mode={"date"}
+            setHours={setGettingDataDate}
+          />
         </View>
-      </ScrollView>
+      </View>
+      {/* </ScrollView> */}
       <TouchableOpacity
         onPress={() => setModelOpen(true)}
         style={styles.addCryingDataIcon}
@@ -212,13 +218,13 @@ export default ExampleTwo = (props) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    height: "100%",
-    width: "100%",
-    backgroundColor: "#fff",
-    paddingBottom: 20,
-    flex: 1,
-  },
+  // container: {
+  //   height: "100%",
+  //   width: "100%",
+  //   backgroundColor: "#fff",
+  //   paddingBottom: 20,
+  //   flex: 1,
+  // },
 
   valueOne: {
     marginHorizontal: 20,
@@ -278,11 +284,17 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "bold",
   },
-  editBack: {
+  editBackAndroid: {
     flexDirection: "row",
     justifyContent: "space-between",
     paddingHorizontal: 20,
-    paddingTop: 30,
+    paddingTop: 50,
+  },
+  editBackIOS: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+    paddingTop: 40,
   },
   editText: {
     fontSize: 25,
@@ -352,7 +364,8 @@ const styles = StyleSheet.create({
     width: "20%",
     textAlign: "center",
     marginVertical: 6,
-    fontSize: 20,
+    fontSize: 18,
+    // backgroundColor: 'red'
   },
   indexNotEqualToZero: {
     textAlign: "center",
@@ -368,7 +381,7 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     position: "absolute",
     alignSelf: "flex-end",
-    bottom: 20,
+    bottom: 70,
     right: 20,
   },
   addCryingDataIconView: {

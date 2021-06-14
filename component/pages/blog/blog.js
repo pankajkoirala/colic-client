@@ -10,6 +10,7 @@ import {
   TextInput,
   useWindowDimensions,
   Dimensions,
+  Platform
 } from "react-native";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import FontAwesome5Icon from "react-native-vector-icons/FontAwesome5";
@@ -35,9 +36,8 @@ export default Blog = (props) => {
       setSearchWord(null);
     }
   }, [searchWord]);
-
   return (
-    <View style={styles.blogContainer}>
+    <View style={Platform.OS === 'ios' ? styles.blogContainerIOS : styles.blogContainerAndroid}>
       <View style={{ height: "100%" }}>
         <View style={styles.editBack}>
           <View style={styles.menuNameView}>
@@ -326,7 +326,17 @@ export default Blog = (props) => {
 };
 
 const styles = StyleSheet.create({
-  blogContainer: { paddingTop: 20, height: "100%" },
+  blogContainerAndroid: {
+    height: "100%", paddingBottom: 5, paddingTop: 50,
+    paddingBottom: 155
+
+
+  },
+  blogContainerIOS: {
+    height: "100%", paddingBottom: 5, paddingTop: 30,
+    paddingBottom: 130
+  },
+
   categoryView: {
     paddingTop: 10,
     paddingHorizontal: 20,
@@ -361,6 +371,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingHorizontal: 20,
     paddingTop: 10,
+    paddingBottom: 10
   },
 
   profileImg: {
@@ -476,5 +487,7 @@ const styles = StyleSheet.create({
     width: "50%",
     height: 200,
     marginLeft: 2,
+    overflow: 'hidden',
+
   },
 });

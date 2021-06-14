@@ -29,6 +29,7 @@ function CustomDrawerContent(props) {
       style={{ backgroundColor: "#ffad33" }}
       bounces={false}
       {...props}
+
     >
       <Text style={{ textAlign: "center", fontSize: 60, fontWeight: "bold" }}>
         Colic

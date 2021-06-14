@@ -30,8 +30,8 @@ function MyTabs({ descriptors, state, route, navigation, index }) {
     options.tabBarLabel !== undefined
       ? options.tabBarLabel
       : options.title !== undefined
-      ? options.title
-      : route.name;
+        ? options.title
+        : route.name;
 
   const isFocused = state.index === index;
   let opacityValue = new Animated.Value(0);
@@ -233,6 +233,7 @@ function MyTabBar({ state, descriptors, navigation }) {
         flexDirection: "row",
         paddingHorizontal: 20,
         backgroundColor: "#f7f7f7",
+        height: 50
       }}
     >
       {editedList.map((route, index) => {

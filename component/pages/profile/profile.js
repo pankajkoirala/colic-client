@@ -14,6 +14,8 @@ import {
   Image,
   ScrollView,
   ImageBackground,
+  Platform,
+  Dimensions
 } from "react-native";
 
 import DateInsert from "../../../common/dateInsert";
@@ -37,53 +39,63 @@ function Profile(props) {
   } = props;
   const [genderOpen, setGenderOpen] = useState(false);
   const [dateOfBirth, setDateOfBirth] = useState(false);
+
+  var { width, height } = Dimensions.get("window");
+
   return (
-    <ScrollView style={styles.profileContainer} bounces={false}>
-      <View style={styles.fullPageView}>
-        <ImageBackground
-          source={profileImageBG}
-          imageStyle={{
-            resizeMode: "cover",
-          }}
+    // <ScrollView style={styles.profileContainer} bounces={false}>
+    <View style={{
+      display: "flex",
+      flexDirection: "column",
+      height: height,
+      paddingBottom: 50
+    }}>
+      <ImageBackground
+        source={profileImageBG}
+        imageStyle={{
+          resizeMode: "cover",
+        }}
+        style={{
+          width: "100%",
+        }}
+      >
+        <View
           style={{
-            width: "100%",
+            height: "30%",
+            paddingTop: Platform.OS === 'ios' ? 5 : 30
           }}
         >
-          <View
-            style={{
-              height: "35%",
-            }}
-          >
-            <View style={styles.editBack}>
-              <FontAwesome5
-                onPress={() => props.navigation.goBack()}
-                name={"arrow-left"}
-                size={25}
-              />
-              <TouchableOpacity onPress={handleSubmit(onSubmit)}>
-                <Text style={styles.editText}>
-                  {editState === true ? "Save" : "Edit"}
-                </Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.profileImgView}>
-              <Image
-                source={{
-                  uri: `${base_URL}/${profileDetail?.profileimage}`,
-                }}
-                style={styles.profileImg}
-              />
-            </View>
-
-            <View style={styles.imageUploadEditIcon}>
-              <ImageImportModel
-                image={profileImage}
-                setImage={setProfileImage}
-                ImageUploadFunction={ImageUploadFunction}
-              />
-            </View>
+          <View style={styles.editBack}>
+            <FontAwesome5
+              onPress={() => props.navigation.goBack()}
+              name={"arrow-left"}
+              size={25}
+            />
+            <TouchableOpacity onPress={handleSubmit(onSubmit)}>
+              <Text style={styles.editText}>
+                {editState === true ? "Save" : "Edit"}
+              </Text>
+            </TouchableOpacity>
           </View>
-        </ImageBackground>
+          <View style={styles.profileImgView}>
+            <Image
+              source={{
+                uri: `${base_URL}/${profileDetail?.profileimage}`,
+              }}
+              style={styles.profileImg}
+            />
+          </View>
+
+          <View style={styles.imageUploadEditIcon}>
+            <ImageImportModel
+              image={profileImage}
+              setImage={setProfileImage}
+              ImageUploadFunction={ImageUploadFunction}
+            />
+          </View>
+        </View>
+      </ImageBackground>
+      <ScrollView bounces={false}>
         <View style={styles.formView}>
           <View style={styles.inputView}>
             <Text>FullName</Text>
@@ -248,17 +260,104 @@ function Profile(props) {
               defaultValue="no gender"
             />
           </View>
+          {/* baby information */}
+          <View style={styles.inputView}>
+            <Text>Baby Name</Text>
+            {/* <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => ( */}
+            <View style={styles.inputInnerView}>
+              <TextInput
+                editable={editState}
+                // onBlur={onBlur}
+                // onChangeText={(value) => onChange(value)}
+                // value={value}
+                style={{ height: 30 }}
+              />
+              {errors.name && (
+                <Text style={styles.errorMessage}>This is required.</Text>
+              )}
+            </View>
+            {/* )}
+              name="name"
+              rules={{ required: true }}
+              defaultValue=" no name"
+            /> */}
+          </View>
+          <View style={styles.inputView}>
+            <Text>Week of birth</Text>
+            {/* <Controller
+              control={control}
+              render={({ field: { onChange, onBlur, value } }) => ( */}
+            <View style={styles.inputInnerView}>
+              <TextInput
+                editable={editState}
+                // onBlur={onBlur}
+                // onChangeText={(value) => onChange(value)}
+                // value={value}
+                style={{ height: 30 }}
+              />
+              {errors.name && (
+                <Text style={styles.errorMessage}>This is required.</Text>
+              )}
+            </View>
+            {/* )}
+              name="name"
+              rules={{ required: true }}
+              defaultValue=" no name"
+            /> */}
+          </View>
+
+
+          <View style={styles.inputView}>
+            <Controller
+              control={control}
+              render={({ field: { onChange, value } }) => (
+                <>
+                  <Text style={{ paddingBottom: 4 }}>Gender</Text>
+
+                  <View
+                    style={
+                      Platform.OS === "ios"
+                        ? styles.genderPickerIOS
+                        : styles.genderPicker
+                    }
+                  >
+                    {Platform.OS === "ios" && (
+                      <TouchableOpacity
+                        disabled={!editState}
+                        onPress={() => setGenderOpen(true)}
+                      >
+                        <Text>{value || profileDetail.gender}</Text>
+                      </TouchableOpacity>
+                    )}
+                    <GenderPicker
+                      setGenderOpen={setGenderOpen}
+                      genderOpen={genderOpen}
+                      onChange={onChange}
+                      oldValue={profileDetail.gender}
+                      editable={editState}
+                    />
+                  </View>
+                </>
+              )}
+              name="gender"
+              rules={{
+                required: true,
+              }}
+              defaultValue="no gender"
+            />
+          </View>
         </View>
-      </View>
-    </ScrollView>
+      </ScrollView>
+    </View>
+    // </ScrollView>
   );
 }
 export default Profile;
 
 const styles = StyleSheet.create({
-  profileContainer: {
-    // backgroundColor: "grey",
-  },
+
   fullPageView: {
     display: "flex",
     flexDirection: "column",
@@ -274,7 +373,6 @@ const styles = StyleSheet.create({
     fontSize: 25,
   },
   profileImgView: {
-    flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -287,7 +385,7 @@ const styles = StyleSheet.create({
   },
   imageUploadEditIcon: {
     left: 0,
-    marginTop: -40,
+    marginTop: -20,
     marginRight: -110,
   },
   inputView: {
@@ -298,7 +396,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     width: "100%",
-    height: 500,
+    // height: 800,
     paddingTop: 10,
     backgroundColor: "white",
   },
